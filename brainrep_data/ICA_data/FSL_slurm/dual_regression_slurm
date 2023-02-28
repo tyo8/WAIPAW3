@@ -162,7 +162,6 @@ j=0
 for i in $INPUTS ; do
   echo "$FSLDIR/bin/fslmaths $i -Tstd -bin ${OUTPUT}/mask_`${FSLDIR}/bin/zeropad $j 5` -odt char" > "${LOGDIR}/drA"
 	$FSLurmDIR/fsl_sub_slurm.sh -j true -T 10 -N mask_generation1 -l $LOGDIR -f "${LOGDIR}/drA"
-# 	ID_drA=`$FSLurmDIR/fsl_sub_slurm.sh -j true -T 10 -N mask_generation1 -l $LOGDIR -f ${LOGDIR}/drA`
   j=`echo "$j 1 + p" | dc -`
 done
 
@@ -174,7 +173,6 @@ cat <<EOF > ${LOGDIR}/drB
 EOF
 chmod a+x "${LOGDIR}/drB"
 $FSLurmDIR/fsl_sub_slurm.sh -j true -T 5 -N mask_generation2 -l $LOGDIR -f "${LOGDIR}/drB"
-# ID_drB=`$FSLurmDIR/fsl_sub_slurm.sh -j true -T 5 -N mask_generation2 -l $LOGDIR -f ${LOGDIR}/drB`
 
 ############################################################################
 echo "doing the dual regressions"
@@ -186,11 +184,9 @@ for i in $INPUTS ; do
         $FSLDIR/bin/fslsplit $OUTPUT/dr_stage2_$s $OUTPUT/dr_stage2_${s}_ic" > "${LOGDIR}/drC"
   
 $FSLurmDIR/fsl_sub_slurm.sh -T 30 -N dual_regression -l $LOGDIR -f "${LOGDIR}/drC"
-#   ID_drC=`$FSLurmDIR/fsl_sub_slurm.sh -T 30 -N dual_regression -l $LOGDIR -f ${LOGDIR}/drC`
   j=`echo "$j 1 + p" | dc -`
 done
 $FSLurmDIR/fsl_sub_slurm.sh -j true -T 30 -N dual_regression -l $LOGDIR -f "${LOGDIR}/drC"
-# ID_drC=`$FSLurmDIR/fsl_sub_slurm.sh -j true -T 30 -N dual_regression -l $LOGDIR -f ${LOGDIR}/drC`
 
 ############################################################################
 # For thresholded maps, try and normalise such that null is N(0,1)
@@ -221,7 +217,6 @@ $FSLurmDIR/fsl_sub_slurm.sh -N thresholdedDR -l $LOGDIR -f "${LOGDIR}/drD"
       j=`echo "$j 1 + p" | dc -`
    done
 $FSLurmDIR/fsl_sub_slurm.sh -j true -N thresholdedDR -l $LOGDIR -f "${LOGDIR}/drD"
-#    ID_drD=`$FSLurmDIR/fsl_sub_slurm.sh -j true -N thresholdedDR -l $LOGDIR -f ${LOGDIR}/drD`
 fi
 
 ############################################################################
@@ -243,5 +238,4 @@ while [ $j -lt $N_ICs ] ; do
         $FSLDIR/bin/imrm \`\$FSLDIR/bin/imglob $OUTPUT/dr_stage2_subject*_ic${jj}.*\` \n $RAND" > ${LOGDIR}/drE
   j=`echo "$j 1 + p" | dc -`
 $FSLurmDIR/fsl_sub_slurm.sh -T 60 -N randomise -l $LOGDIR -f "${LOGDIR}/drE"
-#   ID_drE=`$FSLurmDIR/fsl_sub_slurm.sh -T 60 -N randomise -l $LOGDIR -f ${LOGDIR}/drE`
 done

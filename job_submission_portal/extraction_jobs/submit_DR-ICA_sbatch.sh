@@ -101,7 +101,7 @@ export DISPLAY=:1
 
 melodic -i \${data_flist} -o \${melodic_out} --tr=0.72 --nobet -a concat -m \${mask_fpath} --report --Oall -d \${dim}
 
-FSL_slurm/dual_regression_slurm \"\${melodic_out}/melodic_IC.nii.gz\" \${dim} \"\${design_fpath_type}.mat\" \"\${design_fpath_type}.con\" 0 \"\${DR_out}/groupICA\${dim}.dr\" \$(cat \${data_flist})
+scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/FSL_slurm/stage1_DR_slurm \"\${melodic_out}/melodic_IC.nii.gz\" \${dim} \"\${design_fpath_type}.mat\" \"\${design_fpath_type}.con\" 0 \"\${DR_out}/groupICA\${dim}.dr\" \$(cat \${data_flist})
 \
 " > "${sbatch_fpath}"  
 
