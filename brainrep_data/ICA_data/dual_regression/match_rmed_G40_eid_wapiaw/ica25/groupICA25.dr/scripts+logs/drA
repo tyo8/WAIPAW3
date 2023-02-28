@@ -1,0 +1,13 @@
+#!/bin/sh
+
+#SBATCH --job-name=mask_generation1
+#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G40_eid_wapiaw/ica25/groupICA25.dr/scripts+logs/mask_generation1.out
+#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G40_eid_wapiaw/ica25/groupICA25.dr/scripts+logs/mask_generation1.err
+#SBATCH --partition=small
+#SBATCH --time=10:00:00
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=1
+#SBATCH --mem=50gb
+
+	
+/export/fsl/fsl-6.0.5/bin/fslmaths /ceph/biobank/derivatives/melodic/sub-5605840/ses-01/sub-5605840_ses-01_melodic.ica/filtered_func_data_clean_MNI152 -Tstd -bin /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G40_eid_wapiaw/ica25/groupICA25.dr/mask_00240 -odt char

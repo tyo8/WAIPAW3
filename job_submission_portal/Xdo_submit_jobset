@@ -1,0 +1,18 @@
+#!/bin/sh
+#SBATCH --job-name=WAPIAW3_submission_beta
+#SBATCH --output=/scratch/khannon/WAPIAW3/outputs/logs_%j.out
+#SBATCH --error=/scratch/khannon/WAPIAW3/outputs/logs_%j.err
+#SBATCH --time=7:55:00
+#SBATCH --partition=small
+#SBATCH --mem=10gb
+
+runfile="/scratch/khannon/WAPIAW3/submission_portal/submit_script"
+
+### input parametrs ###
+datalist_path=""
+session_num="" #default is ses-01
+script_path=""
+subject_list=""
+mem_gb=50
+
+${runfile} -d ${datalist_path} -s ${script_path} -n ${session_num} -j ${subject_list} -m ${mem_gb}

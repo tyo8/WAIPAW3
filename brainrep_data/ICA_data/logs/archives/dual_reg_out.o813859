@@ -1,0 +1,34 @@
+--------------------------------------------------------------
+Begin Slurm Prologue Tue Feb 14 16:02:38 CST 2023 1676412158
+Job ID:		813859
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Tue Feb 14 16:02:38 CST 2023 1676412158
+--------------------------------------------------------------
+pulling from subject list: 
+computing with 25 dimensions
+--------------------------------------------------------------
+Begin Slurm Epilogue Tue Feb 14 16:02:40 CST 2023 1676412160
+Name                : allocation
+User                : tyoeasley
+Partition           : 
+Nodes               : node15
+Cores               : 1
+State               : FAILED
+Submit              : 2023-02-14T16:02:36
+Start               : 2023-02-14T16:02:38
+End                 : 2023-02-14T16:02:38
+Reserved Walltime   : --
+Used Walltime       : --
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 16?
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node15
+Max-Disk-Write Node : node15
+Max-Disk-Read Node  : node15
+End Slurm Epilogue Tue Feb 14 16:02:40 CST 2023 1676412160
+--------------------------------------------------------------

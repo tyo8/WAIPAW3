@@ -1,0 +1,33 @@
+--------------------------------------------------------------
+Begin Slurm Prologue Fri Feb 17 18:02:11 CST 2023 1676678531
+Job ID:		825671
+Username:	tyoeasley
+Partition:	test
+End Slurm Prologue Fri Feb 17 18:02:11 CST 2023 1676678531
+--------------------------------------------------------------
+hello, world!
+--------------------------------------------------------------
+Begin Slurm Epilogue Fri Feb 17 18:02:18 CST 2023 1676678538
+Name                : test
+User                : tyoeasley
+Partition           : test
+Nodes               : node04
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-17T18:02:10
+Start               : 2023-02-17T18:02:11
+End                 : 2023-02-17T18:02:16
+Reserved Walltime   : 00:10:00
+Used Walltime       : 00:00:05
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node04
+Max-Disk-Write Node : node04
+Max-Disk-Read Node  : node04
+End Slurm Epilogue Fri Feb 17 18:02:18 CST 2023 1676678538
+--------------------------------------------------------------

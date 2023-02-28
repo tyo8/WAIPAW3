@@ -1,0 +1,32 @@
+--------------------------------------------------------------
+Begin Slurm Prologue Tue Feb 14 16:00:41 CST 2023 1676412041
+Job ID:		813858
+Username:	l.lexi
+Partition:	small
+End Slurm Prologue Tue Feb 14 16:00:41 CST 2023 1676412041
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Tue Feb 14 16:00:43 CST 2023 1676412043
+Name                : dual_reg
+User                : l.lexi
+Partition           : small
+Nodes               : node15
+Cores               : 1
+State               : FAILED
+Submit              : 2023-02-14T16:00:40
+Start               : 2023-02-14T16:00:40
+End                 : 2023-02-14T16:00:41
+Reserved Walltime   : 05:00:00
+Used Walltime       : 00:00:01
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 100G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node15
+Max-Disk-Write Node : node15
+Max-Disk-Read Node  : node15
+End Slurm Epilogue Tue Feb 14 16:00:43 CST 2023 1676412043
+--------------------------------------------------------------

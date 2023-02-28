@@ -1,0 +1,36 @@
+--------------------------------------------------------------
+Begin Slurm Prologue Tue Feb 14 16:11:23 CST 2023 1676412683
+Job ID:		813863
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Tue Feb 14 16:11:23 CST 2023 1676412683
+--------------------------------------------------------------
+pulling from subject list: /scratch/tyoeasley/WAPIAW3/subject_lists/example.txt
+computing with 25 dimensions
+sending Melodic outputs to: /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/melodic_output/example/ica25
+sending dual_regression outputs to: /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/example/ica25
+--------------------------------------------------------------
+Begin Slurm Epilogue Tue Feb 14 16:11:26 CST 2023 1676412686
+Name                : allocation
+User                : tyoeasley
+Partition           : 
+Nodes               : node15
+Cores               : 1
+State               : FAILED
+Submit              : 2023-02-14T16:11:23
+Start               : 2023-02-14T16:11:23
+End                 : 2023-02-14T16:11:23
+Reserved Walltime   : --
+Used Walltime       : --
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 16?
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node15
+Max-Disk-Write Node : node15
+Max-Disk-Read Node  : node15
+End Slurm Epilogue Tue Feb 14 16:11:26 CST 2023 1676412686
+--------------------------------------------------------------

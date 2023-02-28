@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#SBATCH --job-name=randomise
+#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/example/ica100/groupICA100.dr/scripts+logs/randomise.out
+#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/example/ica100/groupICA100.dr/scripts+logs/randomise.err
+#SBATCH --partition=small
+#SBATCH --time=60:00:00
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=1
+#SBATCH --mem=50gb
+
+	
+/export/fsl/fsl-6.0.5/bin/fslmerge -t /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/example/ica100/groupICA100.dr/dr_stage2_ic0099 `$FSLDIR/bin/imglob /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/example/ica100/groupICA100.dr/dr_stage2_subject*_ic0099.*` 
+         /export/fsl/fsl-6.0.5/bin/imrm `$FSLDIR/bin/imglob /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/example/ica100/groupICA100.dr/dr_stage2_subject*_ic0099.*` 
+ 

@@ -1,0 +1,41 @@
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+Job ID:		875250
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+--------------------------------------------------------------
+
+Usage: fslmerge <-x/y/z/t/a/tr> <output> <file1 file2 .......> [tr value in seconds]
+     -t : concatenate images in time
+     -x : concatenate images in the x direction
+     -y : concatenate images in the y direction
+     -z : concatenate images in the z direction
+     -a : auto-choose: single slices -> volume, volumes -> 4D (time series)
+     -tr : concatenate images in time and set the output image tr to the final option value
+     -n <N> : only use volume <N> from each input file (first volume is 0 not 1)
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 12:18:20 CST 2023 1677521900
+Name                : allocation
+User                : tyoeasley
+Partition           : 
+Nodes               : node23
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T12:18:16
+Start               : 2023-02-27T12:18:18
+End                 : 2023-02-27T12:18:18
+Reserved Walltime   : --
+Used Walltime       : --
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 16?
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node23
+Max-Disk-Write Node : node23
+Max-Disk-Read Node  : node23
+End Slurm Epilogue Mon Feb 27 12:18:20 CST 2023 1677521900
+--------------------------------------------------------------

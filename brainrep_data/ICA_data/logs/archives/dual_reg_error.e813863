@@ -1,0 +1,8 @@
+Image Exception : #63 :: No image files match: /ceph/biobank/derivatives/melodic/sub-1091034/ses-01/sub-1091034_ses-01_melodic.ica/filtered_func_data_clean_MNI152
+Image Exception : #22 :: Failed to read volume /ceph/biobank/derivatives/melodic/sub-1091034/ses-01/sub-1091034_ses-01_melodic.ica/filtered_func_data_clean_MNI152
+Error : No image files match: /ceph/biobank/derivatives/melodic/sub-1091034/ses-01/sub-1091034_ses-01_melodic.ica/filtered_func_data_clean_MNI152
+
+Failed to read volume /ceph/biobank/derivatives/melodic/sub-1091034/ses-01/sub-1091034_ses-01_melodic.ica/filtered_func_data_clean_MNI152
+Error : No image files match: /ceph/biobank/derivatives/melodic/sub-1091034/ses-01/sub-1091034_ses-01_melodic.ica/filtered_func_data_clean_MNI152
+/var/spool/slurm/d/job813863/slurm_script: line 36: unexpected EOF while looking for matching ``'
+/var/spool/slurm/d/job813863/slurm_script: line 37: syntax error: unexpected end of file

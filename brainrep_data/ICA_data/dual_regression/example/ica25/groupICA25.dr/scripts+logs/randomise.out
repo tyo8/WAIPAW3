@@ -1,0 +1,285 @@
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:28 CST 2023 1677517828
+Job ID:		873653
+Username:	tyoeasley
+Partition:	medium
+End Slurm Prologue Mon Feb 27 11:10:28 CST 2023 1677517828
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+Name                : randomise
+User                : tyoeasley
+Partition           : medium
+Nodes               : node07
+Cores               : 1
+State               : FAILED
+Submit              : 2023-02-27T11:10:25
+Start               : 2023-02-27T11:10:27
+End                 : 2023-02-27T11:10:28
+Reserved Walltime   : 2-12:00:00
+Used Walltime       :   00:00:01
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node07
+Max-Disk-Write Node : node07
+Max-Disk-Read Node  : node07
+End Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:28 CST 2023 1677517828
+Job ID:		873652
+Username:	tyoeasley
+Partition:	medium
+End Slurm Prologue Mon Feb 27 11:10:28 CST 2023 1677517828
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+Name                : randomise
+User                : tyoeasley
+Partition           : medium
+Nodes               : node07
+Cores               : 1
+State               : FAILED
+Submit              : 2023-02-27T11:10:25
+Start               : 2023-02-27T11:10:27
+End                 : 2023-02-27T11:10:28
+Reserved Walltime   : 2-12:00:00
+Used Walltime       :   00:00:01
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node07
+Max-Disk-Write Node : node07
+Max-Disk-Read Node  : node07
+End Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+Name                : randomise
+User                : tyoeasley
+Partition           : medium
+Nodes               : node07
+Cores               : 1
+State               : FAILED
+Submit              : 2023-02-27T11:10:25
+Start               : 2023-02-27T11:10:27
+End                 : 2023-02-27T11:10:28
+Reserved Walltime   : 2-12:00:00
+Used Walltime       :   00:00:01
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node07
+Max-Disk-Write Node : node07
+Max-Disk-Read Node  : node07
+End Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:28 CST 2023 1677517828
+Job ID:		873648
+Username:	tyoeasley
+Partition:	medium
+End Slurm Prologue Mon Feb 27 11:10:28 CST 2023 1677517828
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+Name                : randomise
+User                : tyoeasley
+Partition           : medium
+Nodes               : node07
+Cores               : 1
+State               : FAILED
+Submit              : 2023-02-27T11:10:25
+Start               : 2023-02-27T11:10:27
+End                 : 2023-02-27T11:10:28
+Reserved Walltime   : 2-12:00:00
+Used Walltime       :   00:00:01
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node07
+Max-Disk-Write Node : node07
+Max-Disk-Read Node  : node07
+End Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+Name                : randomise
+User                : tyoeasley
+Partition           : medium
+Nodes               : node07
+Cores               : 1
+State               : FAILED
+Submit              : 2023-02-27T11:10:25
+Start               : 2023-02-27T11:10:27
+End                 : 2023-02-27T11:10:28
+Reserved Walltime   : 2-12:00:00
+Used Walltime       :   00:00:01
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 50G
+Max Mem Used        : 12.00K (12288.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node07
+Max-Disk-Write Node : node07
+Max-Disk-Read Node  : node07
+End Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+Name                : randomise
+User                : tyoeasley
+Partition           : medium
+Nodes               : node07
+Cores               : 1
+State               : FAILED
+Submit              : 2023-02-27T11:10:25
+Start               : 2023-02-27T11:10:27
+End                 : 2023-02-27T11:10:28
+Reserved Walltime   : 2-12:00:00
+Used Walltime       :   00:00:01
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node07
+Max-Disk-Write Node : node07
+Max-Disk-Read Node  : node07
+End Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+Name                : randomise
+User                : tyoeasley
+Partition           : medium
+Nodes               : node07
+Cores               : 1
+State               : FAILED
+Submit              : 2023-02-27T11:10:25
+Start               : 2023-02-27T11:10:27
+End                 : 2023-02-27T11:10:28
+Reserved Walltime   : 2-12:00:00
+Used Walltime       :   00:00:01
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node07
+Max-Disk-Write Node : node07
+Max-Disk-Read Node  : node07
+End Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+Name                : randomise
+User                : tyoeasley
+Partition           : medium
+Nodes               : node07
+Cores               : 1
+State               : FAILED
+Submit              : 2023-02-27T11:10:25
+Start               : 2023-02-27T11:10:27
+End                 : 2023-02-27T11:10:28
+Reserved Walltime   : 2-12:00:00
+Used Walltime       :   00:00:01
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node07
+Max-Disk-Write Node : node07
+Max-Disk-Read Node  : node07
+End Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:28 CST 2023 1677517828
+Job ID:		873651
+Username:	tyoeasley
+Partition:	medium
+End Slurm Prologue Mon Feb 27 11:10:28 CST 2023 1677517828
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+Name                : randomise
+User                : tyoeasley
+Partition           : medium
+Nodes               : node07
+Cores               : 1
+State               : FAILED
+Submit              : 2023-02-27T11:10:25
+Start               : 2023-02-27T11:10:27
+End                 : 2023-02-27T11:10:28
+Reserved Walltime   : 2-12:00:00
+Used Walltime       :   00:00:01
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node07
+Max-Disk-Write Node : node07
+Max-Disk-Read Node  : node07
+End Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:28 CST 2023 1677517828
+Job ID:		873650
+Username:	tyoeasley
+Partition:	medium
+End Slurm Prologue Mon Feb 27 11:10:28 CST 2023 1677517828
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+Name                : randomise
+User                : tyoeasley
+Partition           : medium
+Nodes               : node07
+Cores               : 1
+State               : FAILED
+Submit              : 2023-02-27T11:10:25
+Start               : 2023-02-27T11:10:27
+End                 : 2023-02-27T11:10:28
+Reserved Walltime   : 2-12:00:00
+Used Walltime       :   00:00:01
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node07
+Max-Disk-Write Node : node07
+Max-Disk-Read Node  : node07
+End Slurm Epilogue Mon Feb 27 11:10:30 CST 2023 1677517830
+--------------------------------------------------------------

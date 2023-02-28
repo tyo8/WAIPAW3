@@ -1,0 +1,54 @@
+#!/bin/bash
+### argument parsing ###
+	# ${runfile} -d ${datalist_path} -s ${script_path} -j ${subject_list} -m ${mem_gb}
+while getopts ":d:s:o:O:j:l:m:" opt; do
+  case $opt in
+    d) datalist_path=${OPTARG}
+    ;;
+    s) script_path=${OPTARG}
+    ;;
+    j) subject_list=${OPTARG}
+    ;;
+    m) mem_gb=${OPTARG}
+    ;;
+    \?) echo "Invalid option -${OPTARG}" >&2
+    exit 1
+    ;;
+  esac
+
+  case $OPTARG in
+    -*) echo "Option $opt needs a valid argument"
+    exit 1
+    ;;
+  esac
+done
+
+## bookkeeping paths that wont change for each person running it (but may change for when we integrate this into Janine or Tys domain)
+dirname="/scratch/tyoeasley/WAPIAW3"
+
+### somewhere (maybe not below done?) actually submit the script - the scripts must all have the same input formats that are being created here
+##build outputh path
+# Name the submission script for this dataset type
+#		sbatch_fpath=$(dirname)"/do_predict"
+
+		# Create bookkeeping directories
+#		outdir=$(dirname ${distname})"/phom_data_${data_label}"
+#		scratchdir="${outdir}/dist_mtxs"
+#		mkdir -p $scratchdir
+#		phomdir="${outdir}/phom_out"
+#		mkdir -p $phomdir
+
+#		dX_fpath="${scratchdir}/dX.ldm"
+#		cp $distname $dX_fpath
+#		ndims=$(wc -l ${dX_fpath})
+
+#		phomX_outpath="${outdir}/phom_X.txt"
+
+##build output result name
+
+
+##build log path
+#log_name will be batchname_o% whatever
+
+
+##submit script

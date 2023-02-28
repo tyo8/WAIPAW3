@@ -1,0 +1,6 @@
+basename: 缺少操作数
+请尝试执行 "basename --help" 来获取更多信息。
+
+/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/melodic_output//ica25:  is an unrecognised token!
+/var/spool/slurm/d/job813858/slurm_script:行30: 寻找匹配的 ``' 是遇到了未预期的文件结束符
+/var/spool/slurm/d/job813858/slurm_script:行31: 语法错误: 未预期的文件结尾

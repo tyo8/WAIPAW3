@@ -1,0 +1,48 @@
+Beginning PROFUMO analysis.
+Started at 12:53:43 CST (-0600); Fri 24 Feb 2023.
+
+  /$$$$$$$   /$$$$$$$    /$$$$$$   /$$$$$$$  /$$   /$$  /$$      /$$   /$$$$$$ 
+ | $$__  $$ | $$__  $$  /$$__  $$ | $$____/ | $$  | $$ | $$$    /$$$  /$$__  $$
+ | $$  \ $$ | $$  \ $$ | $$  \ $$ | $$      | $$  | $$ | $$$$  /$$$$ | $$  \ $$
+ | $$$$$$$/ | $$$$$$$/ | $$  | $$ | $$$$$$  | $$  | $$ | $$ $$/$$ $$ | $$  | $$
+ | $$____/  | $$__  $$ | $$  | $$ | $$___/  | $$  | $$ | $$  $$$| $$ | $$  | $$
+ | $$       | $$  \ $$ | $$  | $$ | $$      | $$  | $$ | $$\  $ | $$ | $$  | $$
+ | $$       | $$  | $$ |  $$$$$$/ | $$      |  $$$$$$/ | $$ \/  | $$ |  $$$$$$/
+ |__/       |__/  |__/  \______/  |__/       \______/  |__/     |__/  \______/ 
+
+--------------
+Key parameters
+--------------
+Input data: /home/l.lexi/PROFUMO_data/datalocations.json
+Number of modes: 25
+Output directory: /home/l.lexi/PROFUMO_data/example.pfm/
+--------------
+
+Creating config file...
+----------------------------- Config file contents -----------------------------
+{
+    "> Description": "PROFUMO configuration file",
+    "> Timestamp": "12:53:43; Feb 24 2023",
+    "> Version": "0.11.1",
+    "> Version [build time]": "16:05:34; Jan  8 2020",
+    "Command": "/opt/profumo/C++/PROFUMO /home/l.lexi/PROFUMO_data/datalocations.json 25 /home/l.lexi/PROFUMO_data/example.pfm --useHRF 0.735 --hrfFile /opt/profumo/HRFs/Default.phrf --mask /scratch/tyoeasley/WAPIAW3/brainrep_data/final_GM_mask.nii.gz --covModel Subject --dofCorrection 0.075",
+    "Covariance model": "Subject",
+    "Data locations file": "/home/l.lexi/PROFUMO_data/datalocations.json",
+    "Data normalisation": true,
+    "Data type": "Full rank",
+    "DoF correction": 0.07500000298023224,
+    "Global initialisation": false,
+    "HRF parameters": {
+        "HRF file": "/opt/profumo/HRFs/Default.phrf",
+        "TR (s)": 0.7350000143051147
+    },
+    "Mask file": "/scratch/tyoeasley/WAPIAW3/brainrep_data/final_GM_mask.nii.gz",
+    "Multi-start iterations": 5,
+    "Number of modes": 25,
+    "Output directory": "/home/l.lexi/PROFUMO_data/example.pfm/",
+    "Spatial model": "Modes",
+    "Temporal model": "HRF based"
+}
+--------------------------------------------------------------------------------
+Config file created: /home/l.lexi/PROFUMO_data/example.pfm/Configuration.json
+

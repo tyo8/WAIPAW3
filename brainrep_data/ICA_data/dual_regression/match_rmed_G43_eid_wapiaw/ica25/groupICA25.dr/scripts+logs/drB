@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#SBATCH --job-name=mask_generation2
+#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G43_eid_wapiaw/ica25/groupICA25.dr/scripts+logs/mask_generation2.out
+#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G43_eid_wapiaw/ica25/groupICA25.dr/scripts+logs/mask_generation2.err
+#SBATCH --partition=small
+#SBATCH --time=5:00:00
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=1
+#SBATCH --mem=50gb
+
+	
+$FSLDIR/bin/fslmerge -t /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G43_eid_wapiaw/ica25/groupICA25.dr/maskALL `$FSLDIR/bin/imglob /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G43_eid_wapiaw/ica25/groupICA25.dr/mask_*`
+$FSLDIR/bin/fslmaths /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G43_eid_wapiaw/ica25/groupICA25.dr/maskALL -Tmin /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G43_eid_wapiaw/ica25/groupICA25.dr/mask
+$FSLDIR/bin/imrm /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G43_eid_wapiaw/ica25/groupICA25.dr/mask_*

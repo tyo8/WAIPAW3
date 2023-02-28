@@ -1,0 +1,8 @@
+mkdir: cannot create directory '/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/example/ica25/groupICA25.dr': File exists
+mkdir: cannot create directory '/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/example/ica25/groupICA25.dr/scripts+logs': File exists
+mkdir: cannot create directory '/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G2_eid_wapiaw/ica25/groupICA25.dr': File exists
+mkdir: cannot create directory '/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G2_eid_wapiaw/ica25/groupICA25.dr/scripts+logs': File exists
+slurmstepd: error: *** JOB 873551 ON node15 CANCELLED AT 2023-02-27T16:03:23 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 873561 ON node05 CANCELLED AT 2023-02-27T16:03:23 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 873553 ON node15 CANCELLED AT 2023-02-27T16:03:23 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 873552 ON node15 CANCELLED AT 2023-02-27T16:03:23 DUE TO TIME LIMIT ***

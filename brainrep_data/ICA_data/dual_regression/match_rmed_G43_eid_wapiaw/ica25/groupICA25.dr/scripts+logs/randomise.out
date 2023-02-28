@@ -1,0 +1,128 @@
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 17:19:22 CST 2023 1677539962
+Job ID:		898328
+Username:	tyoeasley
+Partition:	medium
+End Slurm Prologue Mon Feb 27 17:19:22 CST 2023 1677539962
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 17:19:22 CST 2023 1677539962
+Job ID:		898325
+Username:	tyoeasley
+Partition:	medium
+End Slurm Prologue Mon Feb 27 17:19:22 CST 2023 1677539962
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 17:19:22 CST 2023 1677539962
+Job ID:		898326
+Username:	tyoeasley
+Partition:	medium
+End Slurm Prologue Mon Feb 27 17:19:22 CST 2023 1677539962
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 17:19:22 CST 2023 1677539962
+Job ID:		898330
+Username:	tyoeasley
+Partition:	medium
+End Slurm Prologue Mon Feb 27 17:19:22 CST 2023 1677539962
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 17:20:10 CST 2023 1677540010
+Name                : randomise
+User                : tyoeasley
+Partition           : medium
+Nodes               : node22
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T14:35:40
+Start               : 2023-02-27T17:19:22
+End                 : 2023-02-27T17:20:08
+Reserved Walltime   : 2-12:00:00
+Used Walltime       :   00:00:46
+Used CPU Time       :   00:00:32
+% User (Computation): 66.01%
+% System (I/O)      : 33.99%
+Mem Reserved        : 50G
+Max Mem Used        : 1.45M (1515520.0)
+Max Disk Write      : 417.63M (437916794.88)
+Max Disk Read       : 430.47M (451380510.72)
+Max-Mem-Used Node   : node22
+Max-Disk-Write Node : node22
+Max-Disk-Read Node  : node22
+End Slurm Epilogue Mon Feb 27 17:20:10 CST 2023 1677540010
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 17:20:10 CST 2023 1677540010
+Name                : randomise
+User                : tyoeasley
+Partition           : medium
+Nodes               : node22
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T14:35:40
+Start               : 2023-02-27T17:19:22
+End                 : 2023-02-27T17:20:08
+Reserved Walltime   : 2-12:00:00
+Used Walltime       :   00:00:46
+Used CPU Time       :   00:00:31
+% User (Computation): 67.77%
+% System (I/O)      : 32.23%
+Mem Reserved        : 50G
+Max Mem Used        : 1.45M (1519616.0)
+Max Disk Write      : 420.89M (441335152.64)
+Max Disk Read       : 433.83M (454903726.08)
+Max-Mem-Used Node   : node22
+Max-Disk-Write Node : node22
+Max-Disk-Read Node  : node22
+End Slurm Epilogue Mon Feb 27 17:20:10 CST 2023 1677540010
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 17:20:10 CST 2023 1677540010
+Name                : randomise
+User                : tyoeasley
+Partition           : medium
+Nodes               : node22
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T14:35:40
+Start               : 2023-02-27T17:19:22
+End                 : 2023-02-27T17:20:08
+Reserved Walltime   : 2-12:00:00
+Used Walltime       :   00:00:46
+Used CPU Time       :   00:00:31
+% User (Computation): 67.00%
+% System (I/O)      : 33.00%
+Mem Reserved        : 50G
+Max Mem Used        : 1.45M (1515520.0)
+Max Disk Write      : 418.50M (438829056.0)
+Max Disk Read       : 431.36M (452313743.36)
+Max-Mem-Used Node   : node22
+Max-Disk-Write Node : node22
+Max-Disk-Read Node  : node22
+End Slurm Epilogue Mon Feb 27 17:20:10 CST 2023 1677540010
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 17:20:12 CST 2023 1677540012
+Name                : randomise
+User                : tyoeasley
+Partition           : medium
+Nodes               : node22
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T14:35:40
+Start               : 2023-02-27T17:19:22
+End                 : 2023-02-27T17:20:10
+Reserved Walltime   : 2-12:00:00
+Used Walltime       :   00:00:48
+Used CPU Time       :   00:00:29
+% User (Computation): 69.95%
+% System (I/O)      : 30.06%
+Mem Reserved        : 50G
+Max Mem Used        : 6.98M (7319552.0)
+Max Disk Write      : 419.01M (439363829.76)
+Max Disk Read       : 431.29M (452240343.04)
+Max-Mem-Used Node   : node22
+Max-Disk-Write Node : node22
+Max-Disk-Read Node  : node22
+End Slurm Epilogue Mon Feb 27 17:20:12 CST 2023 1677540012
+--------------------------------------------------------------

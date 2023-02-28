@@ -1,0 +1,33 @@
+--------------------------------------------------------------
+Begin Slurm Prologue Fri Feb 24 16:41:12 CST 2023 1677278472
+Job ID:		831464
+Username:	l.lexi
+Partition:	small
+End Slurm Prologue Fri Feb 24 16:41:12 CST 2023 1677278472
+--------------------------------------------------------------
+Initialising postprocessing directory...
+--------------------------------------------------------------
+Begin Slurm Epilogue Fri Feb 24 16:41:20 CST 2023 1677278480
+Name                : pfm
+User                : l.lexi
+Partition           : small
+Nodes               : node15
+Cores               : 1
+State               : FAILED
+Submit              : 2023-02-24T16:40:29
+Start               : 2023-02-24T16:41:11
+End                 : 2023-02-24T16:41:18
+Reserved Walltime   : 05:00:00
+Used Walltime       : 00:00:07
+Used CPU Time       : 00:00:03
+% User (Computation): 36.04%
+% System (I/O)      : 63.96%
+Mem Reserved        : 100G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node15
+Max-Disk-Write Node : node15
+Max-Disk-Read Node  : node15
+End Slurm Epilogue Fri Feb 24 16:41:20 CST 2023 1677278480
+--------------------------------------------------------------

@@ -1,0 +1,34 @@
+--------------------------------------------------------------
+Begin Slurm Prologue Tue Feb 14 16:03:50 CST 2023 1676412230
+Job ID:		813860
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Tue Feb 14 16:03:50 CST 2023 1676412230
+--------------------------------------------------------------
+pulling from subject list: 
+computing with 25 dimensions
+--------------------------------------------------------------
+Begin Slurm Epilogue Tue Feb 14 16:03:52 CST 2023 1676412232
+Name                : dual_reg
+User                : tyoeasley
+Partition           : small
+Nodes               : node15
+Cores               : 1
+State               : FAILED
+Submit              : 2023-02-14T16:03:50
+Start               : 2023-02-14T16:03:50
+End                 : 2023-02-14T16:03:50
+Reserved Walltime   : 05:00:00
+Used Walltime       : --
+Used CPU Time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem Reserved        : 100G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node15
+Max-Disk-Write Node : node15
+Max-Disk-Read Node  : node15
+End Slurm Epilogue Tue Feb 14 16:03:52 CST 2023 1676412232
+--------------------------------------------------------------

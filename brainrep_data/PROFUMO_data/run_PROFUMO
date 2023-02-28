@@ -1,0 +1,23 @@
+#!/bin/sh
+#SBATCH -J pfm
+#SBATCH -o pfm.out
+#SBATCH -e pfm.err
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH --mem 100G
+#SBATCH -t 5:00:00
+
+module load singularity/3.5.2
+container=/home/e.ty/profumo.sif
+src_json=/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/datalocations.json
+Ncomponents=25
+mask=/scratch/tyoeasley/WAPIAW3/brainrep_data/final_GM_mask.nii.gz
+output=/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/example.pfm
+
+singularity exec -B /scratch:/scratch -B /ceph:/ceph ${container}  /opt/profumo/C++/PROFUMO ${src_json} ${Ncomponents} ${output} --useHRF 0.735 --hrfFile /opt/profumo/HRFs/Default.phrf --mask ${mask} --covModel Subject --dofCorrection 0.075
+
+#ref image of same size
+ref_img=${mask}
+
+# writing post processing results
+singularity exec -B /scratch:/scratch ${container} /opt/profumo/Python/postprocess_results.py ${output} ${output}/Results.ppp ${ref_img} --web-report

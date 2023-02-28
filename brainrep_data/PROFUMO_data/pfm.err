@@ -1,0 +1,9 @@
+terminate called after throwing an instance of 'spdlog::spdlog_ex'
+  what():  Failed opening file /scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/example.pfm/log.txt for writing: Permission denied
+/var/spool/slurm/d/job831464/slurm_script: 行 17: 3394512 Aborted                 singularity exec -B /scratch:/scratch -B /ceph:/ceph ${container} /opt/profumo/C++/PROFUMO ${src_json} ${Ncomponents} ${output} --useHRF 0.735 --hrfFile /opt/profumo/HRFs/Default.phrf --mask ${mask} --covModel Subject --dofCorrection 0.075
+Traceback (most recent call last):
+  File "/opt/profumo/Python/postprocess_results.py", line 94, in <module>
+    runs=runs, modes=modes, signs=signs)
+  File "/opt/profumo/Python/profumo/postprocessing.py", line 95, in __init__
+    os.mkdir(self.directory)
+PermissionError: [Errno 13] Permission denied: '/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/example.pfm/Results.ppp'
