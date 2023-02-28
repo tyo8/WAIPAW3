@@ -1,0 +1,519 @@
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873621
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873625
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node23
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:24
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:42
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:17
+Used CPU Time       : 00:00:16
+% User (Computation): 91.54%
+% System (I/O)      :  8.45%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node23
+Max-Disk-Write Node : node23
+Max-Disk-Read Node  : node23
+End Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873624
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873626
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873623
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873629
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873622
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873627
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873628
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:43 CST 2023 1677517843
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node24
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:25
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:41
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:16
+Used CPU Time       : 00:00:15
+% User (Computation): 89.14%
+% System (I/O)      : 10.85%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node24
+Max-Disk-Write Node : node24
+Max-Disk-Read Node  : node24
+End Slurm Epilogue Mon Feb 27 11:10:43 CST 2023 1677517843
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:43 CST 2023 1677517843
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node23
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:24
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:41
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:16
+Used CPU Time       : 00:00:15
+% User (Computation): 93.42%
+% System (I/O)      :  6.57%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node23
+Max-Disk-Write Node : node23
+Max-Disk-Read Node  : node23
+End Slurm Epilogue Mon Feb 27 11:10:43 CST 2023 1677517843
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node23
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:24
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:42
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:17
+Used CPU Time       : 00:00:15
+% User (Computation): 92.81%
+% System (I/O)      :  7.19%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node23
+Max-Disk-Write Node : node23
+Max-Disk-Read Node  : node23
+End Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node24
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:25
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:42
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:17
+Used CPU Time       : 00:00:15
+% User (Computation): 88.72%
+% System (I/O)      : 11.28%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node24
+Max-Disk-Write Node : node24
+Max-Disk-Read Node  : node24
+End Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node23
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:24
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:42
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:17
+Used CPU Time       : 00:00:15
+% User (Computation): 92.78%
+% System (I/O)      :  7.22%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node23
+Max-Disk-Write Node : node23
+Max-Disk-Read Node  : node23
+End Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:45 CST 2023 1677517845
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node23
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:24
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:43
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:18
+Used CPU Time       : 00:00:15
+% User (Computation): 92.21%
+% System (I/O)      :  7.79%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node23
+Max-Disk-Write Node : node23
+Max-Disk-Read Node  : node23
+End Slurm Epilogue Mon Feb 27 11:10:45 CST 2023 1677517845
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873625
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node23
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:24
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:42
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:17
+Used CPU Time       : 00:00:16
+% User (Computation): 91.54%
+% System (I/O)      :  8.45%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node23
+Max-Disk-Write Node : node23
+Max-Disk-Read Node  : node23
+End Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873624
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873626
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873623
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873629
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873622
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873627
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+Job ID:		873628
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Feb 27 11:10:25 CST 2023 1677517825
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:43 CST 2023 1677517843
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node24
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:25
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:41
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:16
+Used CPU Time       : 00:00:15
+% User (Computation): 89.14%
+% System (I/O)      : 10.85%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node24
+Max-Disk-Write Node : node24
+Max-Disk-Read Node  : node24
+End Slurm Epilogue Mon Feb 27 11:10:43 CST 2023 1677517843
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:43 CST 2023 1677517843
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node23
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:24
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:41
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:16
+Used CPU Time       : 00:00:15
+% User (Computation): 93.42%
+% System (I/O)      :  6.57%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node23
+Max-Disk-Write Node : node23
+Max-Disk-Read Node  : node23
+End Slurm Epilogue Mon Feb 27 11:10:43 CST 2023 1677517843
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node23
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:24
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:42
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:17
+Used CPU Time       : 00:00:15
+% User (Computation): 92.81%
+% System (I/O)      :  7.19%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node23
+Max-Disk-Write Node : node23
+Max-Disk-Read Node  : node23
+End Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node24
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:25
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:42
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:17
+Used CPU Time       : 00:00:15
+% User (Computation): 88.72%
+% System (I/O)      : 11.28%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node24
+Max-Disk-Write Node : node24
+Max-Disk-Read Node  : node24
+End Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node23
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:24
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:42
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:17
+Used CPU Time       : 00:00:15
+% User (Computation): 92.78%
+% System (I/O)      :  7.22%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node23
+Max-Disk-Write Node : node23
+Max-Disk-Read Node  : node23
+End Slurm Epilogue Mon Feb 27 11:10:44 CST 2023 1677517844
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:45 CST 2023 1677517845
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node23
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:24
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:43
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:18
+Used CPU Time       : 00:00:15
+% User (Computation): 92.21%
+% System (I/O)      :  7.79%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node23
+Max-Disk-Write Node : node23
+Max-Disk-Read Node  : node23
+End Slurm Epilogue Mon Feb 27 11:10:45 CST 2023 1677517845
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:47 CST 2023 1677517847
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node22
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:24
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:44
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:19
+Used CPU Time       : 00:00:19
+% User (Computation): 85.10%
+% System (I/O)      : 14.89%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node22
+Max-Disk-Write Node : node22
+Max-Disk-Read Node  : node22
+End Slurm Epilogue Mon Feb 27 11:10:47 CST 2023 1677517847
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Feb 27 11:10:47 CST 2023 1677517847
+Name                : mask_generation1
+User                : tyoeasley
+Partition           : small
+Nodes               : node22
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-27T11:10:24
+Start               : 2023-02-27T11:10:25
+End                 : 2023-02-27T11:10:44
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:19
+Used CPU Time       : 00:00:19
+% User (Computation): 85.51%
+% System (I/O)      : 14.49%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node22
+Max-Disk-Write Node : node22
+Max-Disk-Read Node  : node22
+End Slurm Epilogue Mon Feb 27 11:10:47 CST 2023 1677517847
+--------------------------------------------------------------
