@@ -1,0 +1,33 @@
+{
+	"sub-1091034": {
+		"ses": "/ceph/biobank/derivatives/melodic/sub-1091034/ses-01/sub-1091034_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
+	},
+	"sub-1113736": {
+		"ses": "/ceph/biobank/derivatives/melodic/sub-1113736/ses-01/sub-1113736_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
+	},
+	"sub-1150832": {
+		"ses": "/ceph/biobank/derivatives/melodic/sub-1150832/ses-01/sub-1150832_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
+	},
+	"sub-1160638": {
+		"ses": "/ceph/biobank/derivatives/melodic/sub-1160638/ses-01/sub-1160638_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
+	},
+	"sub-1167235": {
+		"ses": "/ceph/biobank/derivatives/melodic/sub-1167235/ses-01/sub-1167235_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
+	},
+	"sub-4630421": {
+		"ses": "/ceph/biobank/derivatives/melodic/sub-4630421/ses-01/sub-4630421_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
+	},
+	"sub-3900806": {
+		"ses": "/ceph/biobank/derivatives/melodic/sub-3900806/ses-01/sub-3900806_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
+	},
+	"sub-5276183": {
+		"ses": "/ceph/biobank/derivatives/melodic/sub-5276183/ses-01/sub-5276183_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
+	},
+	"sub-4875069": {
+		"ses": "/ceph/biobank/derivatives/melodic/sub-4875069/ses-01/sub-4875069_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
+	},
+	"sub-3069175": {
+		"ses": "/ceph/biobank/derivatives/melodic/sub-3069175/ses-01/sub-3069175_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
+	}
+
+}

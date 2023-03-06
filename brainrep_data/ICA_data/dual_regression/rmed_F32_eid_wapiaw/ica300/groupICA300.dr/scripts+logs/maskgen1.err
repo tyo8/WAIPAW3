@@ -1,0 +1,8 @@
+slurmstepd: error: *** JOB 1040873 ON node25 CANCELLED AT 2023-03-01T17:09:20 ***
+slurmstepd: error: *** JOB 1040936 ON node09 CANCELLED AT 2023-03-01T17:09:20 ***
+slurmstepd: error: *** JOB 1040882 ON node15 CANCELLED AT 2023-03-01T17:09:20 ***
+slurmstepd: error: *** JOB 1040951 ON node20 CANCELLED AT 2023-03-01T17:09:20 ***
+slurmstepd: error: *** JOB 1040902 ON node07 CANCELLED AT 2023-03-01T17:09:20 ***
+slurmstepd: error: *** JOB 1040921 ON node18 CANCELLED AT 2023-03-01T17:09:20 ***
+slurmstepd: error: *** JOB 1040959 ON node16 CANCELLED AT 2023-03-01T17:09:20 ***
+slurmstepd: error: *** JOB 1040942 ON node09 CANCELLED AT 2023-03-01T17:09:20 ***

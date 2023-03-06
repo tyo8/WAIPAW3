@@ -1,0 +1,13 @@
+#!/bin/sh
+
+#SBATCH --job-name=dual_regression
+#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G43_eid_wapiaw/ica300/groupICA300.dr/scripts+logs/dual_regression.out
+#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G43_eid_wapiaw/ica300/groupICA300.dr/scripts+logs/dual_regression.err
+#SBATCH --partition=small
+#SBATCH --time=30:00:00
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=1
+#SBATCH --mem=50gb
+
+	
+/export/fsl/fsl-6.0.5/bin/fsl_glm -i /ceph/biobank/derivatives/melodic/sub-3655245/ses-01/sub-3655245_ses-01_melodic.ica/filtered_func_data_clean_MNI152 -d /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/melodic_output/match_rmed_G43_eid_wapiaw/ica300/melodic_IC -o /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G43_eid_wapiaw/ica300/groupICA300.dr/dr_stage1_3655245.txt --demean -m /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G43_eid_wapiaw/ica300/groupICA300.dr/mask

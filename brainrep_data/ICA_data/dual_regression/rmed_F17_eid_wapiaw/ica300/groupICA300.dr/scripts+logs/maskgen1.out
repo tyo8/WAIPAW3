@@ -1,0 +1,32 @@
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Mar  6 14:20:50 CST 2023 1678134050
+Job ID:		1188008
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Mar  6 14:20:50 CST 2023 1678134050
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Mar  6 14:21:09 CST 2023 1678134069
+Name                : maskgen1
+User                : tyoeasley
+Partition           : small
+Nodes               : node16
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-03-06T14:20:12
+Start               : 2023-03-06T14:20:50
+End                 : 2023-03-06T14:21:07
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:17
+Used CPU Time       : 00:00:14
+% User (Computation): 94.78%
+% System (I/O)      :  0.00%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node16
+Max-Disk-Write Node : node16
+Max-Disk-Read Node  : node16
+End Slurm Epilogue Mon Mar  6 14:21:09 CST 2023 1678134069
+--------------------------------------------------------------

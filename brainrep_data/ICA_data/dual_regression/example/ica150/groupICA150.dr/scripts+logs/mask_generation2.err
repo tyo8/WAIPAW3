@@ -1,4 +1,0 @@
-Image Exception : #63 :: No image files match: /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/example/ica150/groupICA150.dr/maskALL
-terminate called after throwing an instance of 'std::runtime_error'
-  what():  No image files match: /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/example/ica150/groupICA150.dr/maskALL
-/var/spool/slurm/d/job873799/slurm_script: line 14: 3732503 Aborted                 (core dumped) $FSLDIR/bin/fslmaths /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/example/ica150/groupICA150.dr/maskALL -Tmin /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/example/ica150/groupICA150.dr/mask

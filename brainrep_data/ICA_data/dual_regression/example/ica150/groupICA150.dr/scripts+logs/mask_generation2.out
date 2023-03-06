@@ -1,32 +1,23 @@
 --------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 11:38:18 CST 2023 1677519498
-Job ID:		873799
+Begin Slurm Prologue Tue Feb 28 15:09:27 CST 2023 1677618567
+Job ID:		910512
 Username:	tyoeasley
 Partition:	small
-End Slurm Prologue Mon Feb 27 11:38:18 CST 2023 1677519498
+End Slurm Prologue Tue Feb 28 15:09:27 CST 2023 1677618567
 --------------------------------------------------------------
-
-Usage: fslmerge <-x/y/z/t/a/tr> <output> <file1 file2 .......> [tr value in seconds]
-     -t : concatenate images in time
-     -x : concatenate images in the x direction
-     -y : concatenate images in the y direction
-     -z : concatenate images in the z direction
-     -a : auto-choose: single slices -> volume, volumes -> 4D (time series)
-     -tr : concatenate images in time and set the output image tr to the final option value
-     -n <N> : only use volume <N> from each input file (first volume is 0 not 1)
 --------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 11:38:20 CST 2023 1677519500
+Begin Slurm Epilogue Tue Feb 28 15:09:31 CST 2023 1677618571
 Name                : mask_generation2
 User                : tyoeasley
 Partition           : small
-Nodes               : node24
+Nodes               : node29
 Cores               : 1
 State               : COMPLETED
-Submit              : 2023-02-27T11:38:16
-Start               : 2023-02-27T11:38:18
-End                 : 2023-02-27T11:38:18
+Submit              : 2023-02-28T15:09:27
+Start               : 2023-02-28T15:09:27
+End                 : 2023-02-28T15:09:29
 Reserved Walltime   : 05:00:00
-Used Walltime       : --
+Used Walltime       : 00:00:02
 Used CPU Time       : --
 % User (Computation): --
 % System (I/O)      : --
@@ -34,8 +25,8 @@ Mem Reserved        : 50G
 Max Mem Used        : 0.00  (0.0)
 Max Disk Write      : 0.00  (0.0)
 Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node24
-Max-Disk-Write Node : node24
-Max-Disk-Read Node  : node24
-End Slurm Epilogue Mon Feb 27 11:38:20 CST 2023 1677519500
+Max-Mem-Used Node   : node29
+Max-Disk-Write Node : node29
+Max-Disk-Read Node  : node29
+End Slurm Epilogue Tue Feb 28 15:09:31 CST 2023 1677618571
 --------------------------------------------------------------

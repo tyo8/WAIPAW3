@@ -1,7 +1,0 @@
-terminate called after throwing an instance of 'NiftiIO::NiftiException'
-  what():  Error: short read, file may be truncated
-/var/spool/slurm/d/job895664/slurm_script: line 13: 3972052 Aborted                 (core dumped) $FSLDIR/bin/fslmerge -t /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G55_eid_wapiaw/ica25/groupICA25.dr/maskALL `$FSLDIR/bin/imglob /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G55_eid_wapiaw/ica25/groupICA25.dr/mask_*`
-Image Exception : #63 :: No image files match: /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G55_eid_wapiaw/ica25/groupICA25.dr/maskALL
-terminate called after throwing an instance of 'std::runtime_error'
-  what():  No image files match: /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G55_eid_wapiaw/ica25/groupICA25.dr/maskALL
-/var/spool/slurm/d/job895664/slurm_script: line 14: 3972055 Aborted                 (core dumped) $FSLDIR/bin/fslmaths /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G55_eid_wapiaw/ica25/groupICA25.dr/maskALL -Tmin /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G55_eid_wapiaw/ica25/groupICA25.dr/mask

@@ -1,0 +1,64 @@
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Mar  6 11:06:30 CST 2023 1678122390
+Job ID:		1184989
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Mar  6 11:06:30 CST 2023 1678122390
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Mon Mar  6 11:06:30 CST 2023 1678122390
+Job ID:		1184990
+Username:	tyoeasley
+Partition:	small
+End Slurm Prologue Mon Mar  6 11:06:30 CST 2023 1678122390
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Mar  6 11:06:48 CST 2023 1678122408
+Name                : maskgen1
+User                : tyoeasley
+Partition           : small
+Nodes               : node16
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-03-06T11:05:38
+Start               : 2023-03-06T11:06:30
+End                 : 2023-03-06T11:06:46
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:16
+Used CPU Time       : 00:00:14
+% User (Computation): 94.60%
+% System (I/O)      :  0.00%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node16
+Max-Disk-Write Node : node16
+Max-Disk-Read Node  : node16
+End Slurm Epilogue Mon Mar  6 11:06:49 CST 2023 1678122409
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Mon Mar  6 11:06:49 CST 2023 1678122409
+Name                : maskgen1
+User                : tyoeasley
+Partition           : small
+Nodes               : node16
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-03-06T11:05:38
+Start               : 2023-03-06T11:06:30
+End                 : 2023-03-06T11:06:47
+Reserved Walltime   : 10:00:00
+Used Walltime       : 00:00:17
+Used CPU Time       : 00:00:14
+% User (Computation): 94.62%
+% System (I/O)      :  0.00%
+Mem Reserved        : 50G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node16
+Max-Disk-Write Node : node16
+Max-Disk-Read Node  : node16
+End Slurm Epilogue Mon Mar  6 11:06:49 CST 2023 1678122409
+--------------------------------------------------------------

@@ -1,0 +1,22 @@
+#!/bin/sh
+#SBATCH -J stg1_dual_reg
+#SBATCH -o logs/stg1_DR_pipeline.out
+#SBATCH -e logs/stg1_DR_pipeline.err
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH --mem 2G
+#SBATCH -t 23:55:00
+
+# constants
+base_dir="/scratch/tyoeasley/WAPIAW3"
+ICA_dir="${base_dir}/brainrep_data/ICA_data"
+sbatch_fpath="${ICA_dir}/do_dual_reg_batch"
+script_fpath="${base_dir}/job_submission_portal/extraction_jobs/submit_DR-ICA_sbatch.sh"
+
+# parameters
+dim_list_fpath="${ICA_dir}/ICA_dimlist.txt"
+subj_group_flist="${base_dir}/subject_lists/lists_of_groups/code_disease_groups.txt"
+DR_process_script="stage1_DR_only_slurm"
+
+# call
+${script_fpath} -b ${base_dir} -I ${ICA_dir} -f ${sbatch_fpath} -D ${dim_list_fpath} -s ${subj_group_flist} -p ${DR_process_script}

@@ -157,32 +157,29 @@ fi
 N_ICs=`$FSLDIR/bin/fslnvols $ICA_MAPS`
 
 ############################################################################
-echo "creating common mask..."
+printf "\ncreating common mask... (part A)"
 for i in $INPUTS ; do
   eid=$( /scratch/tyoeasley/WAPIAW3/brainrep_data/fpath_to_eid.sh $i )
   echo "$FSLDIR/bin/fslmaths $i -Tstd -bin ${OUTPUT}/mask_${eid} -odt char" > "${LOGDIR}/drA"
-	$FSLurmDIR/fsl_sub_slurm.sh -j true -T 10 -N mask_generation1 -l $LOGDIR -f "${LOGDIR}/drA"
-  j=`echo "$j 1 + p" | dc -`
+	$FSLurmDIR/fsl_sub_slurm.sh -j true -T 10 -N maskgen1 -l $LOGDIR -f "${LOGDIR}/drA"
 done
 
 ############################################################################
+printf "\ncreating common mask... (part B)"
 cat <<EOF > ${LOGDIR}/drB
 \$FSLDIR/bin/fslmerge -t ${OUTPUT}/maskALL \`\$FSLDIR/bin/imglob ${OUTPUT}/mask_*\`
 \$FSLDIR/bin/fslmaths $OUTPUT/maskALL -Tmin $OUTPUT/mask
 \$FSLDIR/bin/imrm $OUTPUT/mask_*
 EOF
 chmod a+x "${LOGDIR}/drB"
-$FSLurmDIR/fsl_sub_slurm.sh -j true -T 5 -N mask_generation2 -l $LOGDIR -f "${LOGDIR}/drB"
-echo "common mask successfully created!"
+$FSLurmDIR/fsl_sub_slurm.sh -j true -T 5 -N maskgen2 -l $LOGDIR -f "${LOGDIR}/drB"
+printf "common mask successfully created!\n\n"
 
 ############################################################################
 echo "submitting dual regression jobs..."
-j=0
 for i in $INPUTS ; do
   eid=$( /scratch/tyoeasley/WAPIAW3/brainrep_data/fpath_to_eid.sh $i )
-  printf "$FSLDIR/bin/fsl_glm -i $i -d $ICA_MAPS -o $OUTPUT/dr_stage1_${eid}.txt --demean -m $OUTPUT/mask \
-        " > "${LOGDIR}/drC"
+  echo "${FSLDIR}/bin/fsl_glm -i ${i} -d ${ICA_MAPS} -o ${OUTPUT}/dr_stage1_${eid}.txt --demean -m ${OUTPUT}/mask" > "${LOGDIR}/drC"
   
 $FSLurmDIR/fsl_sub_slurm.sh -T 30 -N dual_regression -l $LOGDIR -f "${LOGDIR}/drC"
-  j=`echo "$j 1 + p" | dc -`
 done

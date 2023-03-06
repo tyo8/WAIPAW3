@@ -3,15 +3,37 @@
 set -u nounset
 
 base_dir="/scratch/tyoeasley/WAPIAW3"
-js_fname="/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/datalocations.json"
 subj_list="/scratch/tyoeasley/WAPIAW3/subject_lists/example.txt"
-n_subj=$( wc ${subj_list} | cut -d ' ' -f 1 )
-echo ${n_subj}
+js_fname_type="\$( echo \"/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/raw_data_subj_lists/${groupname}_datalocations.json\" )"
+
+
+while getopts ":b:s:j:" opt; do
+  case $opt in
+    b) base_dir=${OPTARG}
+    ;;
+    s) subj_list=${OPTARG}
+    ;;
+    j) js_fname_type=${OPTARG}
+    ;;
+    \?) echo "Invalid option -$OPTARG" >&2
+    exit 1
+    ;;
+  esac
+
+  case $OPTARG in
+    -*) echo "Option $opt needs a valid argument"
+    exit 1
+    ;;
+  esac
+done
+groupname=$( basename ${eid_list} | cut -d. -f 1)
+js_fname=$( eval ${js_fname_type} )
+
+n_subj=$( wc ${subj_list} | cut -d' ' -f 1 )
 
 # overwrite/create json file and make first bracket
 printf "{\n" > ${js_fname}
 counter=0
-echo ${counter}
 for i in `cat ${subj_list}` ; do
         let counter=counter+1
 	# echo ${counter}
@@ -40,5 +62,4 @@ done
 # close last bracket in json
 printf "\n}" >> $js_fname
 
-printf "\nDone.\n\n"
-
+echo $js_fname

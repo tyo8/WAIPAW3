@@ -1,0 +1,3 @@
+terminate called after throwing an instance of 'NiftiIO::NiftiException'
+  what():  Error: cant open file /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/rmed_G55_eid_wapiaw/ica25/groupICA25.dr/mask_2279446.nii.gz
+/var/spool/slurm/d/job1188048/slurm_script: line 13: 434464 Aborted                 (core dumped) /export/fsl/fsl-6.0.5/bin/fslmaths /ceph/biobank/derivatives/melodic/sub-2279446/ses-01/sub-2279446_ses-01_melodic.ica/filtered_func_data_clean_MNI152 -Tstd -bin /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/rmed_G55_eid_wapiaw/ica25/groupICA25.dr/mask_2279446 -odt char

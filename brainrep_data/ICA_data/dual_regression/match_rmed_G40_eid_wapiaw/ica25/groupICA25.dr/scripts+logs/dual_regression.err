@@ -1,6 +1,0 @@
-Image Exception : #22 :: Failed to read volume /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G40_eid_wapiaw/ica25/groupICA25.dr/dr_stage2_subject00240
-Error : Error: short read, file may be truncated
-terminate called after throwing an instance of 'std::runtime_error'
-  what():  Failed to read volume /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G40_eid_wapiaw/ica25/groupICA25.dr/dr_stage2_subject00240
-Error : Error: short read, file may be truncated
-/var/spool/slurm/d/job883127/slurm_script: line 15: 760314 Aborted                 (core dumped) /export/fsl/fsl-6.0.5/bin/fslsplit /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G40_eid_wapiaw/ica25/groupICA25.dr/dr_stage2_subject00240 /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/match_rmed_G40_eid_wapiaw/ica25/groupICA25.dr/dr_stage2_subject00240_ic

@@ -1,0 +1,9 @@
+terminate called after throwing an instance of 'NiftiIO::NiftiException'
+  what():  Error: cant open file /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/rmed_F41_eid_wapiaw/ica150/groupICA150.dr/mask_3939289.nii.gz
+/var/spool/slurm/d/job1188040/slurm_script: line 13: 2515564 Aborted                 (core dumped) /export/fsl/fsl-6.0.5/bin/fslmaths /ceph/biobank/derivatives/melodic/sub-3939289/ses-01/sub-3939289_ses-01_melodic.ica/filtered_func_data_clean_MNI152 -Tstd -bin /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/rmed_F41_eid_wapiaw/ica150/groupICA150.dr/mask_3939289 -odt char
+terminate called after throwing an instance of 'NiftiIO::NiftiException'
+  what():  Error: cant open file /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/rmed_F41_eid_wapiaw/ica150/groupICA150.dr/mask_3966099.nii.gz
+/var/spool/slurm/d/job1188061/slurm_script: line 13: 1617895 Aborted                 (core dumped) /export/fsl/fsl-6.0.5/bin/fslmaths /ceph/biobank/derivatives/melodic/sub-3966099/ses-01/sub-3966099_ses-01_melodic.ica/filtered_func_data_clean_MNI152 -Tstd -bin /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/rmed_F41_eid_wapiaw/ica150/groupICA150.dr/mask_3966099 -odt char
+terminate called after throwing an instance of 'NiftiIO::NiftiException'
+  what():  Error: cant open file /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/rmed_F41_eid_wapiaw/ica150/groupICA150.dr/mask_3941181.nii.gz
+/var/spool/slurm/d/job1188045/slurm_script: line 13: 2290383 Aborted                 (core dumped) /export/fsl/fsl-6.0.5/bin/fslmaths /ceph/biobank/derivatives/melodic/sub-3941181/ses-01/sub-3941181_ses-01_melodic.ica/filtered_func_data_clean_MNI152 -Tstd -bin /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/rmed_F41_eid_wapiaw/ica150/groupICA150.dr/mask_3941181 -odt char

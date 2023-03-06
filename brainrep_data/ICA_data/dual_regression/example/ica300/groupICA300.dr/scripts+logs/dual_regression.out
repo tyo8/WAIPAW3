@@ -1,779 +1,480 @@
 --------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875251
+Begin Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
+Job ID:		923245
 Username:	tyoeasley
 Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+End Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875258
+Begin Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
+Job ID:		923249
 Username:	tyoeasley
 Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+End Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875254
+Begin Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
+Job ID:		923242
 Username:	tyoeasley
 Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+End Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875257
+Begin Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
+Job ID:		923248
 Username:	tyoeasley
 Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+End Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875259
+Begin Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
+Job ID:		923246
 Username:	tyoeasley
 Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+End Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875260
+Begin Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
+Job ID:		923244
 Username:	tyoeasley
 Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+End Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875261
+Begin Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
+Job ID:		923243
 Username:	tyoeasley
 Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+End Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
-Name                : dual_regression
-User                : tyoeasley
-Partition           : medium
-Nodes               : node01
-Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:28
-Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:10
-Used CPU Time       :   00:00:10
-% User (Computation): 91.91%
-% System (I/O)      :  0.00%
-Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
-Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node01
-Max-Disk-Write Node : node01
-Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
-Name                : dual_regression
-User                : tyoeasley
-Partition           : medium
-Nodes               : node01
-Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:28
-Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:10
-Used CPU Time       :   00:00:10
-% User (Computation): 91.75%
-% System (I/O)      :  0.00%
-Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
-Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node01
-Max-Disk-Write Node : node01
-Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
-Name                : dual_regression
-User                : tyoeasley
-Partition           : medium
-Nodes               : node01
-Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:28
-Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:10
-Used CPU Time       :   00:00:10
-% User (Computation): 91.95%
-% System (I/O)      :  0.00%
-Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
-Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node01
-Max-Disk-Write Node : node01
-Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
-Name                : dual_regression
-User                : tyoeasley
-Partition           : medium
-Nodes               : node01
-Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:29
-Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:11
-Used CPU Time       :   00:00:10
-% User (Computation): 91.93%
-% System (I/O)      :  0.00%
-Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
-Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node01
-Max-Disk-Write Node : node01
-Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875255
+Begin Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
+Job ID:		923247
 Username:	tyoeasley
 Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+End Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875257
+Begin Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
+Job ID:		923250
 Username:	tyoeasley
 Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+End Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875259
+Begin Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
+Job ID:		923251
 Username:	tyoeasley
 Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+End Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875260
+Begin Slurm Epilogue Tue Feb 28 22:44:11 CST 2023 1677645851
+Name                : dual_regression
+User                : tyoeasley
+Partition           : medium
+Nodes               : node01
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-28T22:42:15
+Start               : 2023-02-28T22:42:15
+End                 : 2023-02-28T22:44:09
+Reserved Walltime   : 1-06:00:00
+Used Walltime       :   00:01:54
+Used CPU Time       :   00:01:51
+% User (Computation): 97.19%
+% System (I/O)      :  2.81%
+Mem Reserved        : 50G
+Max Mem Used        : 4.39G (4718731264.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 10.24K (10485.76)
+Max-Mem-Used Node   : node01
+Max-Disk-Write Node : node01
+Max-Disk-Read Node  : node01
+End Slurm Epilogue Tue Feb 28 22:44:11 CST 2023 1677645851
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Tue Feb 28 22:44:18 CST 2023 1677645858
+Name                : dual_regression
+User                : tyoeasley
+Partition           : medium
+Nodes               : node01
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-28T22:42:15
+Start               : 2023-02-28T22:42:15
+End                 : 2023-02-28T22:44:16
+Reserved Walltime   : 1-06:00:00
+Used Walltime       :   00:02:01
+Used CPU Time       :   00:01:59
+% User (Computation): 97.34%
+% System (I/O)      :  2.66%
+Mem Reserved        : 50G
+Max Mem Used        : 4.40G (4719190016.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 10.24K (10485.76)
+Max-Mem-Used Node   : node01
+Max-Disk-Write Node : node01
+Max-Disk-Read Node  : node01
+End Slurm Epilogue Tue Feb 28 22:44:18 CST 2023 1677645858
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Tue Feb 28 22:44:26 CST 2023 1677645866
+Name                : dual_regression
+User                : tyoeasley
+Partition           : medium
+Nodes               : node01
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-28T22:42:15
+Start               : 2023-02-28T22:42:15
+End                 : 2023-02-28T22:44:24
+Reserved Walltime   : 1-06:00:00
+Used Walltime       :   00:02:09
+Used CPU Time       :   00:02:06
+% User (Computation): 97.48%
+% System (I/O)      :  2.52%
+Mem Reserved        : 50G
+Max Mem Used        : 4.39G (4718653440.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 10.24K (10485.76)
+Max-Mem-Used Node   : node01
+Max-Disk-Write Node : node01
+Max-Disk-Read Node  : node01
+End Slurm Epilogue Tue Feb 28 22:44:26 CST 2023 1677645866
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Tue Feb 28 22:44:26 CST 2023 1677645866
+Name                : dual_regression
+User                : tyoeasley
+Partition           : medium
+Nodes               : node01
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-28T22:42:15
+Start               : 2023-02-28T22:42:15
+End                 : 2023-02-28T22:44:24
+Reserved Walltime   : 1-06:00:00
+Used Walltime       :   00:02:09
+Used CPU Time       :   00:02:07
+% User (Computation): 97.53%
+% System (I/O)      :  2.47%
+Mem Reserved        : 50G
+Max Mem Used        : 4.40G (4719190016.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 10.24K (10485.76)
+Max-Mem-Used Node   : node01
+Max-Disk-Write Node : node01
+Max-Disk-Read Node  : node01
+End Slurm Epilogue Tue Feb 28 22:44:26 CST 2023 1677645866
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Epilogue Tue Feb 28 22:44:32 CST 2023 1677645872
+Name                : dual_regression
+User                : tyoeasley
+Partition           : medium
+Nodes               : node01
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-02-28T22:42:15
+Start               : 2023-02-28T22:42:15
+End                 : 2023-02-28T22:44:30
+Reserved Walltime   : 1-06:00:00
+Used Walltime       :   00:02:15
+Used CPU Time       :   00:02:12
+% User (Computation): 97.57%
+% System (I/O)      :  2.43%
+Mem Reserved        : 50G
+Max Mem Used        : 4.40G (4719190016.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 10.24K (10485.76)
+Max-Mem-Used Node   : node01
+Max-Disk-Write Node : node01
+Max-Disk-Read Node  : node01
+End Slurm Epilogue Tue Feb 28 22:44:32 CST 2023 1677645872
+--------------------------------------------------------------
+--------------------------------------------------------------
+Begin Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
+Job ID:		923244
 Username:	tyoeasley
 Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+End Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875261
+Begin Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
+Job ID:		923243
 Username:	tyoeasley
 Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+End Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
-Name                : dual_regression
-User                : tyoeasley
-Partition           : medium
-Nodes               : node01
-Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:28
-Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:10
-Used CPU Time       :   00:00:10
-% User (Computation): 91.91%
-% System (I/O)      :  0.00%
-Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
-Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node01
-Max-Disk-Write Node : node01
-Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
-Name                : dual_regression
-User                : tyoeasley
-Partition           : medium
-Nodes               : node01
-Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:28
-Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:10
-Used CPU Time       :   00:00:10
-% User (Computation): 91.75%
-% System (I/O)      :  0.00%
-Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
-Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node01
-Max-Disk-Write Node : node01
-Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
-Name                : dual_regression
-User                : tyoeasley
-Partition           : medium
-Nodes               : node01
-Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:28
-Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:10
-Used CPU Time       :   00:00:10
-% User (Computation): 91.95%
-% System (I/O)      :  0.00%
-Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
-Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node01
-Max-Disk-Write Node : node01
-Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
-Name                : dual_regression
-User                : tyoeasley
-Partition           : medium
-Nodes               : node01
-Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:29
-Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:11
-Used CPU Time       :   00:00:10
-% User (Computation): 91.93%
-% System (I/O)      :  0.00%
-Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
-Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node01
-Max-Disk-Write Node : node01
-Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
-Name                : dual_regression
-User                : tyoeasley
-Partition           : medium
-Nodes               : node01
-Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:29
-Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:11
-Used CPU Time       :   00:00:10
-% User (Computation): 91.78%
-% System (I/O)      :  0.00%
-Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
-Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node01
-Max-Disk-Write Node : node01
-Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
-Name                : dual_regression
-User                : tyoeasley
-Partition           : medium
-Nodes               : node01
-Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:29
-Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:11
-Used CPU Time       :   00:00:10
-% User (Computation): 91.83%
-% System (I/O)      :  0.00%
-Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
-Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node01
-Max-Disk-Write Node : node01
-Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875256
+Begin Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
+Job ID:		923247
 Username:	tyoeasley
 Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+End Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
-Name                : dual_regression
-User                : tyoeasley
-Partition           : medium
-Nodes               : node01
-Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:29
-Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:11
-Used CPU Time       :   00:00:10
-% User (Computation): 91.68%
-% System (I/O)      :  0.00%
-Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
-Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node01
-Max-Disk-Write Node : node01
-Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875257
+Begin Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
+Job ID:		923250
 Username:	tyoeasley
 Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+End Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875259
+Begin Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
+Job ID:		923251
 Username:	tyoeasley
 Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
+End Slurm Prologue Tue Feb 28 22:42:15 CST 2023 1677645735
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875260
-Username:	tyoeasley
-Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875261
-Username:	tyoeasley
-Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
+Begin Slurm Epilogue Tue Feb 28 22:44:11 CST 2023 1677645851
 Name                : dual_regression
 User                : tyoeasley
 Partition           : medium
 Nodes               : node01
 Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:28
+State               : COMPLETED
+Submit              : 2023-02-28T22:42:15
+Start               : 2023-02-28T22:42:15
+End                 : 2023-02-28T22:44:09
 Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:10
-Used CPU Time       :   00:00:10
-% User (Computation): 91.91%
-% System (I/O)      :  0.00%
+Used Walltime       :   00:01:54
+Used CPU Time       :   00:01:51
+% User (Computation): 97.19%
+% System (I/O)      :  2.81%
 Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
+Max Mem Used        : 4.39G (4718731264.0)
 Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
+Max Disk Read       : 10.24K (10485.76)
 Max-Mem-Used Node   : node01
 Max-Disk-Write Node : node01
 Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
+End Slurm Epilogue Tue Feb 28 22:44:11 CST 2023 1677645851
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
+Begin Slurm Epilogue Tue Feb 28 22:44:18 CST 2023 1677645858
 Name                : dual_regression
 User                : tyoeasley
 Partition           : medium
 Nodes               : node01
 Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:28
+State               : COMPLETED
+Submit              : 2023-02-28T22:42:15
+Start               : 2023-02-28T22:42:15
+End                 : 2023-02-28T22:44:16
 Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:10
-Used CPU Time       :   00:00:10
-% User (Computation): 91.75%
-% System (I/O)      :  0.00%
+Used Walltime       :   00:02:01
+Used CPU Time       :   00:01:59
+% User (Computation): 97.34%
+% System (I/O)      :  2.66%
 Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
+Max Mem Used        : 4.40G (4719190016.0)
 Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
+Max Disk Read       : 10.24K (10485.76)
 Max-Mem-Used Node   : node01
 Max-Disk-Write Node : node01
 Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
+End Slurm Epilogue Tue Feb 28 22:44:18 CST 2023 1677645858
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
+Begin Slurm Epilogue Tue Feb 28 22:44:26 CST 2023 1677645866
 Name                : dual_regression
 User                : tyoeasley
 Partition           : medium
 Nodes               : node01
 Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:28
+State               : COMPLETED
+Submit              : 2023-02-28T22:42:15
+Start               : 2023-02-28T22:42:15
+End                 : 2023-02-28T22:44:24
 Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:10
-Used CPU Time       :   00:00:10
-% User (Computation): 91.95%
-% System (I/O)      :  0.00%
+Used Walltime       :   00:02:09
+Used CPU Time       :   00:02:06
+% User (Computation): 97.48%
+% System (I/O)      :  2.52%
 Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
+Max Mem Used        : 4.39G (4718653440.0)
 Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
+Max Disk Read       : 10.24K (10485.76)
 Max-Mem-Used Node   : node01
 Max-Disk-Write Node : node01
 Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
+End Slurm Epilogue Tue Feb 28 22:44:26 CST 2023 1677645866
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
+Begin Slurm Epilogue Tue Feb 28 22:44:26 CST 2023 1677645866
 Name                : dual_regression
 User                : tyoeasley
 Partition           : medium
 Nodes               : node01
 Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:29
+State               : COMPLETED
+Submit              : 2023-02-28T22:42:15
+Start               : 2023-02-28T22:42:15
+End                 : 2023-02-28T22:44:24
 Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:11
-Used CPU Time       :   00:00:10
-% User (Computation): 91.93%
-% System (I/O)      :  0.00%
+Used Walltime       :   00:02:09
+Used CPU Time       :   00:02:07
+% User (Computation): 97.53%
+% System (I/O)      :  2.47%
 Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
+Max Mem Used        : 4.40G (4719190016.0)
 Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
+Max Disk Read       : 10.24K (10485.76)
 Max-Mem-Used Node   : node01
 Max-Disk-Write Node : node01
 Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
+End Slurm Epilogue Tue Feb 28 22:44:26 CST 2023 1677645866
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875255
-Username:	tyoeasley
-Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875257
-Username:	tyoeasley
-Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875259
-Username:	tyoeasley
-Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875260
-Username:	tyoeasley
-Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
-Job ID:		875261
-Username:	tyoeasley
-Partition:	medium
-End Slurm Prologue Mon Feb 27 12:18:18 CST 2023 1677521898
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
+Begin Slurm Epilogue Tue Feb 28 22:44:32 CST 2023 1677645872
 Name                : dual_regression
 User                : tyoeasley
 Partition           : medium
 Nodes               : node01
 Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:28
+State               : COMPLETED
+Submit              : 2023-02-28T22:42:15
+Start               : 2023-02-28T22:42:15
+End                 : 2023-02-28T22:44:30
 Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:10
-Used CPU Time       :   00:00:10
-% User (Computation): 91.91%
-% System (I/O)      :  0.00%
+Used Walltime       :   00:02:15
+Used CPU Time       :   00:02:12
+% User (Computation): 97.57%
+% System (I/O)      :  2.43%
 Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
+Max Mem Used        : 4.40G (4719190016.0)
 Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
+Max Disk Read       : 10.24K (10485.76)
 Max-Mem-Used Node   : node01
 Max-Disk-Write Node : node01
 Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
+End Slurm Epilogue Tue Feb 28 22:44:32 CST 2023 1677645872
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
+Begin Slurm Epilogue Tue Feb 28 22:44:36 CST 2023 1677645876
 Name                : dual_regression
 User                : tyoeasley
 Partition           : medium
 Nodes               : node01
 Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:28
+State               : COMPLETED
+Submit              : 2023-02-28T22:42:15
+Start               : 2023-02-28T22:42:15
+End                 : 2023-02-28T22:44:34
 Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:10
-Used CPU Time       :   00:00:10
-% User (Computation): 91.75%
-% System (I/O)      :  0.00%
+Used Walltime       :   00:02:19
+Used CPU Time       :   00:02:16
+% User (Computation): 97.66%
+% System (I/O)      :  2.34%
 Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
+Max Mem Used        : 4.39G (4718809088.0)
 Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
+Max Disk Read       : 10.24K (10485.76)
 Max-Mem-Used Node   : node01
 Max-Disk-Write Node : node01
 Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:30 CST 2023 1677521910
+End Slurm Epilogue Tue Feb 28 22:44:36 CST 2023 1677645876
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
+Begin Slurm Epilogue Tue Feb 28 22:44:36 CST 2023 1677645876
 Name                : dual_regression
 User                : tyoeasley
 Partition           : medium
 Nodes               : node01
 Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:28
+State               : COMPLETED
+Submit              : 2023-02-28T22:42:15
+Start               : 2023-02-28T22:42:15
+End                 : 2023-02-28T22:44:34
 Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:10
-Used CPU Time       :   00:00:10
-% User (Computation): 91.95%
-% System (I/O)      :  0.00%
+Used Walltime       :   00:02:19
+Used CPU Time       :   00:02:16
+% User (Computation): 97.66%
+% System (I/O)      :  2.34%
 Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
+Max Mem Used        : 4.39G (4717707264.0)
 Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
+Max Disk Read       : 10.24K (10485.76)
 Max-Mem-Used Node   : node01
 Max-Disk-Write Node : node01
 Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
+End Slurm Epilogue Tue Feb 28 22:44:36 CST 2023 1677645876
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
+Begin Slurm Epilogue Tue Feb 28 22:44:41 CST 2023 1677645881
 Name                : dual_regression
 User                : tyoeasley
 Partition           : medium
 Nodes               : node01
 Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:29
+State               : COMPLETED
+Submit              : 2023-02-28T22:42:15
+Start               : 2023-02-28T22:42:15
+End                 : 2023-02-28T22:44:39
 Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:11
-Used CPU Time       :   00:00:10
-% User (Computation): 91.93%
-% System (I/O)      :  0.00%
+Used Walltime       :   00:02:24
+Used CPU Time       :   00:02:21
+% User (Computation): 97.71%
+% System (I/O)      :  2.29%
 Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
+Max Mem Used        : 4.40G (4719382528.0)
 Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
+Max Disk Read       : 10.24K (10485.76)
 Max-Mem-Used Node   : node01
 Max-Disk-Write Node : node01
 Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
+End Slurm Epilogue Tue Feb 28 22:44:41 CST 2023 1677645881
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
+Begin Slurm Epilogue Tue Feb 28 22:44:48 CST 2023 1677645888
 Name                : dual_regression
 User                : tyoeasley
 Partition           : medium
 Nodes               : node01
 Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:29
+State               : COMPLETED
+Submit              : 2023-02-28T22:42:15
+Start               : 2023-02-28T22:42:15
+End                 : 2023-02-28T22:44:46
 Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:11
-Used CPU Time       :   00:00:10
-% User (Computation): 91.78%
-% System (I/O)      :  0.00%
+Used Walltime       :   00:02:31
+Used CPU Time       :   00:02:28
+% User (Computation): 97.83%
+% System (I/O)      :  2.17%
 Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
+Max Mem Used        : 4.39G (4717707264.0)
 Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
+Max Disk Read       : 10.24K (10485.76)
 Max-Mem-Used Node   : node01
 Max-Disk-Write Node : node01
 Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
+End Slurm Epilogue Tue Feb 28 22:44:48 CST 2023 1677645888
 --------------------------------------------------------------
 --------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
+Begin Slurm Epilogue Tue Feb 28 22:44:53 CST 2023 1677645893
 Name                : dual_regression
 User                : tyoeasley
 Partition           : medium
 Nodes               : node01
 Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:29
+State               : COMPLETED
+Submit              : 2023-02-28T22:42:15
+Start               : 2023-02-28T22:42:15
+End                 : 2023-02-28T22:44:51
 Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:11
-Used CPU Time       :   00:00:10
-% User (Computation): 91.83%
-% System (I/O)      :  0.00%
+Used Walltime       :   00:02:36
+Used CPU Time       :   00:02:34
+% User (Computation): 97.94%
+% System (I/O)      :  2.05%
 Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
+Max Mem Used        : 4.40G (4719366144.0)
 Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
+Max Disk Read       : 10.24K (10485.76)
 Max-Mem-Used Node   : node01
 Max-Disk-Write Node : node01
 Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
-Name                : dual_regression
-User                : tyoeasley
-Partition           : medium
-Nodes               : node01
-Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:29
-Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:11
-Used CPU Time       :   00:00:10
-% User (Computation): 91.90%
-% System (I/O)      :  0.00%
-Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
-Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node01
-Max-Disk-Write Node : node01
-Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
-Name                : dual_regression
-User                : tyoeasley
-Partition           : medium
-Nodes               : node01
-Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:29
-Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:11
-Used CPU Time       :   00:00:10
-% User (Computation): 92.47%
-% System (I/O)      :  0.00%
-Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
-Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node01
-Max-Disk-Write Node : node01
-Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
-Name                : dual_regression
-User                : tyoeasley
-Partition           : medium
-Nodes               : node01
-Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:29
-Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:11
-Used CPU Time       :   00:00:10
-% User (Computation): 92.37%
-% System (I/O)      :  0.00%
-Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
-Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node01
-Max-Disk-Write Node : node01
-Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
---------------------------------------------------------------
---------------------------------------------------------------
-Begin Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
-Name                : dual_regression
-User                : tyoeasley
-Partition           : medium
-Nodes               : node01
-Cores               : 1
-State               : FAILED
-Submit              : 2023-02-27T12:18:16
-Start               : 2023-02-27T12:18:18
-End                 : 2023-02-27T12:18:29
-Reserved Walltime   : 1-06:00:00
-Used Walltime       :   00:00:11
-Used CPU Time       :   00:00:10
-% User (Computation): 92.32%
-% System (I/O)      :  0.00%
-Mem Reserved        : 50G
-Max Mem Used        : 0.00  (0.0)
-Max Disk Write      : 0.00  (0.0)
-Max Disk Read       : 0.00  (0.0)
-Max-Mem-Used Node   : node01
-Max-Disk-Write Node : node01
-Max-Disk-Read Node  : node01
-End Slurm Epilogue Mon Feb 27 12:18:31 CST 2023 1677521911
+End Slurm Epilogue Tue Feb 28 22:44:53 CST 2023 1677645893
 --------------------------------------------------------------

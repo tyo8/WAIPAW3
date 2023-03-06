@@ -77,7 +77,7 @@ chmod +x "${sbatch_fname}" || { echo "Error changing the script permission!"; ex
 # Submit script
 if [[ $sequential_run == true ]]
 then
-	sbatch "${sbatch_fname}" --wait || { echo "Error submitting jobs!"; exit 1; }
+	sbatch --wait "${sbatch_fname}" || { echo "Error submitting jobs!"; exit 1; }
 else
 	sbatch "${sbatch_fname}" || { echo "Error submitting jobs!"; exit 1; }
 fi
