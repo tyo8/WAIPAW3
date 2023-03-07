@@ -1,0 +1,31 @@
+#!/bin/sh
+#SBATCH --job-name=cl_example_ica25_Amplitudes
+#SBATCH --output=/scratch/tyoeasley/WAPIAW3/job_submission_portal/prediction_jobs/logs/cl_example_ica25_Amplitudes.out
+#SBATCH --error=/scratch/tyoeasley/WAPIAW3/job_submission_portal/prediction_jobs/logs/cl_example_ica25_Amplitudes.err
+#SBATCH --time=7:55:00
+#SBATCH --partition=small
+#SBATCH --nodes=5
+#SBATCH --mem=10gb
+
+# constants
+classifier="/scratch/tyoeasley/WAPIAW3/classification_model/classify_patients.py"
+patient_eid_dir="/scratch/tyoeasley/WAPIAW3/subject_lists/patient_eid"
+
+# input parameters
+subj_list="/scratch/tyoeasley/WAPIAW3/subject_lists/match_eid/example.csv"
+datapath_type="/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/example/ica25/Amplitudes/sub-%s.csv"
+outpath_type="/scratch/tyoeasley/WAPIAW3/prediction_outputs/%s_%s_%s.csv"
+
+# resource & computation parameters
+n_jobs=5		# number of cores requested by process
+rng_seed=0		# random seed state integer
+
+# (bagged) classifier parameters
+folds=5			# number of folds during gridsearch hyperparameter validation
+n_splits=100		# number of random train/validation splits within training data=number of models learned
+n_estimators=250	# number of trees in random forest
+loss_criterion='gini'	# minimized objective function
+
+python ${classifier} -l ${subj_list} -f ${datapath_type} -o ${outpath_type} -p ${patient_eid_dir} \
+	-n ${n_jobs} -R ${rng_seed} \
+	-k ${folds} -s ${n_splits} -e ${n_estimators} -L ${loss_criterion} -v
