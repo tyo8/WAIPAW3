@@ -55,8 +55,8 @@ base_dir=\"\/scratch/tyoeasley/WAPIAW3\"
 mk_json=\"${PROFUMO_dir}/create_datalocation.sh\"
 
 # user specifications
-groupname=$( basename $subj_list | cut -d. -f 1 )
-subj_list=\"${subj_group}\"
+subj_list=${subj_group}
+groupname=$( basename ${subj_list} | cut -d. -f 1 )
 src_json_type="$( echo \"/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/raw_data_subj_lists/${groupname}_datalocations.json\" )"
 
 # derivatives

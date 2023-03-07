@@ -11,7 +11,7 @@ set -p nounset
 
 # constants
 base_dir="/scratch/tyoeasley/WAPIAW3"
-script_fpath="${base_dir}/job_submission_portal/extraction_jobs/submit_xtrfeats_sbatch.sh"
+script_fpath="${base_dir}/job_submission_portal/extraction/submit_xtrfeats_sbatch.sh"
 
 # bookkeeping parameters
 xtr_dir="${base_dir}/brainrep_data/ICA_data/extract_feats"
