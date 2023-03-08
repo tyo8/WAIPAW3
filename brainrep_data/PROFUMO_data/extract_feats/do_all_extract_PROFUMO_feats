@@ -1,0 +1,32 @@
+#!/bin/sh
+#SBATCH -J xtrAllICA
+#SBATCH -o logs/xtrAllICA.out
+#SBATCH -e logs/xtrAllICA.err
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH --mem 2G
+#SBATCH -t 23:55:00
+
+set -p nounset
+
+# constants
+base_dir="/scratch/tyoeasley/WAPIAW3"
+script_fpath="${base_dir}/job_submission_portal/extraction/submit_xtrfeats_sbatch.sh"
+
+# bookkeeping parameters
+xtr_dir="${base_dir}/brainrep_data/ICA_data/extract_feats"
+xtr_script="${xtr_dir}/feats_from_dtseries.py"
+
+# data parameters
+dimlist_fpath="${base_dir}/brainrep_data/ICA_data/ICA_dimlist.txt"
+subj_group_flist="${base_dir}/subject_lists/lists_of_groups/code_disease_groups.txt"
+### 'input_gendir' should be given as a function of ${groupname} and ${dim} only!
+input_gendir=$( printf "/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/%s/ica%s/groupICA%s.dr" \${groupname} \${dim} \${dim} )
+
+# submission parameters
+sbatch_fpath="${xtr_dir}/do_extract_ICA_feats"
+job_name="featxtr_ICA"
+maxtime_str="23:55:00"
+
+# call
+${script_fpath} -b ${base_dir} -d ${xtr_dir} -x ${xtr_script} -D ${dimlist_fpath} -s ${subj_group_flist} -i ${input_gendir} -f ${sbatch_fpath} -n ${job_name} -t ${maxtime_str} 

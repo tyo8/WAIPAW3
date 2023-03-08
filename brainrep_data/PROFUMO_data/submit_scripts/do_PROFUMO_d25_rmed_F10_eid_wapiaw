@@ -1,0 +1,33 @@
+#!/bin/sh
+
+#SBATCH --job-name=PFM_d25
+#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/logs/PFM_d25.out
+#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/logs/PFM_d25.err
+#SBATCH --time=23:59:00
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=1
+#SBATCH --mem=100G
+
+# constants
+base_dir="/scratch/tyoeasley/WAPIAW3"
+mk_json="/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/create_datalocation.sh"
+
+# user specifications
+subj_list=/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid/rmed_F10_eid_wapiaw.csv
+groupname=rmed_F10_eid_wapiaw
+src_json_type=\"/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/raw_data_subj_lists/${groupname}_datalocations.json\"
+
+# derivatives
+src_json=$( ${mk_json} -b ${base_dir} -s ${subj_list} -j ${src_json_type} )
+
+#lines to run PFM
+module load singularity/3.5.2
+
+container=/home/e.ty/profumo.sif
+dim=25
+mask_fpath="${base_dir}/brainrep_data/final_GM_mask.nii.gz"
+scr_json="${PROFUMO_dir}/raw_data_subj_lists/${groupname}_datalocations.json"
+output=/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/out_PROFUMO/${groupname}_${dim}.pfm
+
+singularity exec -B /scratch:/scratch -B /ceph:/ceph ${container}  /opt/profumo/C++/PROFUMO ${src_json} ${dim} ${output} --useHRF 0.735 --hrfFile /opt/profumo/HRFs/Default.phrf --mask ${mask_fpath} --covModel Subject --dofCorrection 0.075
+

@@ -52,6 +52,7 @@ first_line=$(cat ${sbatch_fname} | head -1)
 if [[ ${first_line} != *"bin/sh"* ]]
 then
 	cp ${sbatch_fname} "${sbatch_fname}_tmp"
+	rm ${sbatch_fname}
 	echo "\
 \
 #!/bin/sh
@@ -72,7 +73,7 @@ then
 fi
 
 # Make script executable
-chmod +x "${sbatch_fname}" || { echo "Error changing the script permission!"; exit 1; }
+chmod 771 "${sbatch_fname}" || { echo "Error changing the script permission!"; exit 1; }
 
 # Submit script
 if [[ $sequential_run == true ]]

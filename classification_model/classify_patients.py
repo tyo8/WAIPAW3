@@ -218,9 +218,9 @@ if __name__=="__main__":
             )
     parser.add_argument(
             '-o',
-            '--outpath_type',
+            '--outpath',
             type=str,
-            default='/scratch/tyoeasley/WAPIAW3/prediction_outputs/%s_%s_%s.csv',
+            default='/scratch/tyoeasley/WAPIAW3/prediction_outputs/example_ica25_Amplitudes.csv',
             help='CSV file containing the output of prediction results'
             )
     parser.add_argument(
@@ -283,8 +283,6 @@ if __name__=="__main__":
     group_name = os.path.basename(args.subj_list).split('.')[0]          # get group_name from args.subj_list
     brain_rep, feature_type = _extract_metadata(args.datapath_type)    # get LHS information from datapath_type
 
-    outpath = args.outpath_type % (group_name, brain_rep, feature_type)
-
     # verbose output
     if args.verbose:
         print('')
@@ -292,7 +290,7 @@ if __name__=="__main__":
         print('Brain representation type:', brain_rep)
         print('Feature type:', feature_type)
         print('Conducting', str(args.n_splits)+'-fold cross-validation.')
-        print('Saving results to:', outpath)
+        print('Saving results to:', args.outpath)
 
     X_train, X_test, Y_train, Y_test = get_input_data(
             args.subj_list, 
@@ -313,7 +311,7 @@ if __name__=="__main__":
             )
 
     fit_and_save_all_models(grid_search, CV, X_train, X_test, Y_train, Y_test,
-            outpath = outpath, 
+            outpath = args.outpath, 
             brain_rep = brain_rep, 
             feature_type = feature_type, 
             group_name = group_name

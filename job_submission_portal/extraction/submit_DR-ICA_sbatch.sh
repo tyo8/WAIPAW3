@@ -5,16 +5,16 @@ set -o nounset
 # bookkeeping parameters
 base_dir="/scratch/tyoeasley/WAPIAW3"
 ICA_dir="${base_dir}/brainrep_data/ICA_data"
-sbatch_fpath="${ICA_dir}/do_dual_reg_batch"
+script_dir="${base_dir}/job_submission_portal/extraction/brainrep_xtr_scripts"
 
 # run & data option parameters
 dim_list_fpath="${ICA_dir}/ICA_dimlist.txt"
 subj_group_flist="${base_dir}/subject_lists/lists_of_groups/code_disease_groups.txt"
-### options:
-# mask_only_slurm
-# stage1_DR_only_slurm
-# up_to_stage1_DR_slurm
 DR_process_script="up_to_stage1_DR_slurm"
+	### options:
+	# mask_only_slurm
+	# stage1_DR_only_slurm
+	# up_to_stage1_DR_slurm
 
 
 while getopts ":b:I:f:D:s:p:" opt; do
@@ -22,8 +22,6 @@ while getopts ":b:I:f:D:s:p:" opt; do
     b) base_dir=${OPTARG}
     ;;
     I) ICA_dir=${OPTARG}
-    ;;
-    f) sbatch_fpath=${OPTARG}
     ;;
     D) dim_list_fpath=${OPTARG}
     ;;
@@ -47,21 +45,25 @@ subj_group_list=$( cat ${subj_group_flist} )
 
 ########################## Write the input and the script #########################
 
-job_name="DR_pipeline"
 
 for dim in $(cat ${dim_list_fpath})
 do
 	for subj_group in ${subj_group_list}
 	do
+		groupname=$( basename ${subj_group} | cut -d. -f 1)
+
+		job_name="dr-ica_${groupname}"
+		sbatch_fpath="${script_dir}/do_dr-ica${dim}_${groupname}"
 		echo ""
 		echo "submitting ${dim}-dimensional DR-ICA computation in subject group: ${subj_group}"	
+		rm $sbatch_fpath
 		echo "\
 \
 #!/bin/sh
 
 #SBATCH --job-name=${job_name}_d${dim}
-#SBATCH --output=${ICA_dir}/logs/${job_name}_d${dim}.out
-#SBATCH --error=${ICA_dir}/logs/${job_name}_d${dim}.err
+#SBATCH --output=${script_dir}/logs/${job_name}_d${dim}.out
+#SBATCH --error=${script_dir}/logs/${job_name}_d${dim}.err
 #SBATCH --time=23:55:00
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
@@ -79,11 +81,11 @@ dim=${dim}
 eid_list=\"${subj_group}\"
 
 # derivatives
-outname=\$( basename \${eid_list} | cut -d. -f 1)
-melodic_out=\"\${base_dir}/brainrep_data/ICA_data/melodic_output/\${outname}/ica\${dim}\"
+groupname=${groupname}
+melodic_out=\"\${base_dir}/brainrep_data/ICA_data/melodic_output/\${groupname}/ica\${dim}\"
 DR_out=\${melodic_out/\"melodic_output\"/\"dual_regression\"}
 design_fpath_type=\"\${DR_out}/design\"
-data_flist=\"\${base_dir}/brainrep_data/ICA_data/raw_data_subj_lists/\${outname}.txt\"
+data_flist=\"\${base_dir}/brainrep_data/ICA_data/raw_data_subj_lists/\${groupname}.txt\"
 \${mk_flist} -i \${eid_list} -o \${data_flist} -p \${fpath_pattern}
 n_subj=\$(cat \${data_flist} | wc -l )
 
@@ -115,16 +117,13 @@ fi
 
 /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/FSL_slurm/${DR_process_script} \"\${melodic_out}/melodic_IC.nii.gz\" \${dim} \"\${design_fpath_type}.mat\" \"\${design_fpath_type}.con\" 0 \"\${DR_out}/groupICA\${dim}.dr\" \$(cat \${data_flist})
 \
-" > "${sbatch_fpath}"  
+" > "${sbatch_fpath}"  # Overwrite submission script
 
-		# Overwrite submission script# Make script executable
-		chmod +x "${sbatch_fpath}" || { echo "Error changing the script permission!"; exit 1; }
+		# Make script executable
+		chmod 771 "${sbatch_fpath}" || { echo "Error changing the script permission!"; exit 1; }
 
     		# Submit script
     		sbatch "${sbatch_fpath}" || { echo "Error submitting jobs!"; exit 1; }
 	done
-	# echo "Waiting between dimension calls to avoid *stepping on toes*..."
-	# sleep 90
-	# echo "Done."
 done
 

@@ -144,9 +144,18 @@ done
 ############################################################################
 ############################################################################
 
-mkdir -p $OUTPUT
+if ! [ -d $OUTPUT ]
+then
+	mkdir -p $OUTPUT
+	chmod 770 $OUTPUT
+fi
 LOGDIR="${OUTPUT}/scripts+logs"
+if [ -d $LOGDIR ]
+then
+	rm -rf $LOGDIR
+fi
 mkdir $LOGDIR
+chmod 770 $LOGDIR
 echo $ORIG_COMMAND > $LOGDIR/command
 if [ "$DESIGN" != -1 ] ; then
   /bin/cp $dm $OUTPUT/design.mat

@@ -93,7 +93,7 @@ python \${xtr_script} -i \${input_dir} -d \${dim} -g \${group}
 " > "${sbatch_fpath}"  
 
 		# Overwrite submission script# Make script executable
-		chmod +x "${sbatch_fpath}" || { echo "Error changing the script permission!"; exit 1; }
+		chmod 771 "${sbatch_fpath}" || { echo "Error changing the script permission!"; exit 1; }
 
     		# Submit script
     		sbatch "${sbatch_fpath}" || { echo "Error submitting jobs!"; exit 1; }

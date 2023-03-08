@@ -1,7 +1,7 @@
 #!/bin/sh
 #SBATCH -J masks_dual_reg
-#SBATCH -o logs/masks_DR_pipeline.out
-#SBATCH -e logs/masks_DR_pipeline.err
+#SBATCH -o /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/logs/masks_DR_pipeline.out
+#SBATCH -e /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/logs/masks_DR_pipeline.err
 #SBATCH -N 1
 #SBATCH -n 1
 #SBATCH --mem 2G
@@ -19,4 +19,4 @@ subj_group_flist="${base_dir}/subject_lists/lists_of_groups/code_disease_groups.
 DR_process_script="mask_only_slurm"
 
 # call
-${script_fpath} -b ${base_dir} -I ${ICA_dir} -f ${sbatch_fpath} -D ${dim_list_fpath} -s ${subj_group_flist} -p ${DR_process_script}
+${script_fpath} -b ${base_dir} -I ${ICA_dir} -D ${dim_list_fpath} -s ${subj_group_flist} -p ${DR_process_script}

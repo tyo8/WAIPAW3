@@ -75,14 +75,14 @@ if __name__=="__main__":
             "--dim", 
             type=int, 
             default=25,
-            help=""
+            help="dimension of decomposition (i.e., number of independent components computed from scan data)"
             )
     parser.add_argument(
             "-g", 
             "--group", 
             type=str, 
             default=def_group_path,
-            help=""
+            help="filepath to list of subject ID numbers that compose subject group (and its corresponding matched controls)"
             )
     args=parser.parse_args()
 

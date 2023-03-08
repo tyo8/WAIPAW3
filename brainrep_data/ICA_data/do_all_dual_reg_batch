@@ -1,7 +1,7 @@
 #!/bin/sh
 #SBATCH -J all_dual_reg
-#SBATCH -o logs/all_DR_pipeline.out
-#SBATCH -e logs/all_DR_pipeline.err
+#SBATCH -o /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/logs/all_DR_pipeline.out
+#SBATCH -e /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/logs/all_DR_pipeline.err
 #SBATCH -N 1
 #SBATCH -n 1
 #SBATCH --mem 2G
@@ -18,4 +18,4 @@ dim_list_fpath="${ICA_dir}/ICA_dimlist.txt"
 subj_group_flist="${base_dir}/subject_lists/lists_of_groups/code_disease_groups.txt"
 
 # call
-${script_fpath} -b ${base_dir} -I ${ICA_dir} -f ${sbatch_fpath} -d ${dim_list_fpath} -s ${subj_group_flist}
+${script_fpath} -b ${base_dir} -I ${ICA_dir} -d ${dim_list_fpath} -s ${subj_group_flist}
