@@ -3,9 +3,13 @@
 #SBATCH --output=/scratch/tyoeasley/brain_representations/schaefer/ext_ptseries/logs/ext_dts_%j.out
 #SBATCH --error=/scratch/tyoeasley/brain_representations/schaefer/ext_ptseries/logs/ext_dts_%j.err
 #SBATCH --time=23:55:00
-#SBATCH --mem=29GB
+#SBATCH --mem=50GB
 
+ext_scr="/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/pull_schaefer_timeseries.py"
 
-module load workbench
+dim=400
+networks=17
+res=2
 
-bash /scratch/tyoeasley/brain_representations/schaefer/ext_ptseries/ext_schaefer_dts.sh 1000 wb_cp
+source /export/anaconda/anaconda3/anaconda3-2020.07/bin/activate neuro
+python ${ext_scr} -d ${dim} -n ${networks} -i ${res}

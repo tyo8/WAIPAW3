@@ -68,6 +68,11 @@ do
 
 		sbatch_fpath="${pred_dir}/sbatch_scripts/do_cl_${groupname}_${brainrep}_${feature}"
 
+		if [ -f ${sbatch_fpath} ]
+		then
+			rm $sbatch_fpath
+		fi
+
 		echo "Predicting diagnosis from ${brainrep} ${feature} in subject group: ${groupname}"	
 		echo "\
 \
@@ -106,7 +111,7 @@ python \${classifier} -l \${subj_list} -f \${datapath_type} -o \${outpath} -p \$
 " > "${sbatch_fpath}"  
 
 		# Overwrite submission script# Make script executable
-		chmod +x "${sbatch_fpath}" || { echo "Error changing the script permission!"; exit 1; }
+		chmod 770 "${sbatch_fpath}" || { echo "Error changing the script permission!"; exit 1; }
 
     		# Submit script
     		sbatch "${sbatch_fpath}" || { echo "Error submitting jobs!"; exit 1; }

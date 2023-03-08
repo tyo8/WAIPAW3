@@ -4,14 +4,14 @@ import csv
 import argparse
 import numpy as np
 
-def_input_dir = "/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/out_PROFUMO/d25_example.pfm/%s" 
+def_input_dir = "/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/out_Schaefer/d25_example.pfm/%s" 
 def_group_path = "/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid/example.csv"
 
-def extract_PROFUMO_feats(input_dir=def_input_dir, dim=25, subjID_path=def_group_path):
+def extract_Schaefer_feats(input_dir=def_input_dir, dim=25, subjID_path=def_group_path):
     print("extracting features from data in paths of form: ", input_dir)
 
     with open(subjID_path, newline='') as fin:
-        subjID_list = fin.read().split()
+        subjID_list = list(map(''.join, list(csv.reader(fin))))
 
     inpath_gentype = os.path.join(input_dir % "Maps","sub-sub-%s.csv")
     outpath_gentype = os.path.join(input_dir,"sub-%s.csv")
@@ -27,9 +27,9 @@ def feats_from_dtseries(fpath, outpath_type, dim=300):
     map_data = np.loadtxt(fpath)
 
     if map_data.shape[1] != dim:
-        print("Initial shape of given data (PROFUMO_dim="+str(dim)+"): ", map_data.shape)
+        print("Initial shape of given data (Schaefer_dim="+str(dim)+"): ", map_data.shape)
         map_data = map_data.T
-        assert map_data.shape[1]==dim, "data dimension ("+str(map_data.shape[1])+") does not match PROFUMO dimension: " + str(dim)
+        assert map_data.shape[1]==dim, "data dimension ("+str(map_data.shape[1])+") does not match Schaefer dimension: " + str(dim)
 
     netmats = np.corrcoef(map_data)
 
@@ -45,7 +45,7 @@ def write_out(outpath, data):
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser(
-            description="Extract network matrices, partial network matrices, and amplitudes from PROFUMO (dr_stage1) timeseries data (per subject)"
+            description="Extract network matrices, partial network matrices, and amplitudes from Schaefer (dr_stage1) timeseries data (per subject)"
             )
     parser.add_argument(
             "-i", 
@@ -70,4 +70,4 @@ if __name__=="__main__":
             )
     args=parser.parse_args()
 
-    extract_PROFUMO_feats(input_dir=args.input_dir, dim=args.dim, subjID_path=args.group)
+    extract_Schaefer_feats(input_dir=args.input_dir, dim=args.dim, subjID_path=args.group)
