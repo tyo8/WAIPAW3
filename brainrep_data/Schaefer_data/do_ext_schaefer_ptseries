@@ -1,7 +1,7 @@
 #!/bin/sh
-#SBATCH --job-name=ext_dts_schaefer
-#SBATCH --output=/scratch/tyoeasley/brain_representations/schaefer/ext_ptseries/logs/ext_dts_%j.out
-#SBATCH --error=/scratch/tyoeasley/brain_representations/schaefer/ext_ptseries/logs/ext_dts_%j.err
+#SBATCH --job-name=ts_schaefer
+#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/logs/ts_schaefer.out
+#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/logs/ts_schaefer.err
 #SBATCH --time=23:55:00
 #SBATCH --mem=50GB
 
