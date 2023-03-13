@@ -1,4 +1,7 @@
 __pycache__/
+# local updater
+pull_from_cluster.sh
+
 # subject data 
 sub-*.csv
 *subj*.txt
