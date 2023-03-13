@@ -51,19 +51,30 @@ do
 	for subj_group in ${subj_group_list}
 	do
 		groupname=$( basename ${subj_group} | cut -d. -f 1)
+		process_name=$(echo $DR_process_script | cut -d_ -f 1)
 
-		job_name="dr-ica_${groupname}"
+		job_name="dr-ica_${process_name}_${groupname}_d${dim}"
 		sbatch_fpath="${script_dir}/do_dr-ica${dim}_${groupname}"
+		log_fpath="${script_dir}/logs/${job_name}"
+
 		echo ""
 		echo "submitting ${dim}-dimensional DR-ICA computation in subject group: ${subj_group}"	
-		rm $sbatch_fpath
+		if compgen -G ${sbatch_fpath} >> "/dev/null"
+		then
+			rm $sbatch_fpath
+		fi
+		if compgen -G "${log_fpath}."* >> "/dev/null"
+		then
+			rm -f ${log_fpath}.*
+		fi
 		echo "\
 \
 #!/bin/sh
 
-#SBATCH --job-name=${job_name}_d${dim}
-#SBATCH --output=${script_dir}/logs/${job_name}_d${dim}.out
-#SBATCH --error=${script_dir}/logs/${job_name}_d${dim}.err
+#SBATCH --job-name=\"${job_name}\"
+#SBATCH --output=\"${log_fpath}.out%j\"
+#SBATCH --error=\"${log_fpath}.err%j\"
+#SBATCH --reservation Janine_group
 #SBATCH --time=23:55:00
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
@@ -89,33 +100,38 @@ data_flist=\"\${base_dir}/brainrep_data/ICA_data/raw_data_subj_lists/\${groupnam
 \${mk_flist} -i \${eid_list} -o \${data_flist} -p \${fpath_pattern}
 n_subj=\$(cat \${data_flist} | wc -l )
 
-python \${mk_descon} -n \${n_subj} --fpath_noext \${design_fpath_type}
-
 # output
 echo \"pulling from subject list: \${eid_list}\"
 echo \"pulling subject data from generalized filepath: \${fpath_pattern}\"
 echo \"        (list of filenames of preprocessed data can be found in): \${data_flist}\"
 echo \"computing \${dim} independent components\"
 echo \"sending melodic outputs to: \${melodic_out}\"
-if ! [ -d \${melodic_out} ]
+if ! test -d \${melodic_out}
 then
 	mkdir -p \${melodic_out}
 fi
 echo \"sending dual_regression outputs to: \${DR_out}\"
-if ! [ -d \${DR_out}/groupICA\${dim}.dr ]
+if ! test -d \${DR_out}/groupICA\${dim}.dr
 then
-	mkdir -p \${DR_out}
+	mkdir -p \${DR_out}/groupICA\${dim}.dr
 fi
+
+# create (mock) design matrices
+module load python
+python \${mk_descon} -n \${n_subj} --fpath_noext \${design_fpath_type}
+
 # FSL calls
 module load fsl
 export DISPLAY=:1
 
-if ! [ -f \"\${melodic_out}/melodic_IC.nii.gz\" ]
+if ! compgen -G \"\${melodic_out}/melodic_IC.nii.gz\" >> "/dev/null"
 then
 	melodic -i \${data_flist} -o \${melodic_out} --tr=0.72 --nobet -a concat -m \${mask_fpath} --report --Oall -d \${dim}
 fi
 
 /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/FSL_slurm/${DR_process_script} \"\${melodic_out}/melodic_IC.nii.gz\" \${dim} \"\${design_fpath_type}.mat\" \"\${design_fpath_type}.con\" 0 \"\${DR_out}/groupICA\${dim}.dr\" \$(cat \${data_flist})
+
+chmod -R 771 \${DR_out}
 \
 " > "${sbatch_fpath}"  # Overwrite submission script
 

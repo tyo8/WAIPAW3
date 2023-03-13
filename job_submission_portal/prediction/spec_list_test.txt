@@ -1,8 +1,3 @@
-ICA300_Amps
-ICA300_pNMs
-ICA150_Amps
-ICA150_pNMs
-ICA100_pNMs
-ICA100_Amps
-ICA25_pNMs
-ICA25_Amps
+Schaefer_Amplitudes
+Schaefer_partial_NMs
+Schaefer_NetMats

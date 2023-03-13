@@ -1,0 +1,24 @@
+#!/bin/bash
+#SBATCH --job-name=diffgrad_allsubj
+#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/diffusion_gradient_data/processing/logs/diffgrad_allsubj.out
+#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/diffusion_gradient_data/processing/logs/diffgrad_allsubj.err
+#SBATCH --time=00:55:00
+#SBATCH --mem=5GB
+
+submit_scr="/scratch/tyoeasley/WAPIAW3/job_submission_portal/extraction/submit_diffgrad_sbatch.sh"
+
+# bookkeeping parameters
+base_dir="/scratch/tyoeasley/WAPIAW3"
+diffusion_gradient_dir="${base_dir}/brainrep_data/diffusion_gradient_data"
+
+# data option parameters
+subj_group_fpath="${base_dir}/subject_lists/all_subj_eid.csv"
+
+# parcellation parameters
+dim=40
+
+# computational parameters
+mem_gb=50
+maxtime_str="00:55:00"
+
+bash ${submit_scr} -b ${base_dir} -S ${diffusion_gradient_dir} -s ${subj_group_fpath} -d ${dim} -m ${mem_gb} -t ${maxtime_str}

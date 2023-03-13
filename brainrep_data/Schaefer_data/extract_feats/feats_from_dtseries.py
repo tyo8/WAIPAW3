@@ -4,36 +4,46 @@ import csv
 import argparse
 import numpy as np
 
-def_input_dir = "/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/out_Schaefer/d25_example.pfm/%s" 
-def_group_path = "/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid/example.csv"
+def_input_dir = "/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/timeseries" 
+def_group_path = "/scratch/tyoeasley/WAPIAW3/subject_lists/lists_of_gropus/dummy_group.csv"
 
-def extract_Schaefer_feats(input_dir=def_input_dir, dim=25, subjID_path=def_group_path):
+def extract_Schaefer_feats(input_dir=def_input_dir, dim=400, subjID_path=def_group_path, do_partial=True):
     print("extracting features from data in paths of form: ", input_dir)
 
     with open(subjID_path, newline='') as fin:
         subjID_list = list(map(''.join, list(csv.reader(fin))))
 
-    inpath_gentype = os.path.join(input_dir % "Maps","sub-sub-%s.csv")
-    outpath_gentype = os.path.join(input_dir,"sub-%s.csv")
-    print("sending extracted features to paths of form: ", outpath_gentype % ("<FEATURE>","<eid>"))
+    outpath_gentype = os.path.join(os.path.dirname( input_dir ), "%s", "sub-")
+    print("sending extracted features to paths of form: ", outpath_gentype % "FEATURE")
 
     for sID in subjID_list:
-        inpath = inpath_gentype % sID
-        outpath_type = outpath_gentype % ("%s", sID)
-        feats_from_dtseries(inpath, outpath_type, dim=dim)
+        fpath = os.path.join(input_dir, "sub-" + sID + ".txt")
+        outpath_type = outpath_gentype + sID + '.csv'
+        feats_from_dtseries(fpath, outpath_type, do_partial=True, dim=dim)
 
 
-def feats_from_dtseries(fpath, outpath_type, dim=300):
-    map_data = np.loadtxt(fpath)
+def feats_from_dtseries(fpath, outpath_type, do_partial=True, dim=400):
+    ts_data = np.loadtxt(fpath)
 
-    if map_data.shape[1] != dim:
-        print("Initial shape of given data (Schaefer_dim="+str(dim)+"): ", map_data.shape)
-        map_data = map_data.T
-        assert map_data.shape[1]==dim, "data dimension ("+str(map_data.shape[1])+") does not match Schaefer dimension: " + str(dim)
+    if ts_data.shape[0] != dim:
+        print("Initial shape of given data (Schaefer_dim="+str(dim)+"): ", ts_data.shape)
+        ts_data = ts_data.T
+        assert ts_data.shape[0]==dim, "data dimension ("+str(ts_data.shape[0])+") does not match Schaefer dimension: " + str(dim)
 
-    netmats = np.corrcoef(map_data)
+    amps = np.std(ts_data, axis=1)
+    netmats = np.nan_to_num(np.corrcoef(ts_data))
+    np.fill_diagonal(netmats, 1)
 
-    write_out(outpath_type % 'spNMs', netmats)
+    if do_partial:
+        # compute partial correlation matrix of ts_data
+        partial_netmats = -np.linalg.pinv(netmats, hermitian=True)
+
+    write_out(outpath_type % 'Amplitudes', amps)
+    write_out(outpath_type % 'NetMats', netmats)
+    if do_partial:
+        partial_netmats
+        write_out(outpath_type % 'partial_NMs', partial_netmats)
+
 
 def write_out(outpath, data):
     savedir = os.path.dirname(os.path.abspath(outpath))
@@ -58,8 +68,8 @@ if __name__=="__main__":
             "-d", 
             "--dim", 
             type=int, 
-            default=25,
-            help="dimension of decomposition (i.e., number of probabilistic functional modes computed from scan data)"
+            default=400,
+            help="dimension of decomposition (i.e., number of Schaefer parcellations)"
             )
     parser.add_argument(
             "-g", 

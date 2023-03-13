@@ -57,9 +57,9 @@ then
 \
 #!/bin/sh
 
-#SBATCH --job-name="${job_name}"
-#SBATCH --output="${log_dir}/${job_name}.out"
-#SBATCH --error="${log_dir}/${job_name}.err"
+#SBATCH --job-name=\"${job_name}\"
+#SBATCH --output=\"${log_dir}/${job_name}.out%j\"
+#SBATCH --error=\"${log_dir}/${job_name}.err%j\"
 #SBATCH --partition=${partition}
 #SBATCH --time=${maxtime_str}
 #SBATCH --nodes=1

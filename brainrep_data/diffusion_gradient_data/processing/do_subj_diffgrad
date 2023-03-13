@@ -1,0 +1,18 @@
+#!/bin/sh
+#SBATCH --job-name=diffgrad_subj
+#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/diffusion_gradient_data/processing/logs/diffgrad_subj.out%j
+#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/diffusion_gradient_data/processing/logs/diffgrad_subj.err%j
+#SBATCH --time=23:55:00
+#SBATCH --mem=350GB
+
+# constants
+grad_scr="/scratch/tyoeasley/WAPIAW3/brainrep_data/diffusion_gradient_data/processing/compute_subj_gradients.py"
+mask_path="/scratch/tyoeasley/WAPIAW3/brainrep_data/final_GM_mask.nii.gz"
+
+# inputs
+outpath_type="/scratch/tyoeasley/WAPIAW3/brainrep_data/diffusion_gradient_data/subj_gradients/sub-%s.csv"
+dim=40
+sID="1061708"
+
+source /export/anaconda/anaconda3/anaconda3-2020.07/bin/activate neuro
+python ${grad_scr} ${sID} -n ${dim} -o ${outpath_type} -m ${mask_path} --par

@@ -12,13 +12,16 @@ from sklearn.metrics import accuracy_score, zero_one_loss
 # given a filepath to a list of subject IDs and a general datapath string, returns train-test split data and labels
 def get_input_data(subj_list_fpath, datapath_type, test_size=1/3, seed_num=0, patient_eid_dir='', verbose=True):
 
-    feat_type = os.path.basename(os.path.dirname(datapath_type))
-
     with open(subj_list_fpath,'r') as fin:
         subj_list = fin.read().split()
 
     # pull imaging data
-    X_all = np.asarray([_pull_data(eid, datapath_type) for eid in subj_list])
+    X_all = np.array([_pull_data(eid, datapath_type) for eid in subj_list], dtype=float)
+
+    ### debug code ###
+    print("Full data array has shape:", X_all.shape)
+    # print("Data array:", X_all)
+    ### debug code ###
 
     # pull disease group labels
     Y_all = np.asarray(_pull_group_labels(subj_list_fpath, patient_eid_dir=patient_eid_dir))
@@ -47,14 +50,18 @@ def _pull_data(subj_eid, datapath_type):
                 data = data.flatten()
         else:
             data = data.flatten()
+    
+    ### debug code ###
+    print(f"subect {subj_eid} has data of shape:", data.shape)
+    ### debug code ###
 
-    return data
+    return np.array(data, dtype=float)
 
 # returns (flattened) upper right triangle of a square matrix; discards matrix diagonal
 def _triu_vals(A):
     n = A.shape[0]
     vals = A[np.triu_indices(n,1)]
-    return vals
+    return vals.flatten()
 
 def _pull_group_labels(subj_list_fpath, patient_eid_dir=''):
     with open(subj_list_fpath,'r') as fin:
@@ -72,31 +79,44 @@ def _pull_group_labels(subj_list_fpath, patient_eid_dir=''):
 # sends information about learning problem parameters to output stream
 def _output_params(X_train, X_test):
     print('')
+    print('Testing set size:', X_test.shape)
+    print('Training set size:', X_train.shape)
     print('Number of features used:', X_train.shape[1])
     print('Number of subjects after selection:', X_train.shape[0] + X_test.shape[0])
-    print('Training set size:', X_train.shape)
-    print('Testing set size:', X_test.shape)
     print('')
 ##################################################################################################################################
 
 
 
 ##################################################################################################################################
-# given a datapath nametype, extracts the feature and brain_rep types of data
-def _extract_metadata(datapath_type):
-    import re
-    feature_type = os.path.basename(os.path.dirname(datapath_type))
-    if "ica" in datapath_type and "ICA" in datapath_type:
-        brain_rep = re.search(r"ica\d{2,}", datapath_type).group(0).replace('ica','ICA_d')
-    elif "PROFUMO" in datapath_type:
-        brain_rep = "PROFUMO"
-    elif "Schaefer" in datapath_type:
-        brain_rep = "Schaefer" + re.search(r"d\d{2,}", datapath_type).group(0).replace('d','_d')
-    elif "gradient" in datapath_type:
-        brain_rep = "gradient" + re.search(r"d\d{2,}", datapath_type).group(0).replace('d','_d')
+# given the result metrics outpath, extracts 'feature' and 'brain_rep' types of input data: expects outpath to have basename of
+# the form "metrics_<groupname>_<brain_rep>_<feature>.csv"
+def _extract_metadata(outpath):
+    outname = os.path.basename(outpath).split('.')[0]
+    
+    if "partial_NM" in outname:
+        feature_type = "partial_NMs"
     else:
-        brain_rep = "UNKNOWN"
+        feature_type = outname.split('_')[-1]
 
+    brain_rep = outname.replace('metrics_','').replace(feature_type,'').split('_')[-2]
+    
+
+## given a datapath nametype, extracts the feature and brain_rep types of data
+ #   import re
+ #   feature_type = os.path.basename(os.path.dirname(datapath_type))
+ #   if "ica" in datapath_type and "ICA" in datapath_type:
+ #       brain_rep = re.search(r"ica\d{2,}", datapath_type).group(0).replace('ica','ICA_d')
+ #   elif "PROFUMO" in datapath_type:
+ #       brain_rep = "PROFUMO"
+ #   elif "Schaefer" in datapath_type:
+ #       brain_rep = "Schaefer"
+ #   elif "gradient" in datapath_type:
+ #       brain_rep = "gradient"
+ #   else:
+ #       brain_rep = "UNKNOWN"
+    
+    
     return brain_rep, feature_type
 ##################################################################################################################################
 
@@ -107,10 +127,15 @@ def _extract_metadata(datapath_type):
 def specify_model(n_estimators = 250, loss = 'gini', n_jobs = 1, n_splits = 100, folds = 5, seed_num=0):
     estimator = RandomForestClassifier(
             n_estimators = n_estimators, 
-            criterion=loss,
+#            criterion=loss,
             verbose=0, 
             random_state=seed_num+0
             )
+
+    ### debug code ###
+    print("Estimator criterion is:", estimator.criterion)
+    ### debug code ###
+
     CV = ShuffleSplit(
             n_splits = n_splits, 
             test_size=0.2,      # reflects 5-fold crossval within training and validation (*not* generalization) dataset
@@ -281,7 +306,7 @@ if __name__=="__main__":
             )
     args = parser.parse_args()
     group_name = os.path.basename(args.subj_list).split('.')[0]          # get group_name from args.subj_list
-    brain_rep, feature_type = _extract_metadata(args.datapath_type)    # get LHS information from datapath_type
+    brain_rep, feature_type = _extract_metadata(args.outpath)    # get LHS information from datapath_type
 
     # verbose output
     if args.verbose:

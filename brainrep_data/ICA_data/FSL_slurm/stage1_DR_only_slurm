@@ -144,17 +144,19 @@ done
 ############################################################################
 ############################################################################
 
-if ! [ -d $OUTPUT ]
+if ! test -d $OUTPUT
 then
 	mkdir -p $OUTPUT
 	chmod 770 $OUTPUT
 fi
 LOGDIR="${OUTPUT}/scripts+logs"
-if ! [ -d $LOGDIR]
+if test -d $LOGDIR
 then
-	mkdir $LOGDIR
-	chmod 770 $OUTPUT
+	rm -rf $LOGDIR
 fi
+mkdir $LOGDIR
+chmod -R 770 $LOGDIR
+
 echo $ORIG_COMMAND > $LOGDIR/command
 if [ "$DESIGN" != -1 ] ; then
   /bin/cp $dm $OUTPUT/design.mat
@@ -169,7 +171,6 @@ printf "\ncreating common mask... (part B)\n"
 cat <<EOF > ${LOGDIR}/drB
 \$FSLDIR/bin/fslmerge -t ${OUTPUT}/maskALL \`\$FSLDIR/bin/imglob ${OUTPUT}/mask_*\`
 \$FSLDIR/bin/fslmaths $OUTPUT/maskALL -Tmin $OUTPUT/mask
-\$FSLDIR/bin/imrm $OUTPUT/mask_*
 EOF
 chmod a+x "${LOGDIR}/drB"
 $FSLurmDIR/fsl_sub_slurm.sh -j true -T 5 -N maskgen2 -l $LOGDIR -f "${LOGDIR}/drB"
@@ -180,10 +181,13 @@ echo "submitting dual regression jobs..."
 for i in $INPUTS ; do
 
   eid=$( /scratch/tyoeasley/WAPIAW3/utils/fpath_to_eid.sh $i )
-  if ! [ -f ${OUTPUT}/dr_stage1_${eid}.txt ]
-  then
-	  echo "${FSLDIR}/bin/fsl_glm -i ${i} -d ${ICA_MAPS} -o ${OUTPUT}/dr_stage1_${eid}.txt --demean -m ${OUTPUT}/mask" > "${LOGDIR}/drC"
-  	  $FSLurmDIR/fsl_sub_slurm.sh -T 30 -N dual_regression -l $LOGDIR -f "${LOGDIR}/drC"
-  fi
+  
+#   echo "${FSLDIR}/bin/fsl_glm -i ${i} -d ${ICA_MAPS} -o ${OUTPUT}/dr_stage1_${eid}.txt --demean -m ${OUTPUT}/mask" > "${LOGDIR}/drC_${eid}"
+#   $FSLurmDIR/fsl_sub_slurm.sh -T 30 -N dual_regression -l $LOGDIR -f "${LOGDIR}/drC_${eid}"
 
+  if ! test -f ${OUTPUT}/dr_stage1_${eid}.txt
+  then
+	  echo "${FSLDIR}/bin/fsl_glm -i ${i} -d ${ICA_MAPS} -o ${OUTPUT}/dr_stage1_${eid}.txt --demean -m ${OUTPUT}/mask" > "${LOGDIR}/drC_${eid}"
+  	  $FSLurmDIR/fsl_sub_slurm.sh -T 30 -N dual_regression -l $LOGDIR -f "${LOGDIR}/drC_${eid}"
+  fi
 done

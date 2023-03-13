@@ -1,0 +1,26 @@
+#!/bin/bash
+#SBATCH --job-name=ts_schaefer_missing_subj
+#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/logs/ts_schaefer_missing_subj.out
+#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/logs/ts_schaefer_missing_subj.err
+#SBATCH --time=00:55:00
+#SBATCH --mem=5GB
+
+submit_scr="/scratch/tyoeasley/WAPIAW3/job_submission_portal/extraction/submit_Schaefer_sbatch.sh"
+
+# bookkeeping parameters
+base_dir="/scratch/tyoeasley/WAPIAW3"
+Schaefer_dir="${base_dir}/brainrep_data/Schaefer_data"
+
+# data option parameters
+subj_group_fpath="${Schaefer_dir}/incomplete_subjs.csv"
+
+# parcellation parameters
+dim=400
+networks=17
+res=2
+
+# computational parameters
+mem_gb=100
+maxtime_str="23:55:00"
+
+bash ${submit_scr} -b ${base_dir} -S ${Schaefer_dir} -s ${subj_group_fpath} -d ${dim} -n ${networks} -r ${res} -m ${mem_gb} -t ${maxtime_str} -w true

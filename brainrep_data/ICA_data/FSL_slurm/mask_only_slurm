@@ -144,18 +144,19 @@ done
 ############################################################################
 ############################################################################
 
-if ! [ -d $OUTPUT ]
+if ! test -d $OUTPUT
 then
 	mkdir -p $OUTPUT
 	chmod 770 $OUTPUT
 fi
 LOGDIR="${OUTPUT}/scripts+logs"
-if [ -d $LOGDIR ]
+if test -d $LOGDIR
 then
 	rm -rf $LOGDIR
 fi
 mkdir $LOGDIR
-chmod 770 $LOGDIR
+chmod -R 770 $LOGDIR
+
 echo $ORIG_COMMAND > $LOGDIR/command
 if [ "$DESIGN" != -1 ] ; then
   /bin/cp $dm $OUTPUT/design.mat
@@ -169,9 +170,12 @@ N_ICs=`$FSLDIR/bin/fslnvols $ICA_MAPS`
 printf "\ncreating common mask... (part A)\n"
 for i in $INPUTS ; do
   eid=$( /scratch/tyoeasley/WAPIAW3/utils/fpath_to_eid.sh $i )
-  if ! [ -f "${OUTPUT}/mask_${eid}.nii.gz" ]
+  if ! test -f "${OUTPUT}/mask_${eid}.nii.gz"
   then
-	  echo "$FSLDIR/bin/fslmaths $i -Tstd -bin ${OUTPUT}/mask_${eid} -odt char" > "${LOGDIR}/drA"
-  	  $FSLurmDIR/fsl_sub_slurm.sh -T 10 -N maskgen1 -l $LOGDIR -f "${LOGDIR}/drA"
+	  echo "$FSLDIR/bin/fslmaths $i -Tstd -bin ${OUTPUT}/mask_${eid} -odt char" > "${LOGDIR}/drA_${eid}"
+	  # version with parallel mask submission
+  	  $FSLurmDIR/fsl_sub_slurm.sh -T 10 -N maskgen1 -l $LOGDIR -f "${LOGDIR}/drA_${eid}"
+	  # version with sequential mask submission
+  	  # $FSLurmDIR/fsl_sub_slurm.sh -j true -T 10 -N maskgen1 -l $LOGDIR -f "${LOGDIR}/drA"
   fi
 done

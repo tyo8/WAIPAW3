@@ -1,0 +1,15 @@
+{
+	"sub-1061708": {
+		"ses": "/ceph/biobank/derivatives/melodic/sub-1061708/ses-01/sub-1061708_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
+	},
+	"sub-2902809": {
+		"ses": "/ceph/biobank/derivatives/melodic/sub-2902809/ses-01/sub-2902809_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
+	},
+	"sub-4587146": {
+		"ses": "/ceph/biobank/derivatives/melodic/sub-4587146/ses-01/sub-4587146_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
+	},
+	"sub-2659750": {
+		"ses": "/ceph/biobank/derivatives/melodic/sub-2659750/ses-01/sub-2659750_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
+	}
+
+}

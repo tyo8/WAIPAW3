@@ -1,0 +1,2 @@
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid/rmed_G35_37_eid_wapiaw.csv
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid/rmed_F0_eid_wapiaw.csv

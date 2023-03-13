@@ -1,0 +1,15 @@
+#!/bin/sh
+#SBATCH --job-name=ts_schaefer_seq
+#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/logs/ts_schaefer_seq.out
+#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/logs/ts_schaefer_seq.err
+#SBATCH --time=23:55:00
+#SBATCH --mem=50GB
+
+ext_scr="/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/pull_schaefer_timeseries.py"
+
+dim=400
+networks=17
+res=2
+
+source /export/anaconda/anaconda3/anaconda3-2020.07/bin/activate neuro
+python ${ext_scr} -D ${dim} -n ${networks} -r ${res}

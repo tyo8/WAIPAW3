@@ -1,0 +1,2 @@
+for "submit_xtrfeats_sbatch.sh", may want to structure to incorporate the
+functionality of "build_fpath_from_specs.sh"!!

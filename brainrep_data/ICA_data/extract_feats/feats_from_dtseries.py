@@ -25,10 +25,10 @@ def extract_ICA_feats(input_dir=def_input_dir, dim=25, subjID_path=def_group_pat
 def feats_from_dtseries(fpath, outpath_type, do_partial=True, dim=300):
     ts_data = np.loadtxt(fpath)
 
-    if ts_data.shape[1] != dim:
+    if ts_data.shape[0] != dim:
         print("Initial shape of given data (ICA_dim="+str(dim)+"): ", ts_data.shape)
         ts_data = ts_data.T
-        assert ts_data.shape[1]==dim, "data dimension ("+str(ts_data.shape[1])+") does not match ICA dimension: " + str(dim)
+        assert ts_data.shape[0]==dim, "data dimension ("+str(ts_data.shape[0])+") does not match ICA dimension: " + str(dim)
 
     amps = np.std(ts_data, axis=1)
     netmats = np.corrcoef(ts_data)

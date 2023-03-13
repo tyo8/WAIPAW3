@@ -1,0 +1,5 @@
+,accuracy,z1_idx,fold,Estimator,model_testing,brain_rep,feature_type,group
+0,0.6470588235294118,0.3529411764705882,0,RandomForest,validation,Schaefer,Amplitudes,rmed_G35_37_eid_wapiaw
+1,0.4588235294117647,0.5411764705882354,0,RandomForest,generalization,Schaefer,Amplitudes,rmed_G35_37_eid_wapiaw
+2,0.5588235294117647,0.4411764705882353,1,RandomForest,validation,Schaefer,Amplitudes,rmed_G35_37_eid_wapiaw
+3,0.5411764705882353,0.45882352941176474,1,RandomForest,generalization,Schaefer,Amplitudes,rmed_G35_37_eid_wapiaw

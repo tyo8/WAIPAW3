@@ -1,23 +1,23 @@
 #!/bin/sh
 
-#SBATCH --job-name=featxtr_ICA
-#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/extract_feats/logs/featxtr_ICA_300_match_rmed_G93_eid_wapiaw.out
-#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/extract_feats/logs/featxtr_ICA_300_match_rmed_G93_eid_wapiaw.err
+#SBATCH --job-name=featxtr_Schaefer
+#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/extract_feats/logs/featxtr_Schaefer_400_all_subj_eid.out
+#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/extract_feats/logs/featxtr_Schaefer_400_all_subj_eid.err
 #SBATCH --time=23:55:00
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
 #SBATCH --mem=50GB
 
 # constants
-xtr_script="/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/extract_feats/feats_from_dtseries.py"
+xtr_script="/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/extract_feats/feats_from_dtseries.py"
 
 # user specs
-group="/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid/rmed_G93_eid_wapiaw.csv"
-groupname="match_rmed_G93_eid_wapiaw"
-dim=300
+group="/scratch/tyoeasley/WAPIAW3/subject_lists/all_subj_eid.csv"
+groupname="all_subj_eid"
+dim=400
 
 # derivatives
-input_dir="/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/${groupname}/ica${dim}/groupICA${dim}.dr"
+input_dir="/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/timeseries"
 
 python ${xtr_script} -i ${input_dir} -d ${dim} -g ${group}
 

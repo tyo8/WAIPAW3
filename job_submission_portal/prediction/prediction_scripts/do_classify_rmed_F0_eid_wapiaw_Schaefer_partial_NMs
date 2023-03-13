@@ -1,0 +1,30 @@
+#!/bin/sh
+#SBATCH --job-name=classify_rmed_F0_eid_wapiaw_Schaefer_partial_NMs
+#SBATCH --output=/scratch/tyoeasley/WAPIAW3/job_submission_portal/prediction/prediction_scripts/logs/classify_rmed_F0_eid_wapiaw_Schaefer_partial_NMs.out%j
+#SBATCH --error=/scratch/tyoeasley/WAPIAW3/job_submission_portal/prediction/prediction_scripts/logs/classify_rmed_F0_eid_wapiaw_Schaefer_partial_NMs.err%j
+#SBATCH --time=23:55:00
+#SBATCH --partition=small
+#SBATCH --cpus-per-task=5
+#SBATCH --mem=20gb
+
+# constants
+classifier="/scratch/tyoeasley/WAPIAW3/classification_model/classify_patients.py"
+patient_eid_dir="/scratch/tyoeasley/WAPIAW3/subject_lists/patient_eid"
+
+# input parameters
+subj_list="/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid/rmed_F0_eid_wapiaw.csv"
+datapath_type="/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/partial_NMs/sub-%s.csv"
+outpath="/scratch/tyoeasley/WAPIAW3/prediction_outputs/metrics_rmed_F0_eid_wapiaw_Schaefer_partial_NMs.csv"
+
+# resource & computation parameters
+n_jobs=5                # number of cores requested by process
+rng_seed=0              # random seed state integer
+
+# (bagged) classifier parameters
+folds=5                 # number of folds during gridsearch hyperparameter validation
+n_splits=2            # number of random train/validation splits within training data=number of models learned
+n_estimators=250        # number of trees in random forest
+loss_criterion=\'gini\'   # minimized objective function
+
+python ${classifier} -l ${subj_list} -f ${datapath_type} -o ${outpath} -p ${patient_eid_dir}         -n ${n_jobs} -R ${rng_seed}         -k ${folds} -s ${n_splits} -e ${n_estimators} -L ${loss_criterion} -v
+

@@ -1,31 +1,30 @@
 #!/bin/sh
-#SBATCH -J xtrAllICA
-#SBATCH -o logs/xtrAllICA.out
-#SBATCH -e logs/xtrAllICA.err
+#SBATCH -J xtrTestSchaefer
+#SBATCH -o logs/xtrTestSchaefer.out
+#SBATCH -e logs/xtrTestSchaefer.err
 #SBATCH -N 1
 #SBATCH -n 1
 #SBATCH --mem 2G
 #SBATCH -t 23:55:00
 
-set -p nounset
+set -o nounset
 
 # constants
 base_dir="/scratch/tyoeasley/WAPIAW3"
 script_fpath="${base_dir}/job_submission_portal/extraction/submit_xtrfeats_sbatch.sh"
 
 # bookkeeping parameters
-xtr_dir="${base_dir}/brainrep_data/ICA_data/extract_feats"
+xtr_dir="${base_dir}/brainrep_data/Schaefer_data/extract_feats"
 xtr_script="${xtr_dir}/feats_from_dtseries.py"
 
 # data parameters
-dimlist_fpath="${base_dir}/brainrep_data/ICA_data/ICA_dimlist.txt"
-subj_group_flist="${base_dir}/subject_lists/lists_of_groups/test_groups.txt"
-### 'input_gendir' should be given as a function of ${groupname} and ${dim} only!
-input_gendir=$( printf "/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/%s/ica%s/groupICA%s.dr" \${groupname} \${dim} \${dim} )
+dimlist_fpath="${base_dir}/brainrep_data/Schaefer_data/Schaefer_dimlist.txt"
+subj_group_flist="${base_dir}/subject_lists/lists_of_groups/predtest_groups.txt"
+input_gendir="/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/timeseries"
 
 # submission parameters
-sbatch_fpath="${xtr_dir}/do_extract_ICA_feats"
-job_name="featxtr_ICA"
+sbatch_fpath="${xtr_dir}/do_extract_Schaefer_feats"
+job_name="featxtr_Schaefer"
 maxtime_str="23:55:00"
 
 # call

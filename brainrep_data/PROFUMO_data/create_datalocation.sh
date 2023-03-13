@@ -1,11 +1,11 @@
 #!/bin/sh
 
-set -u nounset
+set -o nounset
+
 
 base_dir="/scratch/tyoeasley/WAPIAW3"
 subj_list="/scratch/tyoeasley/WAPIAW3/subject_lists/example.txt"
-js_fname_type="\$( echo \"/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/raw_data_subj_lists/${groupname}_datalocations.json\" )"
-
+js_fpath="/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/raw_data_subj_lists/example_datalocations.json"
 
 while getopts ":b:s:j:" opt; do
   case $opt in
@@ -13,7 +13,7 @@ while getopts ":b:s:j:" opt; do
     ;;
     s) subj_list=${OPTARG}
     ;;
-    j) js_fname_type=${OPTARG}
+    j) js_fpath=${OPTARG}
     ;;
     \?) echo "Invalid option -$OPTARG" >&2
     exit 1
@@ -26,40 +26,42 @@ while getopts ":b:s:j:" opt; do
     ;;
   esac
 done
-groupname=$( basename ${eid_list} | cut -d. -f 1)
-js_fname=$( eval ${js_fname_type} )
 
-n_subj=$( wc ${subj_list} | cut -d' ' -f 1 )
+groupname=$( basename ${subj_list} | cut -d. -f 1)
+
+n_subj=$( cat ${subj_list} | wc -l ) 
+
+echo ""
+echo "Sending raw data locations for ${groupname} (has ${n_subj} subjects) to ${js_fpath}..."
 
 # overwrite/create json file and make first bracket
-printf "{\n" > ${js_fname}
+printf "{\n" > ${js_fpath}
 counter=0
-for i in `cat ${subj_list}` ; do
+for i in $( cat ${subj_list} )
+do
         let counter=counter+1
-	# echo ${counter}
         subj_name="sub-${i}"
         # print subject identifier
-        printf "\t\"${subj_name}\": {\n" >> ${js_fname}
+        printf "\t\"${subj_name}\": {\n" >> ${js_fpath}
         # print data location
-        data_loc=/ceph/biobank/derivatives/melodic/sub-${i}/ses-01/sub-${i}_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz
-        printf "\t\t\"ses\": \"${data_loc}\"" >> ${js_fname}
-        printf "\n\t}" >> ${js_fname}
+        data_loc="/ceph/biobank/derivatives/melodic/sub-${i}/ses-01/sub-${i}_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
+        printf "\t\t\"ses\": \"${data_loc}\"" >> ${js_fpath}
+        printf "\n\t}" >> ${js_fpath}
         # check for comma placement
+
+	### debug code ### (comma placement) 
+	printf "subject ${counter} of ${n_subj} added to .json source file\n"
+	### debug code ### (comma placement) 
+
 	if [[ "${counter}" -lt "${n_subj}" ]]
 	then
-		printf "," >> ${js_fname}
-		### debug code ###
-		# echo "we are in the if statement and have satisfied counter < n_subj: counter=${counter}, n_subj=${n_subj}"
-		### debug code ###
-	else
-		### debug code ###
-		# echo "we are in the if statement and have satisfied counter >= n_subj: counter=${counter}, n_subj=${n_subj}"
-		### debug code ###
+		printf "," >> ${js_fpath}
 	fi
-	printf "\n" >> ${js_fname}
+	printf "\n" >> ${js_fpath}
 done
 
 # close last bracket in json
-printf "\n}" >> $js_fname
+printf "\n}" >> ${js_fpath}
 
-echo $js_fname
+echo "Sent raw data locations for ${groupname} to ${js_fpath}"
+echo ""

@@ -14,7 +14,7 @@ def extract_PROFUMO_feats(input_dir=def_input_dir, dim=25, subjID_path=def_group
         subjID_list = fin.read().split()
 
     inpath_gentype = os.path.join(input_dir % "Maps","sub-sub-%s.csv")
-    outpath_gentype = os.path.join(input_dir,"sub-%s.csv")
+    outpath_gentype = os.path.join(inpath_gentype,"sub-%s.csv")
     print("sending extracted features to paths of form: ", outpath_gentype % ("<FEATURE>","<eid>"))
 
     for sID in subjID_list:
@@ -26,10 +26,10 @@ def extract_PROFUMO_feats(input_dir=def_input_dir, dim=25, subjID_path=def_group
 def feats_from_dtseries(fpath, outpath_type, dim=300):
     map_data = np.loadtxt(fpath)
 
-    if map_data.shape[1] != dim:
+    if map_data.shape[0] != dim:
         print("Initial shape of given data (PROFUMO_dim="+str(dim)+"): ", map_data.shape)
         map_data = map_data.T
-        assert map_data.shape[1]==dim, "data dimension ("+str(map_data.shape[1])+") does not match PROFUMO dimension: " + str(dim)
+        assert map_data.shape[0]==dim, "data dimension ("+str(map_data.shape[0])+") does not match PROFUMO dimension: " + str(dim)
 
     netmats = np.corrcoef(map_data)
 
