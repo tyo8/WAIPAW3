@@ -22,5 +22,7 @@ logs
 # image files
 *.png
 
-# large sets of submission scripts
+# large sets of submission scripts/results data
 *xtr_scripts*
+do_*
+metrics_*
