@@ -9,8 +9,18 @@ from sklearn.metrics import accuracy_score, zero_one_loss
 
 
 ##################################################################################################################################
+def get_spec_model(gridsearch_model_fpath):
+    import dill
+    with open(gridsearch_model_fpath, 'rb') as fin:
+        gridsearch_model = dill.load(fin)
+
+    return gridsearch_model
+##################################################################################################################################
+
+
+##################################################################################################################################
 # given a filepath to a list of subject IDs and a general datapath string, returns train (or test) split data and labels
-def _get_input_data(subj_list_fpath, datapath_type, patient_eid_dir=''):
+def get_input_data(subj_list_fpath, datapath_type, patient_eid_dir=''):
     with open(subj_list_fpath,'r') as fin:
         subj_list = fin.read().split()
     X = np.array([_pull_subj_data(eid, datapath_type) for eid in subj_list], dtype=float)
@@ -56,13 +66,19 @@ def _pull_group_labels(subj_list_fpath, patient_eid_dir=''):
     return Y_all
 
 # sends information about learning problem parameters to output stream
-def _output_params(X_train, X_test):
+def _output_params(X_test, X_test):
     print('')
     print('Testing set size:', X_test.shape)
-    print('Training set size:', X_train.shape)
-    print('Number of features used:', X_train.shape[1])
-    print('Number of subjects after selection:', X_train.shape[0] + X_test.shape[0])
+    print('Training set size:', X_test.shape)
+    print('Number of features used:', X_test.shape[1])
+    print('Number of subjects after selection:', X_test.shape[0] + X_test.shape[0])
     print('')
+##################################################################################################################################
+
+
+
+##################################################################################################################################
+# specify CV model (should just be partial copy-paste from analogous function in "learn_cross..."
 ##################################################################################################################################
 
 
@@ -102,75 +118,32 @@ def _extract_metadata(outpath):
 
 
 ##################################################################################################################################
-# parametrizes learner to user-given (or default) specifications of algorithm and computational resources
-def specify_model(n_estimators = 250, loss = 'gini', n_jobs = 1, n_splits = 100, folds = 5, seed_num=0):
-    estimator = RandomForestClassifier(
-            n_estimators = n_estimators, 
-#            criterion=loss,
-            verbose=0, 
-            random_state=seed_num+0
-            )
-
-    ### debug code ###
-    print("Estimator criterion is:", estimator.criterion)
-    ### debug code ###
-
-    CV = ShuffleSplit(
-            n_splits = n_splits, 
-            test_size=0.2,      # reflects 5-fold crossval within training and validation (*not* generalization) dataset
-            random_state=seed_num+0
-            )
-    param_grid = {
-            'max_depth': [5, 10, 20, 40, None],
-            'max_features': [1, 5, 'log2', 'sqrt', None]
-            }
-    grid_search = GridSearchCV(estimator, param_grid=param_grid,
-            cv=folds, 
-            verbose=2, 
-            n_jobs=n_jobs       # maybe parallelize along learning of splits instead??? -- i.e., use an mp pool to re-learn over CV splits?
-            )
-    return grid_search, CV
-##################################################################################################################################
-
-
-
-##################################################################################################################################
 # learns a patient vs. control classifier (in given group's data) over all shuffle-split data and collects (distributions of)
 # prediction outcomes -- maybe implement mp version of this that parallelizes over splits in cv?
-def fit_and_save_all_models(grid_search, CV, X_train, X_test, Y_train, Y_test, 
-        outpath='predictions.csv', brain_rep='ICA_d150', feature_type='pNMs', group_name='example'):
+def fit_and_save_all_model(grid_search, CV, X_test, Y_test,
+        pred_outpath='prediction_metrics.csv', 
+        brain_rep='ICA_d150', 
+        feature_type='pNMs', 
+        group_name='example'
+        ):
+
     metrics = []
     data_collect = []
     gendata_collect = []
-    for split, (train_index, val_index) in enumerate(CV.split(X_train, Y_train)):
-        grid_search.fit(X_train[train_index], Y_train[train_index])
+        
+    data_collect, scores = _predict_collect(
+            y_pred=grid_search.predict(X_test), 
+            y_true=Y_test, 
+            data_collect=data_collect,
+            test_index=val_index,
+            split=split, 
+            save_type='validation',
+            brain_rep=brain_rep,
+            feature_type=feature_type,
+            group_name=group_name
+            )
+    metrics.append(scores)
 
-        data_collect, scores = _predict_collect(
-                y_pred=grid_search.predict(X_train[val_index]), 
-                y_true=Y_train[val_index], 
-                data_collect=data_collect,
-                test_index=val_index,
-                split=split, 
-                save_type='validation',
-                brain_rep=brain_rep,
-                feature_type=feature_type,
-                group_name=group_name
-                )
-        metrics.append(scores)
-
-        gendata_collect, scores = _predict_collect(
-                y_pred=grid_search.predict(X_test), 
-                y_true=Y_test,
-                data_collect=gendata_collect,             
-                test_index=np.arange(X_test.shape[0], dtype=int),
-                split=split, 
-                save_type='generalization',
-                brain_rep=brain_rep,
-                feature_type=feature_type,
-                group_name=group_name
-                )
-        metrics.append(scores)
-    
     # save outputs
     import pandas as pd
     pd.DataFrame(metrics).to_csv(outpath)
@@ -296,15 +269,18 @@ if __name__=="__main__":
         print('Conducting', str(args.n_splits)+'-fold cross-validation.')
         print('Saving results to:', args.outpath)
 
-    X_train, Y_train = _get_input_data(
-            args.subj_list_test, 
+    X_test, Y_test = get_input_data(
+            args.subj_list, 
             args.datapath_type, 
             patient_eid_dir = args.patient_eid_dir,
             seed_num = args.rng_seed, 
             verbose = args.verbose
             )
 
-    grid_search, CV = specify_model(
+    grid_search = get_spec_model(args.model_fpath)
+
+    # I deleted this function from this file, you'll have to add part of it back in
+    CV = specify_model(
             n_estimators = args.n_estimators, 
             loss = args.loss, 
             n_jobs = args.n_jobs,
@@ -313,7 +289,7 @@ if __name__=="__main__":
             seed_num = args.rng_seed
             )
 
-    fit_and_save_all_models(grid_search, CV, X_train, X_test, Y_train, Y_test,
+    fit_and_save_all_models(grid_search, CV, X_test, Y_test,
             outpath = args.outpath, 
             brain_rep = brain_rep, 
             feature_type = feature_type, 
