@@ -1,0 +1,2 @@
+NOTHING in this directory should currently be expected to work!
+(will remove this note when that is no longer the case)

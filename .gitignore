@@ -1,6 +1,6 @@
 __pycache__/
-# plaintext data 
-# *.csv
+# subject data 
+sub-*.csv
 *subj*.txt
 
 # neuroimaging datatypes
@@ -26,3 +26,4 @@ logs
 *xtr_scripts*
 do_*
 metrics_*
+model_*
