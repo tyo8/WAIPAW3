@@ -9,37 +9,16 @@ from sklearn.metrics import accuracy_score, zero_one_loss
 
 
 ##################################################################################################################################
-# given a filepath to a list of subject IDs and a general datapath string, returns train-test split data and labels
-def get_input_data(subj_list_fpath, datapath_type, test_size=1/3, seed_num=0, patient_eid_dir='', verbose=True):
-
+# given a filepath to a list of subject IDs and a general datapath string, returns train (or test) split data and labels
+def _get_input_data(subj_list_fpath, datapath_type, patient_eid_dir=''):
     with open(subj_list_fpath,'r') as fin:
         subj_list = fin.read().split()
-
-    # pull imaging data
-    X_all = np.array([_pull_data(eid, datapath_type) for eid in subj_list], dtype=float)
-
-    ### debug code ###
-    print("Full data array has shape:", X_all.shape)
-    # print("Data array:", X_all)
-    ### debug code ###
-
-    # pull disease group labels
-    Y_all = np.asarray(_pull_group_labels(subj_list_fpath, patient_eid_dir=patient_eid_dir))
-
-    X_train, X_test, Y_train, Y_test = train_test_split(
-            X_all, 
-            Y_all, 
-            test_size=test_size, 
-            random_state=seed_num+1
-            )
-
-    if verbose:
-        _output_params(X_train, X_test)
-
-    return X_train, X_test, Y_train, Y_test
+    X = np.array([_pull_subj_data(eid, datapath_type) for eid in subj_list], dtype=float)
+    Y = np.array(_pull_group_labels(subj_list_fpath, patient_eid_dir=patient_eid_dir))
+    return X,Y
 
 # loads data for a single subject given a subject ID number and general datapath string
-def _pull_data(subj_eid, datapath_type):
+def _pull_subj_data(subj_eid, datapath_type):
     data = np.genfromtxt(datapath_type % subj_eid)
     if len(data.shape) > 1:
         assert len(data.shape) == 2, "classifier expects subject-wise input data to be either a matrix or vector."
@@ -317,11 +296,10 @@ if __name__=="__main__":
         print('Conducting', str(args.n_splits)+'-fold cross-validation.')
         print('Saving results to:', args.outpath)
 
-    X_train, X_test, Y_train, Y_test = get_input_data(
-            args.subj_list, 
+    X_train, Y_train = _get_input_data(
+            args.subj_list_test, 
             args.datapath_type, 
             patient_eid_dir = args.patient_eid_dir,
-            test_size = 1/3, 
             seed_num = args.rng_seed, 
             verbose = args.verbose
             )
