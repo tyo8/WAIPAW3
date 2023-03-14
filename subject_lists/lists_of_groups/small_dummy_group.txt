@@ -1,2 +1,1 @@
 /scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid/small_example.csv
-/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid/small_example_4.csv

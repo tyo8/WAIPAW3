@@ -9,10 +9,11 @@ from sklearn.metrics import accuracy_score, zero_one_loss
 
 
 ##################################################################################################################################
+#######THIS MIGHT HAVE TO CHANGE DEPENDING ON HOW THE MODEL IS SAVED OUT########
 def get_spec_model(gridsearch_model_fpath):
-    import dill
-    with open(gridsearch_model_fpath, 'rb') as fin:
-        gridsearch_model = dill.load(fin)
+    import joblib
+    
+    gridsearch_model = joblib.load(gridsearch_model_fpath)
 
     return gridsearch_model
 ##################################################################################################################################
@@ -78,8 +79,23 @@ def _output_params(X_test, X_test):
 
 
 ##################################################################################################################################
-# specify CV model (should just be partial copy-paste from analogous function in "learn_cross..."
+# specify CV model (should just be partial copy-paste from analogous function in "learn_cross..." MODIFY TO WORK
 ##################################################################################################################################
+CV = ShuffleSplit(
+            n_splits = n_splits, 
+            test_size=0.2,      # reflects 5-fold crossval within training and validation (*not* generalization) dataset
+            random_state=seed_num+0
+            )
+    param_grid = {
+            'max_depth': [5, 10, 20, 40, None],
+            'max_features': [1, 5, 'log2', 'sqrt', None]
+            }
+    grid_search = GridSearchCV(estimator, param_grid=param_grid,
+            cv=folds, 
+            verbose=2, 
+            n_jobs=n_jobs       # maybe parallelize along learning of splits instead??? -- i.e., use an mp pool to re-learn over CV splits?
+            )
+    return grid_search, CV
 
 
 
@@ -279,7 +295,7 @@ if __name__=="__main__":
 
     grid_search = get_spec_model(args.model_fpath)
 
-    # I deleted this function from this file, you'll have to add part of it back in
+    # I deleted this function from this file, you'll have to add part of it back in           I don't see what is deleted?
     CV = specify_model(
             n_estimators = args.n_estimators, 
             loss = args.loss, 

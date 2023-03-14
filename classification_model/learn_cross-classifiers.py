@@ -143,7 +143,7 @@ def fit_and_save_all_models(grid_search, CV, X_train, Y_train,
         feature_type='pNMs', 
         group_name='example'
         ):
-    import dill
+    import joblib
 
     metrics = []
     data_collect = []
@@ -163,16 +163,15 @@ def fit_and_save_all_models(grid_search, CV, X_train, Y_train,
                 group_name=group_name
                 )
         metrics.append(scores)
-        modelname=f"model_split{split}"
-        model_fpath=outpath.replace(metrics, modelname)
 
-        with open(model_fpath, 'wb') as fout:
-            dill.dump(fout, grid_search)
+        model_fname=os.path.basename(pred_outpath).replace("metrics",f"model_split{split}").replace("csv","pkl")
+        model_fpath=os.path.join("/scratch/tyoeasley/WAPIAW3/classification_model/models_cross-classify", model_fname)
+        print("After fitting the RandomForestClassifier, GridSearchCV object saved to:", model_fpath)
+        joblib.dump(grid_search, model_fpath)
 
-    
     # save outputs
     import pandas as pd
-    pd.DataFrame(metrics).to_csv(outpath)
+    pd.DataFrame(metrics).to_csv(pred_outpath)
 
 
 # given trained model and held-out generalization data, computes mectrics of prediction performance
@@ -296,11 +295,9 @@ if __name__=="__main__":
         print('Saving results to:', args.outpath)
 
     X_train, Y_train = get_input_data(
-            args.subj_list_test, 
+            args.subj_list, #used to be args.subj_list_test 
             args.datapath_type, 
             patient_eid_dir = args.patient_eid_dir,
-            seed_num = args.rng_seed, 
-            verbose = args.verbose
             )
 
     grid_search, CV = specify_model(
@@ -313,7 +310,7 @@ if __name__=="__main__":
             )
 
     fit_and_save_all_models(grid_search, CV, X_train, Y_train,
-            outpath = args.outpath, 
+            pred_outpath = args.outpath, 
             brain_rep = brain_rep, 
             feature_type = feature_type, 
             group_name = group_name

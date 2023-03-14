@@ -1,15 +1,17 @@
 #!/bin/bash
 
 set -o nounset
-
+echo "0.are you running?"
 # constants
 base_dir="/scratch/tyoeasley/WAPIAW3"
-pred_dir="${base_dir}/job_submission_portal/prediction"
-out_dir="${base_dir}/prediction_outputs"
+pred_dir="${base_dir}/job_submission_portal/cross-prediction"
+out_dir="${base_dir}/cross-prediction_outputs"
 build_path_src="${base_dir}/utils/build_fpath_from_specs.sh"
 
+echo "1.are you running?"
+
 # learning parameters
-subj_group_flist="${base_dir}/subject_lists/lists_of_groups/dummy_groups.txt"
+subj_group_flist="${base_dir}/subject_lists/lists_of_groups/small_dummy_group.txt"
 spec_list_fpath="${pred_dir}/spec_list_test.txt"
 n_splits=100
 
@@ -17,6 +19,7 @@ n_splits=100
 n_jobs=1
 mem_gb=$(( 100/${n_jobs} ))
 maxtime_str="23:55:00"
+echo "2.are you running?"
 
 while getopts ":i:o:b:p:s:n:N:t:m:" opt; do
   case $opt in
@@ -52,7 +55,7 @@ done
 
 subj_group_list=$( cat ${subj_group_flist} )
 spec_list=$( cat ${spec_list_fpath} )
-
+echo "3.are you running?"
 ########################## Write the input and the script #########################
 
 echo "Running predictions for the following parameters:"
@@ -69,8 +72,8 @@ do
 		groupname=$( basename ${subj_group} | cut -d. -f 1 )
 		
 		job_name="classify_${groupname}_${brainrep}_${feature}"
-		log_fpath="${pred_dir}/prediction_scripts/logs/${job_name}"
-		sbatch_fpath="${pred_dir}/prediction_scripts/do_${job_name}"
+		log_fpath="${pred_dir}/cross-prediction_scripts/logs/${job_name}"
+		sbatch_fpath="${pred_dir}/cross-prediction_scripts/do_${job_name}"
 
 		datapath_type=$( ${build_path_src} ${groupname} ${brainrep}  ${feature} )
                 if compgen -G ${sbatch_fpath} >> "/dev/null"
@@ -94,7 +97,7 @@ do
 #SBATCH --mem-per-cpu=${mem_gb}gb
 
 # constants
-classifier=\"${base_dir}/classification_model/classify_patients.py\"
+classifier=\"${base_dir}/classification_model/learn_cross-classifiers.py\"
 patient_eid_dir=\"${base_dir}/subject_lists/patient_eid\"
 
 # input parameters

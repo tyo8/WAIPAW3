@@ -4,13 +4,16 @@ set -o nounset
 
 # constants
 base_dir="/scratch/tyoeasley/WAPIAW3"
-pred_dir="${base_dir}/job_submission_portal/prediction"
-out_dir="${base_dir}/prediction_outputs"
+pred_dir="${base_dir}/job_submission_portal/cross-prediction"
+out_dir="${base_dir}/cross-prediction_outputs"
 build_path_src="${base_dir}/utils/build_fpath_from_specs.sh"
 
+########################### WE WILL WANT TO INCLUDE WHERE THE MODELS FOR THE "LEARNED" DISEASE GROUP LIVES SOMEWHERE HERE ########################
 # learning parameters
-subj_group_flist="${base_dir}/subject_lists/lists_of_groups/small_dummy_group.txt"
-spec_list_fpath="${pred_dir}/spec_list_test.txt"
+subjgrp_model_flist="${base_dir}/subject_lists/lists_of_groups/predtest_groups.txt"
+subjgrp_pred_flist="${base_dir}/subject_lists/lists_of_groups/small_dummy_group.txt"
+speclist_model_flist="${pred_dir}/spec_list_test.txt"
+speclist_pred_flist="${pred_dir}/spec_list_test.txt"
 n_splits=100
 
 # submission parameters
@@ -28,7 +31,7 @@ while getopts ":i:o:b:p:s:n:N:t:m:" opt; do
     ;;
     p) pred_dir=${OPTARG}
     ;;
-    s) subj_group_flist=${OPTARG}
+    s) subjgrp_model_flist=${OPTARG}
     ;;
     n) n_jobs=${OPTARG}
     ;;
@@ -50,13 +53,13 @@ while getopts ":i:o:b:p:s:n:N:t:m:" opt; do
   esac
 done
 
-subj_group_list=$( cat ${subj_group_flist} )
+subjgrp_model_list=$( cat ${subjgrp_model_flist} )
 spec_list=$( cat ${spec_list_fpath} )
 
 ########################## Write the input and the script #########################
 
 echo "Running predictions for the following parameters:"
-echo "subject groups in list: ${subj_group_flist}"
+echo "subject groups in list: ${subjgrp_model_flist}"
 echo "brainrep and feature parameters specified in: ${spec_list_fpath}"
 echo ""
 
@@ -64,11 +67,11 @@ for spec_line in $spec_list
 do
 	brainrep=$( echo $spec_line | cut -d_ -f 1 )
 	feature=${spec_line##"${brainrep}_"}
-	for subj_group in ${subj_group_list}
+	for subj_group in ${subjgrp_model_list}
 	do
 		groupname=$( basename ${subj_group} | cut -d. -f 1 )
 		
-		job_name="classify_${groupname}_${brainrep}_${feature}"
+		job_name="cross-classify_${groupname}_${brainrep}_${feature}"
 		log_fpath="${pred_dir}/prediction_scripts/logs/${job_name}"
 		sbatch_fpath="${pred_dir}/prediction_scripts/do_${job_name}"
 
@@ -98,9 +101,10 @@ classifier=\"${base_dir}/classification_model/classify_patients.py\"
 patient_eid_dir=\"${base_dir}/subject_lists/patient_eid\"
 
 # input parameters
+model_fpath_type=\"${out_dir}/${job_name/cross-classify/model_split%s}.csv\"
 subj_list=\"${subj_group}\"
 datapath_type=\"${datapath_type}\"
-outpath=\"${out_dir}/${job_name/classify/metrics}.csv\"
+outpath=\"${out_dir}/${job_name/cross-classify/metrics}.csv\"
 
 # resource & computation parameters
 n_jobs=${n_jobs}                # number of cores requested by process
@@ -112,8 +116,8 @@ n_splits=${n_splits}            # number of random train/validation splits withi
 n_estimators=250        # number of trees in random forest
 loss_criterion=\'gini\'   # minimized objective function
 
-python \${classifier} -l \${subj_list} -f \${datapath_type} -o \${outpath} -p \${patient_eid_dir} \
-        -n \${n_jobs} -R \${rng_seed} \
+python \${classifier} -l \${subj_list} -f \${datapath_type} -o \${outpath} -p \${patient_eid_dir} \\
+        -n \${n_jobs} -R \${rng_seed} \\
         -k \${folds} -s \${n_splits} -e \${n_estimators} -L \${loss_criterion} -v
 \
 " > "${sbatch_fpath}"  

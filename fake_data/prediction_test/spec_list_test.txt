@@ -1,0 +1,3 @@
+Schaefer_Amplitudes
+Schaefer_partial_NMs
+Schaefer_NetMats
