@@ -1,15 +1,15 @@
 import argparse
 import os
 import numpy as np
+#import joblib
 
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import ShuffleSplit, GridSearchCV
 from sklearn.metrics import accuracy_score, zero_one_loss
 
-
 ##################################################################################################################################
-#######THIS MIGHT HAVE TO CHANGE DEPENDING ON HOW THE MODEL IS SAVED OUT########
+##### Open model ####
 def get_spec_model(gridsearch_model_fpath):
     import joblib
     
@@ -25,6 +25,7 @@ def get_input_data(subj_list_fpath, datapath_type, patient_eid_dir=''):
     with open(subj_list_fpath,'r') as fin:
         subj_list = fin.read().split()
     X = np.array([_pull_subj_data(eid, datapath_type) for eid in subj_list], dtype=float)
+    X = X/np.amax(X)
     Y = np.array(_pull_group_labels(subj_list_fpath, patient_eid_dir=patient_eid_dir))
     return X,Y
 
@@ -42,7 +43,7 @@ def _pull_subj_data(subj_eid, datapath_type):
             data = data.flatten()
     
     ### debug code ###
-    print(f"subect {subj_eid} has data of shape:", data.shape)
+    # print(f"subect {subj_eid} has data of shape:", data.shape)
     ### debug code ###
 
     return np.array(data.flatten(), dtype=float)
@@ -67,35 +68,7 @@ def _pull_group_labels(subj_list_fpath, patient_eid_dir=''):
     return Y_all
 
 # sends information about learning problem parameters to output stream
-def _output_params(X_test, X_test):
-    print('')
-    print('Testing set size:', X_test.shape)
-    print('Training set size:', X_test.shape)
-    print('Number of features used:', X_test.shape[1])
-    print('Number of subjects after selection:', X_test.shape[0] + X_test.shape[0])
-    print('')
 ##################################################################################################################################
-
-
-
-##################################################################################################################################
-# specify CV model (should just be partial copy-paste from analogous function in "learn_cross..." MODIFY TO WORK
-##################################################################################################################################
-CV = ShuffleSplit(
-            n_splits = n_splits, 
-            test_size=0.2,      # reflects 5-fold crossval within training and validation (*not* generalization) dataset
-            random_state=seed_num+0
-            )
-    param_grid = {
-            'max_depth': [5, 10, 20, 40, None],
-            'max_features': [1, 5, 'log2', 'sqrt', None]
-            }
-    grid_search = GridSearchCV(estimator, param_grid=param_grid,
-            cv=folds, 
-            verbose=2, 
-            n_jobs=n_jobs       # maybe parallelize along learning of splits instead??? -- i.e., use an mp pool to re-learn over CV splits?
-            )
-    return grid_search, CV
 
 
 
@@ -112,22 +85,6 @@ def _extract_metadata(outpath):
 
     brain_rep = outname.replace('metrics_','').replace(feature_type,'').split('_')[-2]
     
-
-## given a datapath nametype, extracts the feature and brain_rep types of data
- #   import re
- #   feature_type = os.path.basename(os.path.dirname(datapath_type))
- #   if "ica" in datapath_type and "ICA" in datapath_type:
- #       brain_rep = re.search(r"ica\d{2,}", datapath_type).group(0).replace('ica','ICA_d')
- #   elif "PROFUMO" in datapath_type:
- #       brain_rep = "PROFUMO"
- #   elif "Schaefer" in datapath_type:
- #       brain_rep = "Schaefer"
- #   elif "gradient" in datapath_type:
- #       brain_rep = "gradient"
- #   else:
- #       brain_rep = "UNKNOWN"
-    
-    
     return brain_rep, feature_type
 ##################################################################################################################################
 
@@ -136,7 +93,9 @@ def _extract_metadata(outpath):
 ##################################################################################################################################
 # learns a patient vs. control classifier (in given group's data) over all shuffle-split data and collects (distributions of)
 # prediction outcomes -- maybe implement mp version of this that parallelizes over splits in cv?
-def fit_and_save_all_model(grid_search, CV, X_test, Y_test,
+def predict_and_save_all_models(X_test, Y_test,
+        n_splits=100,
+        model_fpath_type='<something something with %s for split number>',
         pred_outpath='prediction_metrics.csv', 
         brain_rep='ICA_d150', 
         feature_type='pNMs', 
@@ -146,24 +105,26 @@ def fit_and_save_all_model(grid_search, CV, X_test, Y_test,
     metrics = []
     data_collect = []
     gendata_collect = []
-        
-    data_collect, scores = _predict_collect(
-            y_pred=grid_search.predict(X_test), 
-            y_true=Y_test, 
-            data_collect=data_collect,
-            test_index=val_index,
-            split=split, 
-            save_type='validation',
-            brain_rep=brain_rep,
-            feature_type=feature_type,
-            group_name=group_name
-            )
-    metrics.append(scores)
+
+    for i in range(n_splits):
+        model_fpath = model_fpath_type % i
+        model = get_spec_model(model_fpath)
+#	important_features = model.feature_importances_
+#	joblib.dump(important_features, pred_outpath)
+        data_collect, scores = _predict_collect(
+                y_pred=model.predict(X_test), 
+                y_true=Y_test, 
+                data_collect=data_collect,
+                save_type='validation',
+                brain_rep=brain_rep,
+                feature_type=feature_type,
+                group_name=group_name
+                )
+        metrics.append(scores)
 
     # save outputs
     import pandas as pd
-    pd.DataFrame(metrics).to_csv(outpath)
-
+    pd.DataFrame(metrics).to_csv(pred_outpath)
 
 # given trained model and held-out generalization data, computes mectrics of prediction performance
 def _predict_collect(y_pred=[], y_true=[], data_collect=[], test_index=[], split=[],
@@ -190,7 +151,7 @@ def _predict_collect(y_pred=[], y_true=[], data_collect=[], test_index=[], split
 ##################################################################################################################################
 
 
-
+### ABOVE WAS DEFINING FUNCTIONS, BELOW IS THE ACTUAL SCRIPT ###
 ##################################################################################################################################
 # parses inputs, generates derivative intermediates, loads and splits data, fits and predicts with RF classifiers, and saves results
 if __name__=="__main__":
@@ -210,8 +171,15 @@ if __name__=="__main__":
             help="generic path (awaiting eid substitution) to CSV file containing per-subject features"
             )
     parser.add_argument(
-            '-o',
-            '--outpath',
+            '-r',
+            '--pred_outpath',
+            type=str,
+            default='/scratch/tyoeasley/WAPIAW3/prediction_outputs/example_ica25_Amplitudes.csv',
+            help='CSV file containing the output of prediction results'
+            )
+    parser.add_argument(
+            '-m',
+            '--model_fpath_type',
             type=str,
             default='/scratch/tyoeasley/WAPIAW3/prediction_outputs/example_ica25_Amplitudes.csv',
             help='CSV file containing the output of prediction results'
@@ -245,13 +213,6 @@ if __name__=="__main__":
             help="integer specifying rng state initialization"
             )
     parser.add_argument(
-            '-L',
-            '--loss',
-            type=str,
-            default='gini',
-            help='loss function of fit model'
-            )
-    parser.add_argument(
             '-e',
             '--n_estimators',
             type=int,
@@ -274,7 +235,7 @@ if __name__=="__main__":
             )
     args = parser.parse_args()
     group_name = os.path.basename(args.subj_list).split('.')[0]          # get group_name from args.subj_list
-    brain_rep, feature_type = _extract_metadata(args.outpath)    # get LHS information from datapath_type
+    brain_rep, feature_type = _extract_metadata(args.pred_outpath)    # get LHS information from datapath_type
 
     # verbose output
     if args.verbose:
@@ -283,30 +244,18 @@ if __name__=="__main__":
         print('Brain representation type:', brain_rep)
         print('Feature type:', feature_type)
         print('Conducting', str(args.n_splits)+'-fold cross-validation.')
-        print('Saving results to:', args.outpath)
+        print('Saving results to:', args.pred_outpath)
 
     X_test, Y_test = get_input_data(
             args.subj_list, 
             args.datapath_type, 
-            patient_eid_dir = args.patient_eid_dir,
-            seed_num = args.rng_seed, 
-            verbose = args.verbose
+            patient_eid_dir = args.patient_eid_dir
             )
 
-    grid_search = get_spec_model(args.model_fpath)
-
-    # I deleted this function from this file, you'll have to add part of it back in           I don't see what is deleted?
-    CV = specify_model(
-            n_estimators = args.n_estimators, 
-            loss = args.loss, 
-            n_jobs = args.n_jobs,
-            n_splits = args.n_splits, 
-            folds = args.folds, 
-            seed_num = args.rng_seed
-            )
-
-    fit_and_save_all_models(grid_search, CV, X_test, Y_test,
-            outpath = args.outpath, 
+    predict_and_save_all_models(X_test, Y_test,
+            n_splits = args.n_splits,
+            model_fpath_type = args.model_fpath_type,
+            pred_outpath = args.pred_outpath, 
             brain_rep = brain_rep, 
             feature_type = feature_type, 
             group_name = group_name

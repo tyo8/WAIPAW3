@@ -11,7 +11,7 @@ dim=400
 networks=17
 res=2
 
-sID="1061708"
+sID="4824026"
 
 source /export/anaconda/anaconda3/anaconda3-2020.07/bin/activate neuro
 python ${ext_scr} -s ${sID} -D ${dim} -n ${networks} -r ${res} -w

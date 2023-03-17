@@ -18,8 +18,7 @@ n_splits=100
 # submission parameters
 n_jobs=1
 mem_gb=$(( 100/${n_jobs} ))
-maxtime_str="23:55:00"
-echo "2.are you running?"
+maxtime_str="167:55:00"
 
 while getopts ":i:o:b:p:s:n:N:t:m:" opt; do
   case $opt in
@@ -55,7 +54,6 @@ done
 
 subj_group_list=$( cat ${subj_group_flist} )
 spec_list=$( cat ${spec_list_fpath} )
-echo "3.are you running?"
 ########################## Write the input and the script #########################
 
 echo "Running predictions for the following parameters:"
@@ -75,6 +73,13 @@ do
 		log_fpath="${pred_dir}/cross-prediction_scripts/logs/${job_name}"
 		sbatch_fpath="${pred_dir}/cross-prediction_scripts/do_${job_name}"
 
+                model_dir="${base_dir}/classification_model/cross-classifier_models/${job_name/classify/splitmods}"
+                if compgen -G ${model_dir} >> "/dev/null"
+		then
+                    	rm -rf $model_dir
+                fi
+		mkdir -p $model_dir
+
 		datapath_type=$( ${build_path_src} ${groupname} ${brainrep}  ${feature} )
                 if compgen -G ${sbatch_fpath} >> "/dev/null"
                 then
@@ -92,7 +97,6 @@ do
 #SBATCH --output=${log_fpath}.out%j
 #SBATCH --error=${log_fpath}.err%j
 #SBATCH --time=${maxtime_str}
-#SBATCH --partition=small
 #SBATCH --cpus-per-task=${n_jobs}
 #SBATCH --mem-per-cpu=${mem_gb}gb
 
@@ -103,7 +107,8 @@ patient_eid_dir=\"${base_dir}/subject_lists/patient_eid\"
 # input parameters
 subj_list=\"${subj_group}\"
 datapath_type=\"${datapath_type}\"
-outpath=\"${out_dir}/${job_name/classify/metrics}.csv\"
+model_path_type=\"${model_dir}/split_%s.pkl\"
+pred_outpath=\"${out_dir}/${job_name/classify/metrics}.csv\"
 
 # resource & computation parameters
 n_jobs=${n_jobs}                # number of cores requested by process
@@ -113,11 +118,11 @@ rng_seed=0              # random seed state integer
 folds=5                 # number of folds during gridsearch hyperparameter validation
 n_splits=${n_splits}            # number of random train/validation splits within training data=number of models learned
 n_estimators=250        # number of trees in random forest
-loss_criterion=\'gini\'   # minimized objective function
+loss_criterion=\"gini\"   # minimized objective function
 
-python \${classifier} -l \${subj_list} -f \${datapath_type} -o \${outpath} -p \${patient_eid_dir} \
+python \${classifier} -l \${subj_list} -f \${datapath_type} -r \${pred_outpath} -m \${model_path_type} -p \${patient_eid_dir} \
         -n \${n_jobs} -R \${rng_seed} \
-        -k \${folds} -s \${n_splits} -e \${n_estimators} -L \${loss_criterion} -v
+        -k \${folds} -s \${n_splits} -e \${n_estimators} -L \${loss_criterion} -P -v
 \
 " > "${sbatch_fpath}"  
 

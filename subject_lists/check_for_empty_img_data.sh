@@ -7,8 +7,13 @@ for eid in $subj_list
 do
 	fpath="/ceph/biobank/derivatives/melodic/sub-${eid}/ses-01/sub-${eid}_ses-01_melodic.ica/filtered_func_data_clean_MNI152.nii.gz"
 
-	if ! [[ $( stat --printf=%s $fpath ) -gt 0 ]]
+	if compgen -G $fpath >> /dev/null
 	then
-		echo $eid >> empty_melodic_data_eid.txt
+		if ! [[ $( stat --printf=%s $fpath ) -gt 0 ]]
+		then
+			echo $eid >> missing_subj_data_eid.txt
+		fi
+	else
+		echo $eid >> missing_subj_data_eid.txt
 	fi
 done

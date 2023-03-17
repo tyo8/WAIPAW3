@@ -19,7 +19,7 @@ xtr_script="${xtr_dir}/feats_from_dtseries.py"
 
 # data parameters
 dimlist_fpath="${base_dir}/brainrep_data/Schaefer_data/Schaefer_dimlist.txt"
-subj_group_flist="${base_dir}/subject_lists/lists_of_groups/all_subj_group.txt"
+subj_group_flist="${xtr_dir}/missing_group.txt"
 input_gendir="/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/timeseries"
 
 # submission parameters

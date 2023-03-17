@@ -21,7 +21,7 @@ n_splits=2
 
 # submission parameters
 n_jobs=8
-mem_gb_per_cpu=$(( 80/${n_jobs}+15 ))
+mem_gb_per_cpu=$(( 8/${n_jobs}+2 ))
 maxtime_str="23:55:00"
 
 # call

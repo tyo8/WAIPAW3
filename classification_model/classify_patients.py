@@ -1,16 +1,15 @@
-import argparse
 import os
+import argparse
 import numpy as np
 
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import ShuffleSplit, GridSearchCV
 from sklearn.metrics import accuracy_score, zero_one_loss
-
+from model_specification import specify_model as specify_model
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import StratifiedShuffleSplit
 
 ##################################################################################################################################
 # given a filepath to a list of subject IDs and a general datapath string, returns train-test split data and labels
-def get_input_data(subj_list_fpath, datapath_type, test_size=1/3, seed_num=0, patient_eid_dir='', verbose=True):
+def get_input_data(subj_list_fpath, datapath_type, test_prop=0.1, seed_num=0, patient_eid_dir='', verbose=True):
 
     with open(subj_list_fpath,'r') as fin:
         subj_list = fin.read().split()
@@ -26,12 +25,18 @@ def get_input_data(subj_list_fpath, datapath_type, test_size=1/3, seed_num=0, pa
     # pull disease group labels
     Y_all = np.asarray(_pull_group_labels(subj_list_fpath, patient_eid_dir=patient_eid_dir))
 
-    X_train, X_test, Y_train, Y_test = train_test_split(
-            X_all, 
-            Y_all, 
-            test_size=test_size, 
-            random_state=seed_num+1
-            )
+    if test_prop > 0:
+        X_train, X_test, Y_train, Y_test = train_test_split(
+                X_all, 
+                Y_all, 
+                test_prop=test_prop, 
+                random_state=seed_num+1
+                )
+    else:
+        X_train = X_all
+        Y_train = Y_all
+        X_test = np.asarray([])
+        Y_test = np.asarray([])
 
     if verbose:
         _output_params(X_train, X_test)
@@ -52,7 +57,7 @@ def _pull_subj_data(subj_eid, datapath_type):
             data = data.flatten()
     
     ### debug code ###
-    print(f"subect {subj_eid} has data of shape:", data.shape)
+    # print(f"subect {subj_eid} has data of shape:", data.shape)
     ### debug code ###
 
     return np.array(data.flatten(), dtype=float)
@@ -101,56 +106,7 @@ def _extract_metadata(outpath):
 
     brain_rep = outname.replace('metrics_','').replace(feature_type,'').split('_')[-2]
     
-
-## given a datapath nametype, extracts the feature and brain_rep types of data
- #   import re
- #   feature_type = os.path.basename(os.path.dirname(datapath_type))
- #   if "ica" in datapath_type and "ICA" in datapath_type:
- #       brain_rep = re.search(r"ica\d{2,}", datapath_type).group(0).replace('ica','ICA_d')
- #   elif "PROFUMO" in datapath_type:
- #       brain_rep = "PROFUMO"
- #   elif "Schaefer" in datapath_type:
- #       brain_rep = "Schaefer"
- #   elif "gradient" in datapath_type:
- #       brain_rep = "gradient"
- #   else:
- #       brain_rep = "UNKNOWN"
-    
-    
     return brain_rep, feature_type
-##################################################################################################################################
-
-
-
-##################################################################################################################################
-# parametrizes learner to user-given (or default) specifications of algorithm and computational resources
-def specify_model(n_estimators = 250, loss = 'gini', n_jobs = 1, n_splits = 100, folds = 5, seed_num=0):
-    estimator = RandomForestClassifier(
-            n_estimators = n_estimators, 
-#            criterion=loss,
-            verbose=0, 
-            random_state=seed_num+0
-            )
-
-    ### debug code ###
-    print("Estimator criterion is:", estimator.criterion)
-    ### debug code ###
-
-    CV = ShuffleSplit(
-            n_splits = n_splits, 
-            test_size=0.2,      # reflects 5-fold crossval within training and validation (*not* generalization) dataset
-            random_state=seed_num+0
-            )
-    param_grid = {
-            'max_depth': [5, 10, 20, 40, None],
-            'max_features': [1, 5, 'log2', 'sqrt', None]
-            }
-    grid_search = GridSearchCV(estimator, param_grid=param_grid,
-            cv=folds, 
-            verbose=2, 
-            n_jobs=n_jobs       # maybe parallelize along learning of splits instead??? -- i.e., use an mp pool to re-learn over CV splits?
-            )
-    return grid_search, CV
 ##################################################################################################################################
 
 
@@ -158,11 +114,19 @@ def specify_model(n_estimators = 250, loss = 'gini', n_jobs = 1, n_splits = 100,
 ##################################################################################################################################
 # learns a patient vs. control classifier (in given group's data) over all shuffle-split data and collects (distributions of)
 # prediction outcomes -- maybe implement mp version of this that parallelizes over splits in cv?
-def fit_and_save_all_models(grid_search, CV, X_train, X_test, Y_train, Y_test, 
+def fit_and_save_all_models(grid_search, X_train, Y_train, 
+        X_test=[], Y_test=[], n_splits=100, validation_prop=0.2, seed_num=0,
         outpath='predictions.csv', brain_rep='ICA_d150', feature_type='pNMs', group_name='example'):
     metrics = []
     data_collect = []
     gendata_collect = []
+
+    CV = StratifiedShuffleSplit(
+            n_splits  = n_splits,
+            test_size = validation_prop,
+            random_state = seed_num
+            )
+
     for split, (train_index, val_index) in enumerate(CV.split(X_train, Y_train)):
         grid_search.fit(X_train[train_index], Y_train[train_index])
 
@@ -172,25 +136,26 @@ def fit_and_save_all_models(grid_search, CV, X_train, X_test, Y_train, Y_test,
                 data_collect=data_collect,
                 test_index=val_index,
                 split=split, 
-                save_type='validation',
+                save_type="validation",
                 brain_rep=brain_rep,
                 feature_type=feature_type,
                 group_name=group_name
                 )
         metrics.append(scores)
 
-        gendata_collect, scores = _predict_collect(
-                y_pred=grid_search.predict(X_test), 
-                y_true=Y_test,
-                data_collect=gendata_collect,             
-                test_index=np.arange(X_test.shape[0], dtype=int),
-                split=split, 
-                save_type='generalization',
-                brain_rep=brain_rep,
-                feature_type=feature_type,
-                group_name=group_name
-                )
-        metrics.append(scores)
+        if np.any(X_test) and np.any(Y_test):
+            gendata_collect, scores = _predict_collect(
+                    y_pred=grid_search.predict(X_test), 
+                    y_true=Y_test,
+                    data_collect=gendata_collect,             
+                    test_index=np.arange(X_test.shape[0], dtype=int),
+                    split=split, 
+                    save_type='generalization',
+                    brain_rep=brain_rep,
+                    feature_type=feature_type,
+                    group_name=group_name
+                    )
+            metrics.append(scores)
     
     # save outputs
     import pandas as pd
@@ -208,7 +173,7 @@ def _predict_collect(y_pred=[], y_true=[], data_collect=[], test_index=[], split
                                     index=predictions.index)
     data_collect.append(predictions)
     scores['accuracy'] = accuracy_score(y_true, y_pred)     # problem is balanced, so this is equivalent to Jaccard score
-    scores['z1_idx'] = zero_one_loss(y_true, y_pred)     # normalize=True, so this is equivalent to (normalized) Hamming distance
+    # scores['z1_idx'] = zero_one_loss(y_true, y_pred)     # redundant; equal to 1-accuracy
     scores['fold'] = split
     scores['Estimator'] = 'RandomForest'
     scores['model_testing'] = save_type
@@ -256,6 +221,13 @@ if __name__=="__main__":
             help="number of shuffle-splits over which to train new models (per gridsearch)"
             )
     parser.add_argument(
+            '-C',
+            '--classifier_type',
+            type=str,
+            default="RFC",
+            help="type of classfification algorithm to use (refers estimator-type object in sklearn)"
+            )
+    parser.add_argument(
             '-n',
             '--n_jobs',
             type=int,
@@ -280,7 +252,7 @@ if __name__=="__main__":
             '-L',
             '--loss',
             type=str,
-            default='gini',
+            default="gini",
             help='loss function of fit model'
             )
     parser.add_argument(
@@ -308,34 +280,45 @@ if __name__=="__main__":
     group_name = os.path.basename(args.subj_list).split('.')[0]          # get group_name from args.subj_list
     brain_rep, feature_type = _extract_metadata(args.outpath)    # get LHS information from datapath_type
 
+    test_prop = 0                   # not passed in through parser because this quantity is not allowed to vary for different calls
+    # test_prop = 0.1               # not passed in through parser because this quantity is not allowed to vary for different calls
+    validation_prop = 0.2           # not passed in through parser because this quantity is not allowed to vary for different calls
+
     # verbose output
     if args.verbose:
         print('')
         print('Subject group in analysis:', group_name)
         print('Brain representation type:', brain_rep)
         print('Feature type:', feature_type)
-        print('Conducting', str(args.n_splits)+'-fold cross-validation.')
+        print('Conducting', args.n_splits, f"validate-train shuffle-splits (validation_prop={validation_prop}).")
         print('Saving results to:', args.outpath)
 
     X_train, X_test, Y_train, Y_test = get_input_data(
             args.subj_list, 
             args.datapath_type, 
             patient_eid_dir = args.patient_eid_dir,
-            test_size = 1/3, 
+            test_prop = test_prop,                              # not passed in through parser because this quantity is not allowed to vary for different calls
             seed_num = args.rng_seed, 
             verbose = args.verbose
             )
 
-    grid_search, CV = specify_model(
+    grid_search = specify_model(
             n_estimators = args.n_estimators, 
-            loss = args.loss, 
+            estimator_criterion = args.loss, 
             n_jobs = args.n_jobs,
-            n_splits = args.n_splits, 
             folds = args.folds, 
-            seed_num = args.rng_seed
+            seed_num = args.rng_seed,
+            input_shape = X_train.shape,
+            validation_prop = validation_prop,                  # not passed in through parser because this quantity is not allowed to vary for different calls
+            estimator_type = args.classifier_type
             )
 
-    fit_and_save_all_models(grid_search, CV, X_train, X_test, Y_train, Y_test,
+    fit_and_save_all_models(grid_search, X_train, Y_train, 
+            X_test = X_test, 
+            Y_test = Y_test,
+            n_splits = args.n_splits, 
+            validation_prop = validation_prop,                  # not passed in through parser because this quantity is not allowed to vary for different calls
+            seed_num = args.rng_seed,
             outpath = args.outpath, 
             brain_rep = brain_rep, 
             feature_type = feature_type, 

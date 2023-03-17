@@ -2,11 +2,11 @@ import argparse
 import os
 import numpy as np
 
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import ShuffleSplit, GridSearchCV
 from sklearn.metrics import accuracy_score, zero_one_loss
-
+from sklearn.inspection import permutation_importance
+from model_specification import specify_model as specify_model
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import StratifiedShuffleSplit
 
 ##################################################################################################################################
 # given a filepath to a list of subject IDs and a general datapath string, returns train (or test) split data and labels
@@ -14,6 +14,7 @@ def get_input_data(subj_list_fpath, datapath_type, patient_eid_dir=''):
     with open(subj_list_fpath,'r') as fin:
         subj_list = fin.read().split()
     X = np.array([_pull_subj_data(eid, datapath_type) for eid in subj_list], dtype=float)
+
     Y = np.array(_pull_group_labels(subj_list_fpath, patient_eid_dir=patient_eid_dir))
     return X,Y
 
@@ -31,7 +32,7 @@ def _pull_subj_data(subj_eid, datapath_type):
             data = data.flatten()
     
     ### debug code ###
-    print(f"subect {subj_eid} has data of shape:", data.shape)
+    # print(f"subect {subj_eid} has data of shape:", data.shape)
     ### debug code ###
 
     return np.array(data.flatten(), dtype=float)
@@ -80,56 +81,7 @@ def _extract_metadata(outpath):
 
     brain_rep = outname.replace('metrics_','').replace(feature_type,'').split('_')[-2]
     
-
-## given a datapath nametype, extracts the feature and brain_rep types of data
- #   import re
- #   feature_type = os.path.basename(os.path.dirname(datapath_type))
- #   if "ica" in datapath_type and "ICA" in datapath_type:
- #       brain_rep = re.search(r"ica\d{2,}", datapath_type).group(0).replace('ica','ICA_d')
- #   elif "PROFUMO" in datapath_type:
- #       brain_rep = "PROFUMO"
- #   elif "Schaefer" in datapath_type:
- #       brain_rep = "Schaefer"
- #   elif "gradient" in datapath_type:
- #       brain_rep = "gradient"
- #   else:
- #       brain_rep = "UNKNOWN"
-    
-    
     return brain_rep, feature_type
-##################################################################################################################################
-
-
-
-##################################################################################################################################
-# parametrizes learner to user-given (or default) specifications of algorithm and computational resources
-def specify_model(n_estimators = 250, loss = 'gini', n_jobs = 1, n_splits = 100, folds = 5, seed_num=0):
-    estimator = RandomForestClassifier(
-            n_estimators = n_estimators, 
-#            criterion=loss,
-            verbose=0, 
-            random_state=seed_num+0
-            )
-
-    ### debug code ###
-    print("Estimator criterion is:", estimator.criterion)
-    ### debug code ###
-
-    CV = ShuffleSplit(
-            n_splits = n_splits, 
-            test_size=0.2,      # reflects 5-fold crossval within training and validation (*not* generalization) dataset
-            random_state=seed_num+0
-            )
-    param_grid = {
-            'max_depth': [5, 10, 20, 40, None],
-            'max_features': [1, 5, 'log2', 'sqrt', None]
-            }
-    grid_search = GridSearchCV(estimator, param_grid=param_grid,
-            cv=folds, 
-            verbose=2, 
-            n_jobs=n_jobs       # maybe parallelize along learning of splits instead??? -- i.e., use an mp pool to re-learn over CV splits?
-            )
-    return grid_search, CV
 ##################################################################################################################################
 
 
@@ -137,17 +89,30 @@ def specify_model(n_estimators = 250, loss = 'gini', n_jobs = 1, n_splits = 100,
 ##################################################################################################################################
 # learns a patient vs. control classifier (in given group's data) over all shuffle-split data and collects (distributions of)
 # prediction outcomes -- maybe implement mp version of this that parallelizes over splits in cv?
-def fit_and_save_all_models(grid_search, CV, X_train, Y_train,
-        pred_outpath='prediction_metrics.csv', 
+def fit_and_save_all_models(
+        grid_search, X_train, Y_train,
+        n_splits=100, 
+        validation_prop=0.2, 
+        seed_num=0,
+        pred_outpath='prediction_metrics.csv',
+        model_fpath_type='prediction_metrics.csv',  
+        permute=False,  
         brain_rep='ICA_d150', 
         feature_type='pNMs', 
         group_name='example'
         ):
-    import joblib
+    CV = StratifiedShuffleSplit(
+            n_splits  = n_splits,
+            test_size = validation_prop,
+            random_state = seed_num
+            )
 
     metrics = []
     data_collect = []
     gendata_collect = []
+
+    import joblib
+
     for split, (train_index, val_index) in enumerate(CV.split(X_train, Y_train)):
         grid_search.fit(X_train[train_index], Y_train[train_index])
 
@@ -164,10 +129,15 @@ def fit_and_save_all_models(grid_search, CV, X_train, Y_train,
                 )
         metrics.append(scores)
 
-        model_fname=os.path.basename(pred_outpath).replace("metrics",f"model_split{split}").replace("csv","pkl")
-        model_fpath=os.path.join("/scratch/tyoeasley/WAPIAW3/classification_model/models_cross-classify", model_fname)
+        model_fpath = model_fpath_type % split
         print("After fitting the RandomForestClassifier, GridSearchCV object saved to:", model_fpath)
         joblib.dump(grid_search, model_fpath)
+        
+        feat_outpath = os.path.join(os.path.dirname(model_fpath), os.path.basename(model_fpath).replace('split','feat_impt_split'))
+        joblib.dump(grid_search.best_estimator_.feature_importances_, feat_outpath.replace('feat_impt','feat_bias'))
+        if permute:
+            important_features = permutation_importance(grid_search, X_train[train_index], Y_train[train_index], n_repeats=100, random_state=0)
+            joblib.dump(important_features, feat_outpath.replace('feat_impt','feat_permute'))
 
     # save outputs
     import pandas as pd
@@ -219,18 +189,32 @@ if __name__=="__main__":
             help="generic path (awaiting eid substitution) to CSV file containing per-subject features"
             )
     parser.add_argument(
-            '-o',
-            '--outpath',
+            '-r',
+            '--pred_outpath',
             type=str,
-            default='/scratch/tyoeasley/WAPIAW3/prediction_outputs/example_ica25_Amplitudes.csv',
+            default='/scratch/tyoeasley/WAPIAW3/cross-prediction_outputs/example_ica25_Amplitudes.csv',
             help='CSV file containing the output of prediction results'
             )
+    parser.add_argument(
+            '-m',
+            '--model_fpath_type',
+            type=str,
+            default='/scratch/tyoeasley/WAPIAW3/classification_model/cross-classifier_models/example_ica25_Amplitudes.csv',
+            help='CSV file containing the output of prediction results'
+            )            
     parser.add_argument(
             '-s',
             '--n_splits',
             type=int,
             default=100,
             help="number of shuffle-splits over which to train new models (per gridsearch)"
+            )
+    parser.add_argument(
+            '-C',
+            '--classifier_type',
+            type=str,
+            default="RFC",
+            help="type of classfification algorithm to use (refers estimator-type object in sklearn)"
             )
     parser.add_argument(
             '-n',
@@ -275,6 +259,13 @@ if __name__=="__main__":
             help="directory containing lists of patient eid numbers"
             )
     parser.add_argument(
+            '-P',
+            '--do_permuted_importance',
+            default=False,
+            action='store_true',
+            help="feature importance computation flag: conduct permutation testing to assess feature importance for each model?"
+            )
+    parser.add_argument(
             '-v',
             '--verbose',
             default=False,
@@ -283,7 +274,8 @@ if __name__=="__main__":
             )
     args = parser.parse_args()
     group_name = os.path.basename(args.subj_list).split('.')[0]          # get group_name from args.subj_list
-    brain_rep, feature_type = _extract_metadata(args.outpath)    # get LHS information from datapath_type
+    brain_rep, feature_type = _extract_metadata(args.pred_outpath)    # get LHS information from datapath_type
+    validation_prop = 0.2           # not passed in through parser because this quantity is not allowed to vary for different calls
 
     # verbose output
     if args.verbose:
@@ -292,25 +284,33 @@ if __name__=="__main__":
         print('Brain representation type:', brain_rep)
         print('Feature type:', feature_type)
         print('Conducting', str(args.n_splits)+'-fold cross-validation.')
-        print('Saving results to:', args.outpath)
+        print('Saving results to:', args.pred_outpath)
+        print('Saving model to:', args.model_fpath_type)
 
     X_train, Y_train = get_input_data(
-            args.subj_list, #used to be args.subj_list_test 
+            args.subj_list,
             args.datapath_type, 
             patient_eid_dir = args.patient_eid_dir,
             )
 
-    grid_search, CV = specify_model(
-            n_estimators = args.n_estimators, 
-            loss = args.loss, 
+    grid_search = specify_model(
+            n_estimators = args.n_estimators,
+            estimator_criterion = args.loss,
             n_jobs = args.n_jobs,
-            n_splits = args.n_splits, 
-            folds = args.folds, 
-            seed_num = args.rng_seed
+            folds = args.folds,
+            seed_num = args.rng_seed,
+            input_shape = X_train.shape,
+            validation_prop = validation_prop,                  # not passed in through parser because this quantity is not allowed to vary for different calls
+            estimator_type = args.classifier_type
             )
 
-    fit_and_save_all_models(grid_search, CV, X_train, Y_train,
-            pred_outpath = args.outpath, 
+    fit_and_save_all_models(grid_search, X_train, Y_train,
+            n_splits=args.n_splits, 
+            validation_prop=validation_prop,            # not passed in through parser because this quantity is not allowed to vary for different calls
+            seed_num=args.rng_seed,
+            pred_outpath = args.pred_outpath,
+            model_fpath_type = args.model_fpath_type,  
+            permute=args.do_permuted_importance,  
             brain_rep = brain_rep, 
             feature_type = feature_type, 
             group_name = group_name

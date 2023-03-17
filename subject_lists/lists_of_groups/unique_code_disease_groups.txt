@@ -1,0 +1,17 @@
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/F0_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/F10_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/F17_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/F32_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/F41_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/G2_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/G35_37_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/G40_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/G43_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/G45_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/G47_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/G55_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/G56_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/G57_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/G62_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/G8_unique
+/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/G93_unique

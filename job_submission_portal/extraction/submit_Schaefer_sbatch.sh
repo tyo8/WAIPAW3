@@ -77,8 +77,8 @@ do
 \
 #!/bin/sh
 #SBATCH --job-name=${job_name}
-#SBATCH --output=${Schaefer_dir}/logs/${job_name}.out%j
-#SBATCH --error=${Schaefer_dir}/logs/${job_name}.err%j
+#SBATCH --output=${Schaefer_dir}/logs/${job_name}_${subj_ID}.out
+#SBATCH --error=${Schaefer_dir}/logs/${job_name}_${subj_ID}.err
 #SBATCH --time=${maxtime_str}
 #SBATCH --mem=${mem_gb}GB
 

@@ -9,13 +9,13 @@ out_dir="${base_dir}/prediction_outputs"
 build_path_src="${base_dir}/utils/build_fpath_from_specs.sh"
 
 # learning parameters
-subj_group_flist="${base_dir}/subject_lists/lists_of_groups/dummy_groups.txt"
+#subj_group_flist="${base_dir}/subject_lists/lists_of_groups/dummy_groups.txt"
 spec_list_fpath="${pred_dir}/spec_list_test.txt"
 n_splits=100
 
 # submission parameters
-n_jobs=1
-mem_gb=$(( 100/${n_jobs} ))
+n_jobs=10
+mem_gb=$(( 100/${n_jobs} + 5 ))
 maxtime_str="23:55:00"
 
 while getopts ":i:o:b:p:s:n:N:t:m:" opt; do
@@ -82,6 +82,7 @@ do
                         rm -f ${log_fpath}.*
                 fi
 		echo "Predicting diagnosis from ${brainrep} ${feature} in subject group: ${groupname}"	
+		echo "prediction job submitted via batch script: ${sbatch_fpath}"
 		echo "\
 \
 #!/bin/sh
@@ -110,7 +111,7 @@ rng_seed=0              # random seed state integer
 folds=5                 # number of folds during gridsearch hyperparameter validation
 n_splits=${n_splits}            # number of random train/validation splits within training data=number of models learned
 n_estimators=250        # number of trees in random forest
-loss_criterion=\'gini\'   # minimized objective function
+loss_criterion=\"gini\"   # minimized objective function
 
 python \${classifier} -l \${subj_list} -f \${datapath_type} -o \${outpath} -p \${patient_eid_dir} \
         -n \${n_jobs} -R \${rng_seed} \

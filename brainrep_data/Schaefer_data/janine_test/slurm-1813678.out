@@ -1,0 +1,35 @@
+--------------------------------------------------------------
+Begin Slurm Prologue Fri Mar 17 08:43:58 CDT 2023 1679060638
+Job ID:		1813678
+Username:	janine.bijsterbosch
+Partition:	small
+End Slurm Prologue Fri Mar 17 08:43:58 CDT 2023 1679060638
+--------------------------------------------------------------
+2595846
+4752949
+slurmstepd: error: *** JOB 1813678 ON node25 CANCELLED AT 2023-03-17T08:44:16 ***
+--------------------------------------------------------------
+Begin Slurm Epilogue Fri Mar 17 08:44:20 CDT 2023 1679060660
+Name                : extract_sanity_check
+User                : janine.bijsterbosch
+Partition           : small
+Nodes               : node25
+Cores               : 1
+State               : CANCELLED,CANCELLED by 1950685
+Submit              : 2023-03-17T08:43:41
+Start               : 2023-03-17T08:43:58
+End                 : 2023-03-17T08:44:17
+Reserved Walltime   : 23:00:00
+Used Walltime       : 00:00:19
+Used CPU Time       : 00:00:14
+% User (Computation): 89.66%
+% System (I/O)      : 10.33%
+Mem Reserved        : 20G
+Max Mem Used        : 1.66G (1782054912.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node25
+Max-Disk-Write Node : node25
+Max-Disk-Read Node  : node25
+End Slurm Epilogue Fri Mar 17 08:44:20 CDT 2023 1679060660
+--------------------------------------------------------------
