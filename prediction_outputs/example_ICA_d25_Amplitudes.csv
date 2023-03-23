@@ -1,5 +1,0 @@
-,accuracy,z1_idx,fold,Estimator,model_testing,brain_rep,feature_type,group
-0,0.0,1.0,0,RandomForest,validation,ICA_d25,Amplitudes,example
-1,0.5,0.5,0,RandomForest,generalization,ICA_d25,Amplitudes,example
-2,0.5,0.5,1,RandomForest,validation,ICA_d25,Amplitudes,example
-3,0.75,0.25,1,RandomForest,generalization,ICA_d25,Amplitudes,example
