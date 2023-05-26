@@ -2,6 +2,8 @@
 
 set -o nounset
 
+### NOTE: whoever runs this script needs to own a python environment called "neuro" that contains the nibabel package. Thanks! ###
+
 # bookkeeping parameters
 base_dir="/scratch/tyoeasley/WAPIAW3"
 diffusion_gradient_dir="${base_dir}/brainrep_data/diffusion_gradient_data"
@@ -14,7 +16,7 @@ subj_group_fpath="${base_dir}/subject_lists/all_subj_eid.csv"
 dim=40
 
 # computational parameters
-mem_gb=250
+mem_gb=200
 maxtime_str="23:55:00"
 
 while getopts ":b:S:s:d:n:r:m:t:" opt; do
@@ -79,6 +81,7 @@ dim=${dim}
 sID=\"${subj_ID}\"
 
 source /export/anaconda/anaconda3/anaconda3-2020.07/bin/activate neuro
+
 python \${grad_scr} \${sID} -n \${dim} -o \${outpath_type} -m \${mask_path} --par
 \
 " > "${sbatch_fpath}"

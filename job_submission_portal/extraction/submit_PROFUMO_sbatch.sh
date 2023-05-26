@@ -101,10 +101,7 @@ scr_json=\"\${PROFUMO_dir}/raw_data_subj_lists/\${groupname}_datalocations.json\
 output=\"/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/out_PROFUMO/\${groupname}_\${dim}.pfm\"
 
 singularity exec -B /scratch:/scratch -B /ceph:/ceph \${container}  /opt/profumo/C++/PROFUMO \${src_json_fpath} \${dim} \${output} --useHRF 0.735 --hrfFile /opt/profumo/HRFs/Default.phrf --mask \${mask_fpath} --covModel Subject --dofCorrection 0.075
-
-#remove files except Results.ppp
 \
-
 " > "${sbatch_fpath}"
 
                 # Overwrite submission script# Make script executable

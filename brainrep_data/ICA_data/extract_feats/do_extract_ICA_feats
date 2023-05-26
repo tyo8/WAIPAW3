@@ -1,23 +1,23 @@
 #!/bin/sh
 
 #SBATCH --job-name=featxtr_ICA
-#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/extract_feats/logs/featxtr_ICA_25_example.out
-#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/extract_feats/logs/featxtr_ICA_25_example.err
+#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/extract_feats/logs/featxtr_ICA_300_all_subj_eid.out
+#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/extract_feats/logs/featxtr_ICA_300_all_subj_eid.err
 #SBATCH --time=23:55:00
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
 #SBATCH --mem=50GB
 
 # constants
-xtr_script="/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/extract_feats/feats_from_dtseries.py"
+xtr_script="/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/extract_feats/feats_from_dtseries.py"
 
 # user specs
-group="/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid/example.csv"
-groupname="example"
-dim=25
+group="/scratch/tyoeasley/WAPIAW3/subject_lists/all_subj_eid.csv"
+groupname="all_subj_eid"
+dim=300
 
 # derivatives
-input_dir="$("
+input_dir="/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/${groupname}/ica${dim}/groupICA${dim}.dr"
 
 python ${xtr_script} -i ${input_dir} -d ${dim} -g ${group}
 

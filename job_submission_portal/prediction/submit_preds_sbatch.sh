@@ -83,6 +83,7 @@ do
                 fi
 		echo "Predicting diagnosis from ${brainrep} ${feature} in subject group: ${groupname}"	
 		echo "prediction job submitted via batch script: ${sbatch_fpath}"
+		echo "datapath ${datapath_type}"
 		echo "\
 \
 #!/bin/sh
@@ -90,7 +91,6 @@ do
 #SBATCH --output=${log_fpath}.out%j
 #SBATCH --error=${log_fpath}.err%j
 #SBATCH --time=${maxtime_str}
-#SBATCH --partition=small
 #SBATCH --cpus-per-task=${n_jobs}
 #SBATCH --mem-per-cpu=${mem_gb}gb
 
@@ -112,6 +112,8 @@ folds=5                 # number of folds during gridsearch hyperparameter valid
 n_splits=${n_splits}            # number of random train/validation splits within training data=number of models learned
 n_estimators=250        # number of trees in random forest
 loss_criterion=\"gini\"   # minimized objective function
+
+module load python
 
 python \${classifier} -l \${subj_list} -f \${datapath_type} -o \${outpath} -p \${patient_eid_dir} \
         -n \${n_jobs} -R \${rng_seed} \

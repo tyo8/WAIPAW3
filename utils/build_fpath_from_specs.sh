@@ -7,8 +7,8 @@ base_dir="/scratch/tyoeasley/WAPIAW3/brainrep_data"
 case $brainrep in
 
 	PROFUMO)
-		dim=$(expr brainrep : "[^0-9]*\([0-9]*\)")
-		datapath_type="${base_dir}/${brainrep}_data/out_PROFUMO/${groupname}_${dim}.pfm/${feature}/sub-%s.csv"
+		#dim=$(expr brainrep : "[^0-9]*\([0-9]*\)")
+		datapath_type="${base_dir}/${brainrep}_data/out_PROFUMO/${groupname}_25_Results.ppp/${feature}/sub-%s.csv"
 		;;
 	
 	ICA)

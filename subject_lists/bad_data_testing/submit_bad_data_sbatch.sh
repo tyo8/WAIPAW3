@@ -4,10 +4,13 @@ set -o nounset
 sbatch_fpath="/scratch/tyoeasley/WAPIAW3/subject_lists/bad_data_testing/do_load_bad_data"
 
 subj_fpath=""
+subj_ID="<unknown>"
 
-while getopts ":f:" opt; do
+while getopts ":f:s:" opt; do
   case $opt in
     f) subj_fpath=${OPTARG}
+    ;;
+    s) subj_ID=${OPTARG}
     ;;
     \?) echo "Invalid option -$OPTARG" >&2
     exit 1
@@ -26,8 +29,8 @@ echo "\
 \
 #!/bin/sh
 #SBATCH --job-name=load_data
-#SBATCH --output="/scratch/tyoeasley/WAPIAW3/subject_lists/bad_data_testing/logs/load_bad_data.out%j"
-#SBATCH --error="/scratch/tyoeasley/WAPIAW3/subject_lists/bad_data_testing/logs/load_bad_data.err%j"
+#SBATCH --output="/scratch/tyoeasley/WAPIAW3/subject_lists/bad_data_testing/logs/load_bad_data_${subj_ID}.out"
+#SBATCH --error="/scratch/tyoeasley/WAPIAW3/subject_lists/bad_data_testing/logs/load_bad_data_${subj_ID}.err"
 #SBATCH --time=23:55:00
 #SBATCH --mem=10GB
 
@@ -36,7 +39,7 @@ pyscr="/scratch/tyoeasley/WAPIAW3/subject_lists/bad_data_testing/pull_neurodata.
 subj_fpath=${subj_fpath}
 
 source /export/anaconda/anaconda3/anaconda3-2020.07/bin/activate neuro
-python \${pyscr} \${subj_fpath}
+python \${pyscr} \${subj_fpath} || { echo \"${subj_ID}\" >> corrupted_data.txt; exit 1; }
 \
 " > "${sbatch_fpath}"
 

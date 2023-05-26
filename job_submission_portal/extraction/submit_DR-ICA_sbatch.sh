@@ -74,8 +74,7 @@ do
 #SBATCH --job-name=\"${job_name}\"
 #SBATCH --output=\"${log_fpath}.out%j\"
 #SBATCH --error=\"${log_fpath}.err%j\"
-#SBATCH --reservation Janine_group
-#SBATCH --time=23:55:00
+#SBATCH --time=24:55:00
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
 #SBATCH --mem=50gb

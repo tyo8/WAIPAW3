@@ -13,7 +13,7 @@ do
 	then
 		if [[ $( stat --printf=%s $fpath ) -gt 0 ]]
 		then
-			${sbatch_script} -f $fpath
+			${sbatch_script} -f $fpath -s $eid
 		else
 			echo $eid >> empty_data_eid.txt
 		fi

@@ -6,12 +6,13 @@ check_stg1=${2:-true}
 basedir="/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression"
 ica_datadirs=$( ls -d "${basedir}/rmed_"*/ica*/group* )
 check_xtr="/scratch/tyoeasley/WAPIAW3/utils/check_generic_extraction.sh"
+group_definitions_dir="/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid"
 
 for datadir in $ica_datadirs
 do
 	# hacky shortcut
 	groupname=$( echo $datadir | cut -d/ -f 8 )
-	group_fpath="/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid/${groupname}.csv"
+	group_fpath="${group_definitions_dir}/${groupname}.csv"
 
 	if $check_stg1
 	then

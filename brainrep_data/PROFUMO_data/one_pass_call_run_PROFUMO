@@ -1,0 +1,21 @@
+#!/bin/sh
+#SBATCH -J submit_pfm
+#SBATCH -o /scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/logs/submit_pfm.out
+#SBATCH -e /scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/logs/submit_pfm.err
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH --mem 2G
+#SBATCH -t 23:55:00
+
+# constants
+base_dir="/scratch/tyoeasley/WAPIAW3"
+PROFUMO_dir="${base_dir}/brainrep_data/PROFUMO_data"
+script_fpath="${base_dir}/job_submission_portal/extraction/submit_PROFUMO_sbatch.sh"
+
+# data parameters
+dimlist="${PROFUMO_dir}/dimlist.txt"
+subj_group_flist="${base_dir}/subject_lists/lists_of_groups/one_pass_profumo_list.txt"
+maxtime_str="167:55:00"
+
+# call
+${script_fpath} -b ${base_dir} -P ${PROFUMO_dir} -s ${subj_group_flist} -d ${dimlist} -t ${maxtime_str}

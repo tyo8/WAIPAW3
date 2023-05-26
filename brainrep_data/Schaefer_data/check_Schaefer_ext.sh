@@ -22,6 +22,6 @@ then
 	cat $todo_list | head -${n_show}
 	if [[ "${n_todo}" -gt "${n_show}" ]]
 	then
-		echo "... (only first ${n_show} subject IDs are displayed here)"
+		echo "... (only the first ${n_show} subject IDs are displayed here)"
 	fi
 fi

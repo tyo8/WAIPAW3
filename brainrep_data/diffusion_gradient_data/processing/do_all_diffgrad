@@ -5,6 +5,8 @@
 #SBATCH --time=00:55:00
 #SBATCH --mem=5GB
 
+### NOTE: whoever runs this script needs to own a python environment called "neuro" that contains the nibabel package. Thanks! ###
+
 submit_scr="/scratch/tyoeasley/WAPIAW3/job_submission_portal/extraction/submit_diffgrad_sbatch.sh"
 
 # bookkeeping parameters
@@ -18,7 +20,8 @@ subj_group_fpath="${base_dir}/subject_lists/all_subj_eid.csv"
 dim=40
 
 # computational parameters
-mem_gb=50
-maxtime_str="00:55:00"
+#maxtime_str="00:55:00"
+mem_gb=300
+maxtime_str="23:55:00"
 
 bash ${submit_scr} -b ${base_dir} -S ${diffusion_gradient_dir} -s ${subj_group_fpath} -d ${dim} -m ${mem_gb} -t ${maxtime_str}

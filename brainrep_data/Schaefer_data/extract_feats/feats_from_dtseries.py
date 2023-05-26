@@ -36,7 +36,9 @@ def feats_from_dtseries(fpath, outpath_type, do_partial=True, dim=400):
 
     if do_partial:
         # compute partial correlation matrix of ts_data
-        partial_netmats = -np.linalg.pinv(netmats, hermitian=True)
+        invcorr = np.linalg.pinv(netmats, hermitian=True)
+        norms = np.diag(np.power(np.diag(invcorr), -1/2))
+        partial_netmats = norms @ invcorr @ norms
 
     write_out(outpath_type % 'Amplitudes', amps)
     write_out(outpath_type % 'NetMats', netmats)

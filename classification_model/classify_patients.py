@@ -1,7 +1,7 @@
 import os
 import argparse
 import numpy as np
-
+import pandas as pd
 from sklearn.metrics import accuracy_score, zero_one_loss
 from model_specification import specify_model as specify_model
 from sklearn.model_selection import train_test_split
@@ -45,12 +45,26 @@ def get_input_data(subj_list_fpath, datapath_type, test_prop=0.1, seed_num=0, pa
 
 # loads data for a single subject given a subject ID number and general datapath string
 def _pull_subj_data(subj_eid, datapath_type):
-    data = np.genfromtxt(datapath_type % subj_eid)
+    datapath = datapath_type % subj_eid
+    data = np.genfromtxt(datapath)
+
+    if np.isnan(data).any():
+        if datapath.endswith(".csv"):
+            data = np.genfromtxt(datapath, delimiter=",")
+            if np.isnan(data).any():
+                raise Exception("At least one nan value in loaded data -- probably not a load-in error.")
+        elif datapath.endswith(".txt"):
+            raise Exception("At least one nan value in loaded data -- probably not a load-in error.")
+        else:
+            raise Exception(f"At least one nan value in loaded data -- did you mean to have a \".{datapath.split('.')[-1]}\" file extension?")
+
+
     if len(data.shape) > 1:
         assert len(data.shape) == 2, "classifier expects subject-wise input data to be either a matrix or vector."
         if data.shape == data.T.shape:
             if np.allclose(data, data.T):
                 data = _triu_vals(data)
+                data = _handle_corrs(data)
             else:
                 data = data.flatten()
         else:
@@ -67,6 +81,13 @@ def _triu_vals(A):
     n = A.shape[0]
     vals = A[np.triu_indices(n,1)]
     return vals.flatten()
+
+def _handle_corrs(data):
+    if (np.abs(data.flatten()) <= 1).all():
+        new_data = np.arctanh(data)
+    else:
+        new_data = data
+    return new_data
 
 def _pull_group_labels(subj_list_fpath, patient_eid_dir=''):
     with open(subj_list_fpath,'r') as fin:
@@ -156,10 +177,17 @@ def fit_and_save_all_models(grid_search, X_train, Y_train,
                     group_name=group_name
                     )
             metrics.append(scores)
+
+        # save outputs (iterative)
+        if split==0:
+            pd.DataFrame(metrics).to_csv(outpath, mode='w')
+        else:
+            pd.DataFrame(metrics).to_csv(outpath, mode='a', header=False)
+
     
-    # save outputs
-    import pandas as pd
-    pd.DataFrame(metrics).to_csv(outpath)
+    ### save outputs (block)
+    # import pandas as pd
+    # pd.DataFrame(metrics).to_csv(outpath)
 
 
 # given trained model and held-out generalization data, computes mectrics of prediction performance

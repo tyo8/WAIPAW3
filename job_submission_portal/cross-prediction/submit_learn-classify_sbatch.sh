@@ -1,14 +1,11 @@
 #!/bin/bash
 
 set -o nounset
-echo "0.are you running?"
 # constants
 base_dir="/scratch/tyoeasley/WAPIAW3"
 pred_dir="${base_dir}/job_submission_portal/cross-prediction"
 out_dir="${base_dir}/cross-prediction_outputs"
 build_path_src="${base_dir}/utils/build_fpath_from_specs.sh"
-
-echo "1.are you running?"
 
 # learning parameters
 subj_group_flist="${base_dir}/subject_lists/lists_of_groups/small_dummy_group.txt"

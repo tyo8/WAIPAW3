@@ -15,8 +15,8 @@ script_fpath="${base_dir}/job_submission_portal/extraction/submit_DR-ICA_sbatch.
 
 # parameters
 dim_list_fpath="${ICA_dir}/ICA_dimlist.txt"
-# subj_group_flist="${base_dir}/subject_lists/lists_of_groups/code_disease_groups.txt"
-subj_group_flist="${base_dir}/subject_lists/lists_of_groups/dummy_group.txt"
+subj_group_flist="${base_dir}/subject_lists/lists_of_groups/code_disease_groups.txt"
+# subj_group_flist="${base_dir}/subject_lists/lists_of_groups/dummy_group.txt"
 DR_process_script="up_to_stage1_DR_slurm"
 
 # call
