@@ -3,6 +3,7 @@ __pycache__/
 pull_from_cluster.sh
 
 # subject data 
+*eid*
 sub-*.csv
 *subj*.txt
 

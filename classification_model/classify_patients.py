@@ -2,7 +2,7 @@ import os
 import argparse
 import numpy as np
 import pandas as pd
-from sklearn.metrics import accuracy_score, zero_one_loss
+from sklearn.metrics import accuracy_score, roc_auc_score
 from model_specification import specify_model as specify_model
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import StratifiedShuffleSplit
@@ -62,7 +62,7 @@ def _pull_subj_data(subj_eid, datapath_type):
     if len(data.shape) > 1:
         assert len(data.shape) == 2, "classifier expects subject-wise input data to be either a matrix or vector."
         if data.shape == data.T.shape:
-            if np.allclose(data, data.T):
+            if np.allclose(data, data.T,rtol=1e-4, atol=1e-6):  # changed tolerence
                 data = _triu_vals(data)
                 data = _handle_corrs(data)
             else:
@@ -71,7 +71,7 @@ def _pull_subj_data(subj_eid, datapath_type):
             data = data.flatten()
     
     ### debug code ###
-    # print(f"subect {subj_eid} has data of shape:", data.shape)
+    print(f"subect {subj_eid} has data of shape:", data.shape)
     ### debug code ###
 
     return np.array(data.flatten(), dtype=float)
@@ -182,14 +182,9 @@ def fit_and_save_all_models(grid_search, X_train, Y_train,
         if split==0:
             pd.DataFrame(metrics).to_csv(outpath, mode='w')
         else:
-            pd.DataFrame(metrics).to_csv(outpath, mode='a', header=False)
+            pd.DataFrame(metrics[-1]).to_csv(outpath, mode='a', header=False)
 
     
-    ### save outputs (block)
-    # import pandas as pd
-    # pd.DataFrame(metrics).to_csv(outpath)
-
-
 # given trained model and held-out generalization data, computes mectrics of prediction performance
 def _predict_collect(y_pred=[], y_true=[], data_collect=[], test_index=[], split=[],
         save_type='validation', brain_rep='ICA_d150', feature_type='pNMs', group_name='example'):
@@ -201,7 +196,7 @@ def _predict_collect(y_pred=[], y_true=[], data_collect=[], test_index=[], split
                                     index=predictions.index)
     data_collect.append(predictions)
     scores['accuracy'] = accuracy_score(y_true, y_pred)     # problem is balanced, so this is equivalent to Jaccard score
-    # scores['z1_idx'] = zero_one_loss(y_true, y_pred)     # redundant; equal to 1-accuracy
+    # scores['roc_auc'] = roc_auc_score(y_true, y_pred)
     scores['fold'] = split
     scores['Estimator'] = 'RandomForest'
     scores['model_testing'] = save_type

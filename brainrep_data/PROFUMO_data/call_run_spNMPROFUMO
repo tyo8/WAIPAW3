@@ -4,19 +4,31 @@
 #SBATCH -e /scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/logs/submit_spNM_pfm.err
 #SBATCH -N 1
 #SBATCH -n 1
-#SBATCH --mem 2G
+#SBATCH --mem 300G
 #SBATCH -t 23:55:00
 
-# constants
+creatspNM_src="/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/make_spNMs_masked.py"
+
+# list PROFUMO output folders
 base_dir="/scratch/tyoeasley/WAPIAW3"
-PROFUMO_dir="${base_dir}/brainrep_data/PROFUMO_data"
-script_fpath="${base_dir}/job_submission_portal/extraction/submit_spNMPROFUMO_sbatch.sh"
+subj_group_flist="${base_dir}/subject_lists/lists_of_groups/code_disease_groups.txt"
+out_PFM_path="/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/out_PROFUMO"
 
-# data parameters
-dimlist="${PROFUMO_dir}/dimlist.txt"
-# subj_group_flist="${base_dir}/subject_lists/lists_of_groups/code_disease_groups.txt"
-subj_group_flist="${base_dir}/subject_lists/lists_of_groups/one_pass_profumo_list.txt"
-maxtime_str="167:55:00"
+#all_outputs=$( cat ${subj_group_flist} )
+all_outputs=""
 
-# call
-${script_fpath} -b ${base_dir} -P ${PROFUMO_dir} -s ${subj_group_flist} -d ${dimlist} -t ${maxtime_str}
+while IFS= read -r file_path
+do
+  file_name=$(basename "$file_path")
+  base_name="${file_name%.*}"
+  all_outputs="${all_outputs} $base_name"
+done < "${subj_group_flist}"
+
+for output in $all_outputs
+do
+        module load python
+        source activate neuro
+        python ${creatspNM_src} "${out_PFM_path}/${output}_25_Results.ppp"
+        echo "${out_PFM_path}/${output}_25_Results.ppp/NetMats"
+done
+

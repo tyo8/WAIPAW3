@@ -10,11 +10,12 @@ def clean_PROFUMO_NMs(NM_dir):
         np.savetxt(fpath,data)
 
 def clean_NM(fpath):
-    orig_data = np.genfromtxt(fpath, delimiter=",")
+    orig_data = np.genfromtxt(fpath, delimiter=" ")
     ndims = len(orig_data.shape)
     if ndims < 2:
         N = np.sqrt(len(orig_data))
         assert N==int(N), "non-square number of entries in vectorized load-in >:[ bad!"
+        N = int(N)
         data = np.reshape(orig_data, [N, N])
     else:
         dims = orig_data.shape

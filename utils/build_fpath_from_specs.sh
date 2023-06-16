@@ -22,7 +22,7 @@ case $brainrep in
 		;;
 	gradient)
 		dim=$(expr brainrep : "[^0-9]*\([0-9]*\)")
-		datapath_type="${base_dir}/gradient_data/subj_gradients/sub-%s_emb.csv"
+		datapath_type="${base_dir}/diffusion_gradient_data/subj_gradients/sub-%s_emb.csv"
 		group_datapath_type="${base_dir}/${brainrep}_data/group_gradients/${groupname}_emb.csv"
 		echo ${group_datapath_type}
 		;;
