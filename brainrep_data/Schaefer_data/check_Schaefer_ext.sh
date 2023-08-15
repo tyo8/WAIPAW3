@@ -3,7 +3,8 @@ set -o nounset
 datadir=${1:-"/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/timeseries"}
 n_show=25
 
-full_list=/scratch/tyoeasley/WAPIAW3/subject_lists/all_subj_eid.csv
+full_list=/scratch/tyoeasley/WAPIAW3/subject_lists/all_age.csv
+# full_list=/scratch/tyoeasley/WAPIAW3/subject_lists/all_subj_eid.csv
 done_list=/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/completed_subjs.csv
 todo_list=/scratch/tyoeasley/WAPIAW3/brainrep_data/Schaefer_data/incomplete_subjs.csv
 

@@ -13,12 +13,12 @@ def extract_ICA_feats(input_dir=def_input_dir, dim=25, subjID_path=def_group_pat
     with open(subjID_path, newline='') as fin:
         subjID_list = list(map(''.join, list(csv.reader(fin))))
 
-    outpath_gentype = os.path.join(os.path.dirname( input_dir ), "%s", "sub-")
-    print("sending extracted features to paths of form: ", outpath_gentype % "FEATURE")
+    outpath_gentype = os.path.join(os.path.dirname( input_dir ), "%s", "sub")
+    print("sending extracted features to paths of form: ", outpath_gentype % "<FEATURE>")
 
     for sID in subjID_list:
-        fpath = os.path.join(input_dir, "dr_stage1_" + sID + ".txt")
-        outpath_type = outpath_gentype + sID + '.csv'
+        fpath = os.path.join(input_dir, f"dr_stage1_{sID}.txt")
+        outpath_type = f"{outpath_gentype}-{sID}.csv"
         feats_from_dtseries(fpath, outpath_type, do_partial=True, dim=dim)
 
 

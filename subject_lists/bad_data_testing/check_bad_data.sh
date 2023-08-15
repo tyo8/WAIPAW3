@@ -1,6 +1,7 @@
 set -o nounset
 
-subj_list_fname=${1:-"/scratch/tyoeasley/WAPIAW3/subject_lists/health_noF_G.csv"}
+#subj_list_fname=${1:-"/scratch/tyoeasley/WAPIAW3/subject_lists/all_subj_eid.csv"}
+subj_list_fname=${1:-"/scratch/tyoeasley/WAPIAW3/subject_lists/bad_data_testing/all_age.csv"}
 subj_list=$( cat $subj_list_fname )
 
 sbatch_script="/scratch/tyoeasley/WAPIAW3/subject_lists/bad_data_testing/submit_bad_data_sbatch.sh"

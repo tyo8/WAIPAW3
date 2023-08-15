@@ -15,7 +15,9 @@ script_fpath="${base_dir}/job_submission_portal/extraction/submit_postPROFUMO_sb
 # data parameters
 dimlist="${PROFUMO_dir}/dimlist.txt"
 # subj_group_flist="${base_dir}/subject_lists/lists_of_groups/code_disease_groups.txt"
-subj_group_flist="${base_dir}/subject_lists/lists_of_groups/post_rerun.txt"
+# subj_group_flist="${base_dir}/subject_lists/lists_of_groups/post_rerun.txt"
+#subj_group_flist="${base_dir}/subject_lists/lists_of_groups/age_small_group.txt"
+subj_group_flist="${base_dir}/subject_lists/lists_of_groups/age_big_group.txt"
 # subj_group_flist="${base_dir}/subject_lists/lists_of_groups/one_pass_profumo_list.txt"
 maxtime_str="167:55:00"
 

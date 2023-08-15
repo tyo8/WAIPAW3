@@ -17,8 +17,9 @@ n_splits=100
 n_jobs=10
 mem_gb=$(( 100/${n_jobs} + 5 ))
 maxtime_str="23:55:00"
+ctype="RFC"
 
-while getopts ":i:o:b:p:s:n:N:t:m:" opt; do
+while getopts ":i:o:b:p:s:C:n:N:t:m:" opt; do
   case $opt in
     i) spec_list_fpath=${OPTARG}
     ;;
@@ -29,6 +30,8 @@ while getopts ":i:o:b:p:s:n:N:t:m:" opt; do
     p) pred_dir=${OPTARG}
     ;;
     s) subj_group_flist=${OPTARG}
+    ;;
+    C) ctype=${OPTARG}
     ;;
     n) n_jobs=${OPTARG}
     ;;
@@ -68,7 +71,7 @@ do
 	do
 		groupname=$( basename ${subj_group} | cut -d. -f 1 )
 		
-		job_name="classify_${groupname}_${brainrep}_${feature}"
+		job_name="${ctype}classify_${groupname}_${brainrep}_${feature}"
 		log_fpath="${pred_dir}/prediction_scripts/logs/${job_name}"
 		sbatch_fpath="${pred_dir}/prediction_scripts/do_${job_name}"
 
@@ -82,6 +85,7 @@ do
                         rm -f ${log_fpath}.*
                 fi
 		echo "Predicting diagnosis from ${brainrep} ${feature} in subject group: ${groupname}"	
+		echo "Using classifier type \"${ctype}\""
 		echo "prediction job submitted via batch script: ${sbatch_fpath}"
 		echo "datapath ${datapath_type}"
 		echo "\
@@ -110,6 +114,8 @@ rng_seed=0              # random seed state integer
 # (bagged) classifier parameters
 folds=5                 # number of folds during gridsearch hyperparameter validation
 n_splits=${n_splits}            # number of random train/validation splits within training data=number of models learned
+classifier_type=\"${ctype}\"   # classifier algorithm type 
+# classifier options (option types depend on classifier type)
 n_estimators=250        # number of trees in random forest
 loss_criterion=\"gini\"   # minimized objective function
 
@@ -117,7 +123,7 @@ module load python
 
 python \${classifier} -l \${subj_list} -f \${datapath_type} -o \${outpath} -p \${patient_eid_dir} \
         -n \${n_jobs} -R \${rng_seed} \
-        -k \${folds} -s \${n_splits} -e \${n_estimators} -L \${loss_criterion} -v
+        -k \${folds} -s \${n_splits} -e \${n_estimators} -L \${loss_criterion} -C \${classifier_type} -v
 \
 " > "${sbatch_fpath}"  
 

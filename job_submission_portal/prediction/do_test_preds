@@ -13,10 +13,11 @@ out_dir="${base_dir}/prediction_outputs"
 script_fpath="${base_dir}/job_submission_portal/prediction/submit_preds_sbatch.sh"
 
 # parameters
+spec_list_fpath="${pred_dir}/spec_list_test.txt"
 subj_group_flist="${base_dir}/subject_lists/lists_of_groups/code_disease_groups.txt"
 # subj_group_flist="${base_dir}/subject_lists/lists_of_groups/predtest_groups.txt"
 # subj_group_flist="${base_dir}/subject_lists/lists_of_groups/dummy_group.txt"
-spec_list_fpath="${pred_dir}/spec_list_test.txt"
+classifier_type="SVC"
 n_splits=2
 
 # submission parameters
@@ -25,4 +26,4 @@ mem_gb_per_cpu=$(( 24/${n_jobs}+5 ))
 maxtime_str="23:55:00"
 
 # call
-${script_fpath} -i ${spec_list_fpath} -o ${out_dir} -s ${subj_group_flist} -b ${base_dir} -p ${pred_dir} -n ${n_jobs} -N ${n_splits} -m ${mem_gb_per_cpu} -t ${maxtime_str}
+${script_fpath} -i ${spec_list_fpath} -o ${out_dir} -s ${subj_group_flist} -C ${classifier_type} -b ${base_dir} -p ${pred_dir} -n ${n_jobs} -N ${n_splits} -m ${mem_gb_per_cpu} -t ${maxtime_str}

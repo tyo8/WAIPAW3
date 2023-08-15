@@ -12,6 +12,8 @@ base_dir="/scratch/tyoeasley/WAPIAW3"
 ICA_dir="${base_dir}/brainrep_data/ICA_data"
 sbatch_fpath="${ICA_dir}/do_dual_reg_batch"
 script_fpath="${base_dir}/job_submission_portal/extraction/submit_DR-ICA_sbatch.sh"
+maxtime_str="167:55:00"
+
 
 # parameters
 dim_list_fpath="${ICA_dir}/ICA_dimlist.txt"

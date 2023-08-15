@@ -1,8 +1,8 @@
 #!/bin/sh
 
 #SBATCH --job-name=featxtr_ICA
-#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/extract_feats/logs/featxtr_ICA_300_all_subj_eid.out
-#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/extract_feats/logs/featxtr_ICA_300_all_subj_eid.err
+#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/extract_feats/logs/featxtr_ICA_300_rmed_G93_eid_wapiaw.out
+#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/extract_feats/logs/featxtr_ICA_300_rmed_G93_eid_wapiaw.err
 #SBATCH --time=23:55:00
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
@@ -12,8 +12,8 @@
 xtr_script="/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/extract_feats/feats_from_dtseries.py"
 
 # user specs
-group="/scratch/tyoeasley/WAPIAW3/subject_lists/all_subj_eid.csv"
-groupname="all_subj_eid"
+group="/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid/rmed_G93_eid_wapiaw.csv"
+groupname="rmed_G93_eid_wapiaw"
 dim=300
 
 # derivatives

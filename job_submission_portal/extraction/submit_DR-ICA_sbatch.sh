@@ -6,6 +6,7 @@ set -o nounset
 base_dir="/scratch/tyoeasley/WAPIAW3"
 ICA_dir="${base_dir}/brainrep_data/ICA_data"
 script_dir="${base_dir}/job_submission_portal/extraction/brainrep_xtr_scripts"
+maxtime_str="24:55:00"
 
 # run & data option parameters
 dim_list_fpath="${ICA_dir}/ICA_dimlist.txt"
@@ -17,11 +18,13 @@ DR_process_script="up_to_stage1_DR_slurm"
 	# up_to_stage1_DR_slurm
 
 
-while getopts ":b:I:f:D:s:p:" opt; do
+while getopts ":b:I:t:f:D:s:p:" opt; do
   case $opt in
     b) base_dir=${OPTARG}
     ;;
     I) ICA_dir=${OPTARG}
+    ;;
+    t) maxtime_str=${OPTARG}
     ;;
     D) dim_list_fpath=${OPTARG}
     ;;
@@ -74,7 +77,7 @@ do
 #SBATCH --job-name=\"${job_name}\"
 #SBATCH --output=\"${log_fpath}.out%j\"
 #SBATCH --error=\"${log_fpath}.err%j\"
-#SBATCH --time=24:55:00
+#SBATCH --time=${maxtime_str}
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
 #SBATCH --mem=50gb
@@ -96,7 +99,12 @@ melodic_out=\"\${base_dir}/brainrep_data/ICA_data/melodic_output/\${groupname}/i
 DR_out=\${melodic_out/\"melodic_output\"/\"dual_regression\"}
 design_fpath_type=\"\${DR_out}/design\"
 data_flist=\"\${base_dir}/brainrep_data/ICA_data/raw_data_subj_lists/\${groupname}.txt\"
-\${mk_flist} -i \${eid_list} -o \${data_flist} -p \${fpath_pattern}
+
+if ! test -f \"\${data_flist}\"
+then
+	\${mk_flist} -i \${eid_list} -o \${data_flist} -p \${fpath_pattern}
+fi
+
 n_subj=\$(cat \${data_flist} | wc -l )
 
 # output
@@ -125,12 +133,18 @@ export DISPLAY=:1
 
 if ! compgen -G \"\${melodic_out}/melodic_IC.nii.gz\" >> "/dev/null"
 then
+	echo \"\"
+	echo \"(re?-)computing melodic data for \${groupname}...\"
+	echo \"Start: \$(date)\"
 	melodic -i \${data_flist} -o \${melodic_out} --tr=0.72 --nobet -a concat -m \${mask_fpath} --report --Oall -d \${dim}
+	echo \"Finish: \$(date)\"
+	echo \"\"
 fi
 
 /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/FSL_slurm/${DR_process_script} \"\${melodic_out}/melodic_IC.nii.gz\" \${dim} \"\${design_fpath_type}.mat\" \"\${design_fpath_type}.con\" 0 \"\${DR_out}/groupICA\${dim}.dr\" \$(cat \${data_flist})
 
 chmod -R 771 \${DR_out}
+rm \${data_flist}
 \
 " > "${sbatch_fpath}"  # Overwrite submission script
 

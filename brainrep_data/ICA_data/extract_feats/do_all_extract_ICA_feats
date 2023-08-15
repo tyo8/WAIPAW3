@@ -19,8 +19,9 @@ xtr_script="${xtr_dir}/feats_from_dtseries.py"
 
 # data parameters
 dimlist_fpath="${base_dir}/brainrep_data/ICA_data/ICA_dimlist.txt"
-subj_group_flist="${base_dir}/subject_lists/lists_of_groups/all_subj_group.txt"
-# subj_group_flist="${base_dir}/subject_lists/lists_of_groups/code_disease_groups.txt"
+# subj_group_flist="${base_dir}/subject_lists/lists_of_groups/age_groups.txt"
+subj_group_flist="${base_dir}/subject_lists/lists_of_groups/code_disease_groups.txt"
+# subj_group_flist="${base_dir}/subject_lists/lists_of_groups/all_subj_group.txt"
 ### 'input_gendir' should be given as a function of ${groupname} and ${dim} only!
 input_gendir=$( printf "/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/dual_regression/%s/ica%s/groupICA%s.dr" \${groupname} \${dim} \${dim} )
 

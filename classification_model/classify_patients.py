@@ -178,13 +178,9 @@ def fit_and_save_all_models(grid_search, X_train, Y_train,
                     )
             metrics.append(scores)
 
-        # save outputs (iterative)
-        if split==0:
+            #save outputs
             pd.DataFrame(metrics).to_csv(outpath, mode='w')
-        else:
-            pd.DataFrame(metrics[-1]).to_csv(outpath, mode='a', header=False)
 
-    
 # given trained model and held-out generalization data, computes mectrics of prediction performance
 def _predict_collect(y_pred=[], y_true=[], data_collect=[], test_index=[], split=[],
         save_type='validation', brain_rep='ICA_d150', feature_type='pNMs', group_name='example'):

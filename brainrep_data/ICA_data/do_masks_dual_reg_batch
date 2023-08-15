@@ -12,10 +12,12 @@ base_dir="/scratch/tyoeasley/WAPIAW3"
 ICA_dir="${base_dir}/brainrep_data/ICA_data"
 sbatch_fpath="${ICA_dir}/do_dual_reg_batch"
 script_fpath="${base_dir}/job_submission_portal/extraction/submit_DR-ICA_sbatch.sh"
+maxtime_str="167:55:00"
 
 # parameters
 dim_list_fpath="${ICA_dir}/ICA_dimlist.txt"
-subj_group_flist="${ICA_dir}/mask_rerun_grp.txt"
+# subj_group_flist="${ICA_dir}/mask_rerun_grp.txt"
+subj_group_flist="${base_dir}/subject_lists/lists_of_groups/age_groups.txt"
 # subj_group_flist="${base_dir}/subject_lists/lists_of_groups/dummy_group.txt"
 # subj_group_flist="${base_dir}/subject_lists/lists_of_groups/code_disease_groups.txt"
 DR_process_script="mask_only_slurm"

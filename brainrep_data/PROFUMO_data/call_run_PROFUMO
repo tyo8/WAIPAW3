@@ -14,7 +14,9 @@ script_fpath="${base_dir}/job_submission_portal/extraction/submit_PROFUMO_sbatch
 
 # data parameters
 dimlist="${PROFUMO_dir}/dimlist.txt"
-subj_group_flist="${base_dir}/subject_lists/lists_of_groups/test_groups.txt"
+# subj_group_flist="${base_dir}/subject_lists/lists_of_groups/test_groups.txt"
+subj_group_flist="${base_dir}/subject_lists/lists_of_groups/age_small_group.txt"
+#subj_group_flist="${base_dir}/subject_lists/lists_of_groups/age_big_group.txt"
 
 # call
 ${script_fpath} -b ${base_dir} -P ${PROFUMO_dir} -s ${subj_group_flist} -d ${dimlist}

@@ -1,0 +1,12 @@
+ICA25_Amplitudes
+ICA25_NetMats
+ICA25_partial_NMs
+ICA100_Amplitudes
+ICA100_NetMats
+ICA100_partial_NMs
+ICA150_Amplitudes
+ICA150_NetMats
+ICA150_partial_NMs
+ICA300_Amplitudes
+ICA300_NetMats
+ICA300_partial_NMs

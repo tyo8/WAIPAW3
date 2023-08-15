@@ -19,7 +19,8 @@ sub-*.csv
 [._]ss[a-gi-z]
 [._]sw[a-p]
 
-# cluttered or potentially sensitive introspection info
+# introspection info
+*complete_subjs.csv
 *.html
 logs
 

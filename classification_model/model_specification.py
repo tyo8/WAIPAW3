@@ -62,7 +62,7 @@ def specify_RFC(
 
 def specify_SVC(
         C = 1,  # regularization parameter: the larger C is, the less regularized the SVC (i.e., the smaller the allowed max margin as stopping criteria)
-        kernel = "rbf"
+        kernel = "linear" #used to be rbf
         ):
     estimator = SVC(
             C = C,
@@ -77,8 +77,8 @@ def specify_KNC(
         ):
     estimator = KNeighborsClassifier(
             n_neighbors = n_neighbors,
-            metric = metric
-            verbose=1
+            metric = metric,
+            #verbose=1
             )
     return estimator
 
@@ -125,13 +125,13 @@ def get_param_grid(rank, est_type):
     elif est_type == 'SVC':
         param_grid = {
                 'dimreduce__n_components': decomp_dims,
-                'estimator__C': np.logspace(-3, 3, num=5),
+                'estimator__C': np.logspace(-3, 3, num=7),
                 'estimator__kernel': ['linear','rbf', 'sigmoid', 'poly']
                 }
     elif est_type == 'KNC':
         param_grid = {
                 'dimreduce__n_components': decomp_dims,
-                'estimator__n_neighbors': [int(i) for i in (np.arange(1,11,2)**1.5)],
+                'estimator__n_neighbors': [int(i) for i in (np.arange(1,10,2)**1.5)],
                 'estimator__weights': ['uniform', 'distance'],
                 'estimator__metric': ['l1', 'l2', 'cosine']
                 }
