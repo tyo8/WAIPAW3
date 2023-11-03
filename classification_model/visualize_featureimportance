@@ -1,3 +1,0 @@
-import joblib
-important_features=joblib.load('/scratch/tyoeasley/WAPIAW3/classification_model/cross-classifier_models/splitmods_rmed_G35_37_eid_wapiaw_T1_Volumes/feat_impt_split_3.pkl')
-print(important_features)

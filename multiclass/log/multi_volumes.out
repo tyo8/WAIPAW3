@@ -1,0 +1,34 @@
+--------------------------------------------------------------
+Begin Slurm Prologue Thu Oct 26 17:32:22 CDT 2023 1698359542
+Job ID:		4158951
+Username:	l.lexi
+Partition:	tier2_cpu
+End Slurm Prologue Thu Oct 26 17:32:22 CDT 2023 1698359542
+--------------------------------------------------------------
+Multiclass diagnosis from T1 Volumes
+Full data array has shape: (5166, 153)
+--------------------------------------------------------------
+Begin Slurm Epilogue Thu Oct 26 18:23:24 CDT 2023 1698362604
+Name                : multi
+User                : l.lexi
+Partition           : tier2_cpu
+Nodes               : node32
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-10-26T17:32:22
+Start               : 2023-10-26T17:32:22
+End                 : 2023-10-26T18:23:22
+Reserved Walltime   : 23:55:00
+Used Walltime       : 00:51:00
+Used CPU Time       : 00:50:11
+% User (Computation): 99.88%
+% System (I/O)      :  0.12%
+Mem Reserved        : 100G
+Max Mem Used        : 276.37M (289796096.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 1.00M (1048576.0)
+Max-Mem-Used Node   : node32
+Max-Disk-Write Node : node32
+Max-Disk-Read Node  : node32
+End Slurm Epilogue Thu Oct 26 18:23:24 CDT 2023 1698362604
+--------------------------------------------------------------

@@ -20,16 +20,22 @@ def specify_model(
         n_jobs = 1,
         seed_num = 0,
         validation_prop = 0.2,
-        dimreduce = PCA(), 
-        scaler = StandardScaler(), 
+        dimreduce = PCA(),
+        scaler = StandardScaler(),
         estimator_type = "RFC",
         input_shape = [254, 17900]
         ):
 
+    ### debug code ###
+    print("Estimator report:")
+    print(f"estimator of type: {estimator_type}")
+    print(f"total data shape: {input_shape}")
+    ### debug code ###
+
     # Define a Standard Scaler to normalize inputs
     estimator_params = [n_estimators, estimator_criterion, seed_num]
     estimator = specify_estimator(estimator_type, estimator_params)
-    
+
     pipe = Pipeline(steps=[("scaler", scaler), ("dimreduce", dimreduce), ("estimator", estimator)])
 
     rank = min(np.floor([input_shape[0]*(1-validation_prop), input_shape[1]]))
@@ -38,14 +44,19 @@ def specify_model(
 
     # Parameters of pipelines can be set using '__' separated parameter names:
     grid_search = GridSearchCV(
-            pipe, 
+           pipe,
             param_grid = param_grid,
-            cv = folds, 
+            cv = folds,
             verbose= 1,
             n_jobs = n_jobs,
             scoring = 'roc_auc'
             )
-    return grid_search 
+
+    ### debug code ###
+    print("grid search pipeline:", grid_search)
+    ### debug code ###
+
+    return grid_search
 
 def specify_RFC(
         n_estimators = 250,
@@ -78,7 +89,6 @@ def specify_KNC(
     estimator = KNeighborsClassifier(
             n_neighbors = n_neighbors,
             metric = metric,
-            #verbose=1
             )
     return estimator
 
@@ -112,7 +122,7 @@ def get_param_grid(rank, est_type):
     #    decomp_dims = [5, 23, 50, 230]
     log_r = np.log10(rank)
     decomp_dims =[
-            int(min(rank,max(1,i))) for i in 
+            int(min(rank,max(1,i))) for i in
             np.round(np.logspace(log_r-2, log_r, num=5))
             ]
     if est_type == 'RFC':
@@ -121,7 +131,6 @@ def get_param_grid(rank, est_type):
                 'estimator__max_depth': [5, 10, 20, 40, None],
                 'estimator__max_features': [1, 5, 'log2', 'sqrt', None]
                 }
-        print("Parameter search grid:", param_grid)
     elif est_type == 'SVC':
         param_grid = {
                 'dimreduce__n_components': decomp_dims,
@@ -137,3 +146,4 @@ def get_param_grid(rank, est_type):
                 }
 
     return param_grid
+                                    

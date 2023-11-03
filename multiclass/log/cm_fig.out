@@ -1,0 +1,55 @@
+--------------------------------------------------------------
+Begin Slurm Prologue Fri Nov  3 15:51:14 CDT 2023 1699044674
+Job ID:		4169336
+Username:	tyoeasley
+Partition:	tier2_cpu
+End Slurm Prologue Fri Nov  3 15:51:14 CDT 2023 1699044674
+--------------------------------------------------------------
+Multiclass diagnosis from T1 Volumes (d1)
+Precision summary of confusion matrix:
+             code  Sensitivity  Specificity  ...  #false_neg  rowsum  colsum
+0       F0_unique     0.000000     0.973333  ...          71      71       2
+1      F10_unique     0.000000     0.947619  ...         188     188      11
+2      F17_unique     0.080882     0.724014  ...         500     544     352
+3      F32_unique     0.119476     0.659549  ...         538     611     647
+4      F41_unique     0.026201     0.839939  ...         446     458     117
+5       G2_unique     0.000000     0.953704  ...          98      98       5
+6   G35_37_unique     0.037037     0.953488  ...          78      81       7
+7      G40_unique     0.007092     0.948718  ...         140     141       9
+8      G43_unique     0.006231     0.936986  ...         319     321      25
+9      G45_unique     0.000000     0.902655  ...         182     182      22
+10     G47_unique     0.050667     0.792763  ...         356     375     145
+11     G55_unique     0.012987     0.922222  ...         304     308      32
+12     G56_unique     0.413013     0.557751  ...         415     707    1881
+13     G57_unique     0.014286     0.979167  ...         138     140       5
+14     G62_unique     0.000000     0.968750  ...          90      90       3
+15      G8_unique     0.011765     0.911765  ...          84      85      10
+16     G93_unique     0.000000     1.000000  ...          59      59       0
+17         health     0.415842     0.557186  ...         413     707    1893
+
+[18 rows x 9 columns]
+--------------------------------------------------------------
+Begin Slurm Epilogue Fri Nov  3 15:51:19 CDT 2023 1699044679
+Name                : cm
+User                : tyoeasley
+Partition           : tier2_cpu
+Nodes               : node22
+Cores               : 1
+State               : COMPLETED
+Submit              : 2023-11-03T15:51:11
+Start               : 2023-11-03T15:51:14
+End                 : 2023-11-03T15:51:17
+Reserved Walltime   : 23:55:00
+Used Walltime       : 00:00:03
+Used CPU Time       : 00:00:02
+% User (Computation): 89.51%
+% System (I/O)      :  0.00%
+Mem Reserved        : 100G
+Max Mem Used        : 0.00  (0.0)
+Max Disk Write      : 0.00  (0.0)
+Max Disk Read       : 0.00  (0.0)
+Max-Mem-Used Node   : node22
+Max-Disk-Write Node : node22
+Max-Disk-Read Node  : node22
+End Slurm Epilogue Fri Nov  3 15:51:19 CDT 2023 1699044679
+--------------------------------------------------------------

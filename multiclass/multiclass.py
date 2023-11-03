@@ -1,30 +1,31 @@
 import os
+import re
+import sys
 import argparse
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from sklearn.model_selection import KFold
 import matplotlib.pyplot as plt
-from sklearn.metrics import accuracy_score, zero_one_loss
-from sklearn.metrics import roc_auc_score
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import StratifiedShuffleSplit
-from sklearn.multiclass import OneVsRestClassifier
-from sklearn.model_selection import ShuffleSplit
-from sklearn.model_selection import cross_val_predict
-from sklearn.model_selection import cross_val_score
 from sklearn.metrics import confusion_matrix
+from sklearn.multiclass import OneVsRestClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import multilabel_confusion_matrix, ConfusionMatrixDisplay
+from sklearn.model_selection import cross_val_predict
+
 
 # given a filepath to a list of subject IDs and a general datapath string, returns train-test split data and labels
-def get_input_data(subj_list_fpath, datapath_type, test_prop=0.1, seed_num=0, patient_eid_dir='', verbose=True):
+def get_input_data(subj_list_fpath,subj_group_flist, datapath_type, test_prop=0.1, seed_num=0, patient_eid_dir='', verbose=True):
 
     with open(subj_list_fpath,'r') as fin:
         subj_list = fin.read().split()
+    
+    with open(subj_group_flist,'r') as fin:
+        group_path_list = fin.read().split()
+
+    grouplist = [re.search(r"rmed_.+?_eid_wapiaw", path).group() for path in group_path_list if re.search(r"rmed_.+?_eid_wapiaw", path)]
 
     # pull imaging data
     X_all = np.array([_pull_subj_data(eid, datapath_type) for eid in subj_list], dtype=float)
+
 
     ### debug code ###
     print("Full data array has shape:", X_all.shape)
@@ -32,19 +33,26 @@ def get_input_data(subj_list_fpath, datapath_type, test_prop=0.1, seed_num=0, pa
     ### debug code ###
 
     # pull disease group labels
-    Y_all = np.asarray(_pull_group_labels(subj_list_fpath, patient_eid_dirs)[0])
+    Y_all = np.asarray(_pull_group_labels(subj_list_fpath, patient_eid_dirs))
     #print("Y:",Y_all.shape)
 
-    if verbose:
-        _output_params(X_all, Y_all)
 
     return X_all, Y_all
 
 # loads data for a single subject given a subject ID number and general datapath string
 def _pull_subj_data(subj_eid, datapath_type):
+    for label in label_set:
+        if label != 'health':
+            groupname = "rmed_" + label.replace('_unique', '') + "_eid_wapiaw"
+            path = os.path.join(combined_eid_dirs, label)
+            with open(path) as fin:
+                patient_set = set(fin.read().split())
+            if subj_eid in patient_set:
+                break
+
+    # datapath = datapath_type % (groupname, subj_eid)
     datapath = datapath_type % subj_eid
     data = np.genfromtxt(datapath)
-
     if np.isnan(data).any():
         if datapath.endswith(".csv"):
             data = np.genfromtxt(datapath, delimiter=",")
@@ -87,79 +95,77 @@ def _handle_corrs(data):
     return new_data
 
 def _pull_group_labels(subj_list_fpath, patient_eid_dirs):
-    label_set = ['F0_unique', 'F10_unique', 'F17_unique', 'F32_unique', 'F41_unique', 'G2_unique', 'G35_37_unique', 'G40_unique', 'G43_unique', 'G45_unique', 'G47_unique', 'G55_unique', 'G56_unique', 'G57_unique', 'G62_unique', 'G8_unique', 'G93_unique', 'health' ]
-    factor = pd.factorize(label_set)
-    labels, indices = factor[0], factor[1]
     
     with open(subj_list_fpath,'r') as fin:
         subj_list = fin.read().split()
-    
+     
     full_paths = [os.path.join(patient_eid_dirs, label) for label in label_set]
     
-    label_to_int = {label: i for i, label in zip(labels, indices)}
-   # print(label_to_int) 
-    Y_all = [0] * len(subj_list)
+    label_to_int = {label: i for label, i in zip(labels, indices)} # actual group name to index like 0-17
+    
+    Y_all = [0] * len(subj_list) 
     for path in full_paths:
         with open(path) as fin:
             patient_set = set(fin.read().split())
+
+        # label_to_int.get():check if the the path point to the group we want, -100 for NO, int for YES.
+        # int(eid in patient_set): check if the eid in this group,0 for NO,1 for YES.
         Y = [label_to_int.get(os.path.basename(path), -100)*int(eid in patient_set) for eid in subj_list]
+        # Y presents the int where the eid is in this group, 0 if the eid is not.
+        # Y_all adds all the Y from loop, so every eid matchs to their label.
         Y_all = [a + b for a, b in zip(Y, Y_all)]
 
-    return Y_all,factor
 
-def _output_params(X_train, X_test):
-    print('')
-    print('Testing set size:', X_test.shape)
-    print('Training set size:', X_train.shape)
-    print('Number of features used:', X_train.shape[1])
-    print('Number of subjects after selection:', X_train.shape[0] + X_test.shape[0])
-    print('')
+    return Y_all
+
+def fit_multiclass(n_estimators = 10,criterion = "gini",random_state = 42):
+    clf = OneVsRestClassifier(
+            RandomForestClassifier(
+                n_estimators = n_estimators,
+                criterion = criterion,
+                random_state = random_state)
+            )
+
+    return clf
+
 
 if __name__=="__main__":
-    datapath_type=sys.argv[1]
-    subj_list_fpath='/scratch/tyoeasley/WAPIAW3/subject_lists/all_subj_eid_uni.csv'
-    patient_eid_dirs='/scratch/tyoeasley/WAPIAW3/subject_lists/patient_eid_unique'
-    X_all, Y_all = get_input_data(subj_list_fpath, datapath_type, test_prop=0.1, seed_num=0, patient_eid_dir=patient_eid_dirs, verbose=True)
-    Y_all,label_factor = _pull_group_labels(subj_list_fpath, patient_eid_dirs)
-    clf = OneVsRestClassifier(RandomForestClassifier(n_estimators = 10,criterion = "gini",random_state = 42))
-    cv = ShuffleSplit(n_splits=10, test_size=0.1, random_state=42)
-    scores = cross_val_score(clf, X_all, Y_all, cv=cv,scoring='roc_auc')
-    y_pred = cross_val_predict(clf, X_all, Y_all, cv=10)
-    fold_size = len(Y_all) // 10
-    cm=[]
-    for fold in range(10):
-        start_idx = fold * fold_size
-        end_idx = start_idx + fold_size
-        fold_y_test = Y_all[start_idx:end_idx]
-        fold_y_pred = y_pred[start_idx:end_idx]
-        cm.append(confusion_matrix(fold_y_test, fold_y_pred))
+    brainrep=sys.argv[1]
+    feature=sys.argv[2]
+    dim=sys.argv[3]
+    datapath_type=sys.argv[4]
 
-    #print(cm)
+    base_dir="/scratch/tyoeasley/WAPIAW3"
+    subj_group_flist="/scratch/tyoeasley/WAPIAW3/subject_lists/lists_of_groups/code_disease_groups_noStruct.txt" 
+    subj_list_fpath='/scratch/tyoeasley/WAPIAW3/subject_lists/all_subj_eid_uni_noStruct.csv'
+    patient_eid_dirs='/scratch/tyoeasley/WAPIAW3/subject_lists/patient_eid_unique_noStruct'
+    combined_eid_dirs='/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique'
+       
+    
+    label_set = ['F0_unique', 'F10_unique', 'F17_unique', 'F32_unique', 'F41_unique',
+                 'G2_unique', 'G35_37_unique', 'G40_unique', 'G43_unique', 'G45_unique', 
+                 'G47_unique', 'G55_unique', 'G56_unique', 'G57_unique', 'G62_unique', 'G8_unique', 'G93_unique', 'health' ]
+    indices, labels = pd.factorize(label_set)
 
-    cm = np.sum(cm,axis=0).astype(np.int16)
+    #################################################################################################################################################
+    X_all, Y_all = get_input_data(
+            subj_list_fpath,
+            subj_group_flist, 
+            datapath_type,
+            test_prop=0.1, 
+            seed_num=0, 
+            patient_eid_dir=patient_eid_dirs, 
+            verbose=True
+            )
+    
+    #################################################################################################################################################
+    ### TRY TO PUT ALL FITTING CODE INTO SINGLE FUNCTION, BUT SEPARATE FROM METRIC (?) COMPUTATION ###
+    clf = fit_multiclass(n_estimators = 250,criterion = "gini",random_state = 42)
+    #################################################################################################################################################
 
-
-
-    labels = label_factor[1]
-    class_names = label_factor[0]
-    #print(class_names)
-
-    # Plot confusion matrix in a beautiful manner
-    fig = plt.figure(figsize=(16, 14))
-    ax= plt.subplot()
-    sns.heatmap(cm, annot=True, ax = ax, fmt = 'g'); #annot=True to annotate cells
-    # labels, title and ticks
-    ax.set_xlabel('Predicted', fontsize=20)
-    ax.xaxis.set_label_position('bottom')
-    plt.xticks(rotation=90)
-    ax.xaxis.set_ticklabels(labels, fontsize = 10)
-    ax.xaxis.tick_bottom()
-
-    ax.set_ylabel('True', fontsize=20)
-    ax.yaxis.set_ticklabels(labels, fontsize = 10)
-    plt.yticks(rotation=0)
-
-    plt.title('ICA300', fontsize=20)
-
-    plt.savefig('/scratch/tyoeasley/WAPIAW3/confusion_matrix/ICA300_confusion.png')
-
+    #################################################################################################################################################
+    ### WHAT IS THE MINIMUM SET OF (sufficiently flexible) INPUTS TO MAKE THIS CODE SECTION INTO A FUNCTION? WHAT OUTPUTS SHOULD IT HAVE? ###
+    y_pred = cross_val_predict(clf, X_all, Y_all, cv=10) # cv (Stratified)KFold
+    result = np.column_stack((Y_all, y_pred))
+    df = pd.DataFrame(result)
+    df.to_csv(f"/scratch/tyoeasley/WAPIAW3/multiclass/output/{brainrep}_{feature}.csv",index=False, header=False)
