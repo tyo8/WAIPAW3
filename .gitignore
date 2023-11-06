@@ -1,15 +1,8 @@
 __pycache__/
-# local updater
-pull_from_cluster.sh
-
-# subject data 
-*eid*
-sub-*.csv
-*subj*.txt
-
 # neuroimaging datatypes
 *.hd5
 *.nii*
+*parcellation*
 
 # swap
 [._]*.s[a-v][a-z]
@@ -19,16 +12,23 @@ sub-*.csv
 [._]ss[a-gi-z]
 [._]sw[a-p]
 
-# introspection info
-*complete_subjs.csv
+# program files
+__pycache__
+pull_*.sh
+
+# testing and benchmarking intermediates
+*benchmark*
+*test*
+*tst*
+
+# cluttered or potentially sensitive info
 *.html
+RESTRICTED*
 logs
+*do_*
+*MCCN*
+*subj*
+*prediction_outputs*
 
 # image files
 *.png
-
-# large sets of submission scripts/results data
-*xtr_scripts*
-do_*
-metrics_*
-*_models
