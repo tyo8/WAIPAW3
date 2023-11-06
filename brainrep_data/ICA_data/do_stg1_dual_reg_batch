@@ -12,16 +12,18 @@ base_dir="/scratch/tyoeasley/WAPIAW3"
 ICA_dir="${base_dir}/brainrep_data/ICA_data"
 sbatch_fpath="${ICA_dir}/do_dual_reg_batch"
 script_fpath="${base_dir}/job_submission_portal/extraction/submit_DR-ICA_sbatch.sh"
-maxtime_str="167:55:00"
 
 
 # parameters
+maxtime_str="167:55:00"
+partition="medium"
+
 dim_list_fpath="${ICA_dir}/ICA_dimlist.txt"
-# subj_group_flist="${ICA_dir}/stg1_rerun_grps.txt"
-subj_group_flist="${base_dir}/subject_lists/lists_of_groups/age_small_group.txt"
+subj_group_flist="${ICA_dir}/stg1_rerun_groups.txt"
+# subj_group_flist="${base_dir}/subject_lists/lists_of_groups/age_small_group.txt"
 # subj_group_flist="${base_dir}/subject_lists/lists_of_groups/test_groups.txt"
 # subj_group_flist="${base_dir}/subject_lists/lists_of_groups/code_disease_groups.txt"
 DR_process_script="stage1_DR_only_slurm"
 
 # call
-${script_fpath} -b ${base_dir} -I ${ICA_dir} -D ${dim_list_fpath} -s ${subj_group_flist} -p ${DR_process_script}
+${script_fpath} -b ${base_dir} -I ${ICA_dir} -D ${dim_list_fpath} -s ${subj_group_flist} -p ${DR_process_script} -P ${partition}

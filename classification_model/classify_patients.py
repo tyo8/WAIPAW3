@@ -137,7 +137,8 @@ def _extract_metadata(outpath):
 # prediction outcomes -- maybe implement mp version of this that parallelizes over splits in cv?
 def fit_and_save_all_models(grid_search, X_train, Y_train, 
         X_test=[], Y_test=[], n_splits=100, validation_prop=0.2, seed_num=0,
-        outpath='predictions.csv', brain_rep='ICA_d150', feature_type='pNMs', group_name='example'):
+        outpath='predictions.csv', brain_rep='ICA_d150', feature_type='pNMs', group_name='example',
+        estimator_type='RFC'):
     metrics = []
     data_collect = []
     gendata_collect = []
@@ -160,7 +161,8 @@ def fit_and_save_all_models(grid_search, X_train, Y_train,
                 save_type="validation",
                 brain_rep=brain_rep,
                 feature_type=feature_type,
-                group_name=group_name
+                group_name=group_name,
+                estimator_type=estimator_type
                 )
         metrics.append(scores)
 
@@ -174,16 +176,29 @@ def fit_and_save_all_models(grid_search, X_train, Y_train,
                     save_type='generalization',
                     brain_rep=brain_rep,
                     feature_type=feature_type,
-                    group_name=group_name
+                    group_name=group_name,
+                    estimator_type=estimator_type
                     )
             metrics.append(scores)
 
-            #save outputs
-            pd.DataFrame(metrics).to_csv(outpath, mode='w')
+        #save outputs
+        print("saving...")
+        pd.DataFrame(metrics).to_csv(outpath, mode='w')
+        print("done.")
+
 
 # given trained model and held-out generalization data, computes mectrics of prediction performance
 def _predict_collect(y_pred=[], y_true=[], data_collect=[], test_index=[], split=[],
-        save_type='validation', brain_rep='ICA_d150', feature_type='pNMs', group_name='example'):
+        save_type='validation', brain_rep='ICA_d150', feature_type='pNMs', group_name='example', 
+        estimator_type='RandomForest'):
+
+    # Readable names for classifier type
+    estimator_type_dict={
+            'RFC': 'RandomForest', 
+            'SVC': 'SupportVector', 
+            'KNC': 'KNearestNeighbors'
+            }
+
     import pandas as pd
     scores = {}
     predictions = pd.DataFrame(y_pred, columns = ['predicted'])
@@ -194,7 +209,7 @@ def _predict_collect(y_pred=[], y_true=[], data_collect=[], test_index=[], split
     scores['accuracy'] = accuracy_score(y_true, y_pred)     # problem is balanced, so this is equivalent to Jaccard score
     # scores['roc_auc'] = roc_auc_score(y_true, y_pred)
     scores['fold'] = split
-    scores['Estimator'] = 'RandomForest'
+    scores['Estimator'] = estimator_type_dict[estimator_type]
     scores['model_testing'] = save_type
     scores['brain_rep'] = brain_rep
     scores['feature_type'] = feature_type
@@ -342,5 +357,6 @@ if __name__=="__main__":
             outpath = args.outpath, 
             brain_rep = brain_rep, 
             feature_type = feature_type, 
-            group_name = group_name
+            group_name = group_name,
+            estimator_type = args.classifier_type
             )

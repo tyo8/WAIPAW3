@@ -10,7 +10,7 @@ set -o nounset
 sbatch_fname="test.sh"
 
 sequential_run=false
-maxtime_str="23:55:00"
+maxtime_str="123:55:00"
 job_name="fsl_dr-ica"
 log_dir="/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/FSL_slurm/logs"
 mem_gb=50

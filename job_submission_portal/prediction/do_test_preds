@@ -1,4 +1,6 @@
 #!/bin/sh
+#SBATCH --partition=tier2_cpu
+#SBATCH --account=janine_bijsterbosch
 #SBATCH --job-name=test_preds
 #SBATCH --output=/scratch/tyoeasley/WAPIAW3/job_submission_portal/prediction/logs/test_preds.out%j
 #SBATCH --error=/scratch/tyoeasley/WAPIAW3/job_submission_portal/prediction/logs/test_preds.err%j
@@ -24,6 +26,7 @@ n_splits=2
 n_jobs=8
 mem_gb_per_cpu=$(( 24/${n_jobs}+5 ))
 maxtime_str="23:55:00"
+partition="tier2_cpu"
 
 # call
-${script_fpath} -i ${spec_list_fpath} -o ${out_dir} -s ${subj_group_flist} -C ${classifier_type} -b ${base_dir} -p ${pred_dir} -n ${n_jobs} -N ${n_splits} -m ${mem_gb_per_cpu} -t ${maxtime_str}
+${script_fpath} -i ${spec_list_fpath} -o ${out_dir} -s ${subj_group_flist} -C ${classifier_type} -b ${base_dir} -p ${pred_dir} -n ${n_jobs} -N ${n_splits} -m ${mem_gb_per_cpu} -t ${maxtime_str} -P ${partition}

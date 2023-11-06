@@ -112,10 +112,11 @@ do
 \
 #!/bin/sh
 #SBATCH --job-name=${job_name}
+#SBATCH --account=janine_bijsterbosch
 #SBATCH --output=${log_fpath}.out%j
 #SBATCH --error=${log_fpath}.err%j
 #SBATCH --time=${maxtime_str}
-#SBATCH --partition=small
+#SBATCH --partition=tier2_cpu
 #SBATCH --cpus-per-task=${n_jobs}
 #SBATCH --mem-per-cpu=${mem_gb}gb
 

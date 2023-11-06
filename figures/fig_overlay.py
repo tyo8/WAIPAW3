@@ -1,19 +1,26 @@
 import seaborn as sns
 import os
+import ast
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-# CHANGE THIS:
-indir = "/Users/yuanyuanxiaowang/PycharmProjects/pythonProject/WAPIAW/prediction_outputs"
-figout = "/Users/yuanyuanxiaowang/Desktop/figout"
-
+#######################################################################################################################
+### TREAT THESE AS DEFAULT VARIABLES OF INPUT PARSER ###
 brainreplist = ['Demo', 'ICA300']
 featurelist1 = ['Social']
 # featurelist2 = ['NetMats', 'spatialNMs'] # PROFUMO
-#featurelist2 = ['Amplitudes', 'NetMats', 'partial_NMs']  # 'ICA25', 'ICA100', 'ICA150', 'ICA300', 'Schaefer'
+featurelist2 = ['Amplitudes', 'NetMats', 'partial_NMs']  # 'ICA25', 'ICA100', 'ICA150', 'ICA300', 'Schaefer'
 # featurelist2 = ['Volumes', 'Surface']  # T1
-featurelist2 = ['partial_NMs']
+#######################################################################################################################
+
+
+
+#######################################################################################################################
+### THIS CAN ALL BE A FUNCTION THAT TAKES ONLY 'indir' AND 'figout' AS INPUTS AND RETURNS 'vals' AS AN OUTPUT (?) ###
+# CHANGE THIS:
+indir = "/Users/yuanyuanxiaowang/PycharmProjects/pythonProject/WAPIAW/prediction_outputs"
+figout = "/Users/yuanyuanxiaowang/Desktop/figout"
 
 # create a dataset which represents the concatenated
 # contents of a set of results files.
@@ -24,32 +31,23 @@ for i in file_list:
     valset = pd.read_csv(os.path.join(indir, i))
     vals = pd.concat([vals, valset], axis=0)
 
-    ### CONSIDER CHANGING HARDCODING TO READING NUMBER OF ENTRIES ### (example code below)
+vals['ptcode'] = vals.group.str.replace("rmed_", "").str.replace("_eid_wapiaw", "")
+vals.sort_values('ptcode', inplace=True)
+vals['size'] = None
+### CONSIDER CHANGING HARDCODING TO READING NUMBER OF ENTRIES ### (example code below)
 # for label in label_list:
 #     file = f"/scratch/tyoeasley/WAPIAW3/subject_list/??something??{label}"
 #     with open(file, 'r') as fin:
 #         vals.loc[vals['ptcode'] == label, 'size'] = len(fin.read.split()
+label_list = '/scratch/tyoeasley/WAPIAW3/figures/codelist.txt'
+with open(label_list, 'r') as fin:
+    labels=fin.read().split()
+for i in labels:
+    files = f"/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid_unique/{i}_unique"
+    with open(files,'r') as fin:
 
-als['ptcode'] = vals.group.str.replace("rmed_", "").str.replace("_eid_wapiaw", "")
-vals.sort_values('ptcode', inplace=True)
-vals['size'] = None
-vals.loc[vals['ptcode'] == 'F0', 'size'] = '320'
-vals.loc[vals['ptcode'] == 'F10', 'size'] = '672'
-vals.loc[vals['ptcode'] == 'F17', 'size'] = '1646'
-vals.loc[vals['ptcode'] == 'F32', 'size'] = '2658'
-vals.loc[vals['ptcode'] == 'F41', 'size'] = '2090'
-vals.loc[vals['ptcode'] == 'G2', 'size'] = '384'
-vals.loc[vals['ptcode'] == 'G35_37', 'size'] = '250'
-vals.loc[vals['ptcode'] == 'G40', 'size'] = '478'
-vals.loc[vals['ptcode'] == 'G43', 'size'] = '1042'
-vals.loc[vals['ptcode'] == 'G45', 'size'] = '552'
-vals.loc[vals['ptcode'] == 'G47', 'size'] = '1194'
-vals.loc[vals['ptcode'] == 'G55', 'size'] = '964'
-vals.loc[vals['ptcode'] == 'G56', 'size'] = '1962'
-vals.loc[vals['ptcode'] == 'G57', 'size'] = '386'
-vals.loc[vals['ptcode'] == 'G62', 'size'] = '314'
-vals.loc[vals['ptcode'] == 'G8', 'size'] = '316'
-vals.loc[vals['ptcode'] == 'G93', 'size'] = '296'
+        vals.loc[vals['ptcode'] == i, 'size'] = len(fin.read.split())
+
 
 vals.loc[vals['ptcode'] == 'F0', 'ptcode'] = 'Organic, including symptomatic, mental disorders'
 vals.loc[vals['ptcode'] == 'F10', 'ptcode'] = 'Mental and behavioural disorders due to use of alcohol'
@@ -69,14 +67,17 @@ vals.loc[vals['ptcode'] == 'G62', 'ptcode'] = 'Other polyneuropathies'
 vals.loc[vals['ptcode'] == 'G8', 'ptcode'] = 'Cerebral Palsy and other paralytic syndroms'
 vals.loc[vals['ptcode'] == 'G93', 'ptcode'] = 'Other disorders of brain'
 
-
 # vals['accuracy'] = vals['accuracy'].astype('float')
-
 
 # REMOVE ANY RESULTS YOU DON"T WANT (OR JUST MAKE SURE
 # YOU POINT TO A DIRECTORY THAT ONLY CONTAINS GOOD DATA)
 # for example:
 # vals = vals.loc[~(vals.group.str.contains("IQ"))].copy()
+
+#######################################################################################################################
+
+
+
 
 
 # This will which will plot any feature in the feature list
@@ -97,6 +98,9 @@ def plopiwaw_swarm(feats1, feats2, vals=vals, cohort='validation'):
         ax.spines['bottom'].set_visible(False)
         ax.grid(False)
         # create a swarm plot
+
+        ###############################################################################################################
+        ### CONSOLIDATE INTO A FUNCTION THAT TAKES DATA AS INPUT; CALL AS MANY TIMES AS YOU HAVE SUBGROUPS ###
         sns.swarmplot(data=subgroup2.loc[subgroup2.feature_type == j],
                       x="ptcode",
                       y="accuracy",
@@ -120,6 +124,8 @@ def plopiwaw_swarm(feats1, feats2, vals=vals, cohort='validation'):
                     showfliers=False,
                     showbox=False,
                     showcaps=False)
+        ###############################################################################################################
+
         sns.swarmplot(data=subgroup1.loc[subgroup1.feature_type == feats1[0]],
                       x="ptcode",
                       y="accuracy",
@@ -152,22 +158,19 @@ def plopiwaw_swarm(feats1, feats2, vals=vals, cohort='validation'):
         plt.xlabel("")  # "ICD Category of Patient Group")
         plt.ylabel("Accuracy", fontsize=14)
         plt.ylim(0.25, .9)
-        plt.title(j, fontsize=18)  # defaults to Brain rep name
+        plt.title(j, fontsize=18)  # defaults to Brain rep's feature name in variable "j"
         plt.tight_layout()  # neccessary to get the x-axis labels to fit
-        plt.axhline(y=0.5, color='lightgrey', linestyle='-', lw=6)
-        # plt.axhline(y=0.5, color='grey', linestyle='-',lw=2)
-        # plt.axhline(y=0.6, color='lightgrey', linestyle='-',lw=1)
         plt.axhline(y=0.66, color='lightgrey', linestyle='-', lw=1)
-        # plt.axhline(y=0.9, color='lightgrey', linestyle='-',lw=1)
-        # plt.axhline(y=0.1, color='lightgrey', linestyle='-',lw=1)
-        # plt.axhline(y=0.3, color='lightgrey', linestyle='-', lw=1)
-        # plt.axhline(y=0.4, color='lightgrey', linestyle='-', lw=1)
-        # plt.savefig(figout + i +'_'+brainreplist[1]+'_'+j + '.png')
+        
+        # plt.savefig(f"{figout}{i}_{brainreplist[1]}_{j}.png")
         plt.savefig('test.png')
         plt.show()
         plt.close()
 
 
 # You'll get a lot of warnings about not being able to plot all the points.
-# Haven't yet figured out how to make the warnings go away, but they are a function of plot width
-plopiwaw_swarm(feats1=featurelist1, feats2=featurelist2)
+# Haven't yet figured out how to make the warnings go away, but they are a function of plot width.
+
+if __name__=="__main__":
+    ### ADD INPUT PARSER HERE -- WHAT VARIABLES WOULD YOU LIKE TO BE ABLE TO SPECIFY? ###
+    plopiwaw_swarm(feats1=featurelist1, feats2=featurelist2)

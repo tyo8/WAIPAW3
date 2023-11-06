@@ -72,6 +72,7 @@ do
 #!/bin/sh
 
 #SBATCH --job-name=${job_name}
+#SBATCH --account=janine_bijsterbosch
 #SBATCH --output=${log_fpath}.out
 #SBATCH --error=${log_fpath}.err
 #SBATCH --time=${maxtime_str}
@@ -97,10 +98,10 @@ module load singularity/3.5.2
 container=\"/home/e.ty/profumo.sif\"
 dim=${dim}
 mask_fpath=\"\${base_dir}/brainrep_data/final_GM_mask.nii.gz\"
-scr_json=\"\${PROFUMO_dir}/raw_data_subj_lists/\${groupname}_datalocations.json\"
+scr_json=\"${PROFUMO_dir}/raw_data_subj_lists/\${groupname}_datalocations.json\"
 output=\"/scratch/tyoeasley/WAPIAW3/brainrep_data/PROFUMO_data/out_PROFUMO/\${groupname}_\${dim}.pfm\"
 
-singularity exec -B /scratch:/scratch -B /ceph:/ceph \${container}  /opt/profumo/C++/PROFUMO \${src_json_fpath} \${dim} \${output} --useHRF 0.735 --hrfFile /opt/profumo/HRFs/Default.phrf --mask \${mask_fpath} --covModel Subject --dofCorrection 0.075
+singularity exec -B /scratch:/scratch -B /ceph:/ceph \${container}  /opt/profumo/C++/PROFUMO \${src_json_fpath} \${dim} \${output} --useHRF 0.735 --hrfFile /opt/profumo/HRFs/Default.phrf --mask \${mask_fpath} --covModel Subject --dofCorrection 0.5
 \
 " > "${sbatch_fpath}"
 

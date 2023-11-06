@@ -77,6 +77,7 @@ do
 \
 #!/bin/sh
 #SBATCH --job-name=${job_name}
+#SBATCH --account=janine_bijsterbosch
 #SBATCH --output=${Schaefer_dir}/logs/${job_name}_${subj_ID}.out
 #SBATCH --error=${Schaefer_dir}/logs/${job_name}_${subj_ID}.err
 #SBATCH --time=${maxtime_str}

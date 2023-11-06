@@ -1,9 +1,9 @@
 #!/bin/sh
 
-#SBATCH --job-name=DR_pipeline_d300
-#SBATCH --output=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/logs/DR_pipeline_d300.out
-#SBATCH --error=/scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/logs/DR_pipeline_d300.err
-#SBATCH --time=23:55:00
+#SBATCH --job-name="dr-ica_mask_example_d300"
+#SBATCH --output="/scratch/tyoeasley/WAPIAW3/job_submission_portal/extraction/brainrep_xtr_scripts/logs/dr-ica_mask_example_d300.out%j"
+#SBATCH --error="/scratch/tyoeasley/WAPIAW3/job_submission_portal/extraction/brainrep_xtr_scripts/logs/dr-ica_mask_example_d300.err%j"
+#SBATCH --time=24:55:00
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
 #SBATCH --mem=50gb
@@ -17,18 +17,21 @@ fpath_pattern="/ceph/biobank/derivatives/melodic/sub-%s/ses-01/sub-%s_ses-01_mel
 
 # user specifications
 dim=300
-eid_list="/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid/rmed_G93_eid_wapiaw.csv"
+eid_list="/scratch/tyoeasley/WAPIAW3/subject_lists/combined_subj_eid/example.csv"
 
 # derivatives
-outname=$( basename ${eid_list} | cut -d. -f 1)
-melodic_out="${base_dir}/brainrep_data/ICA_data/melodic_output/${outname}/ica${dim}"
+groupname=example
+melodic_out="${base_dir}/brainrep_data/ICA_data/melodic_output/${groupname}/ica${dim}"
 DR_out=${melodic_out/"melodic_output"/"dual_regression"}
 design_fpath_type="${DR_out}/design"
-data_flist="${base_dir}/brainrep_data/ICA_data/raw_data_subj_lists/${outname}.txt"
-${mk_flist} -i ${eid_list} -o ${data_flist} -p ${fpath_pattern}
-n_subj=$(cat ${data_flist} | wc -l )
+data_flist="${base_dir}/brainrep_data/ICA_data/raw_data_subj_lists/${groupname}.txt"
 
-python ${mk_descon} -n ${n_subj} --fpath_noext ${design_fpath_type}
+if ! test -f "${data_flist}"
+then
+	${mk_flist} -i ${eid_list} -o ${data_flist} -p ${fpath_pattern}
+fi
+
+n_subj=$(cat ${data_flist} | wc -l )
 
 # output
 echo "pulling from subject list: ${eid_list}"
@@ -36,23 +39,38 @@ echo "pulling subject data from generalized filepath: ${fpath_pattern}"
 echo "        (list of filenames of preprocessed data can be found in): ${data_flist}"
 echo "computing ${dim} independent components"
 echo "sending melodic outputs to: ${melodic_out}"
-if ! [ -d ${melodic_out} ]
+if ! test -d ${melodic_out}
 then
 	mkdir -p ${melodic_out}
 fi
 echo "sending dual_regression outputs to: ${DR_out}"
-if ! [ -d ${DR_out}/groupICA${dim}.dr ]
+if ! test -d ${DR_out}/groupICA${dim}.dr
 then
-	mkdir -p ${DR_out}
+	mkdir -p ${DR_out}/groupICA${dim}.dr
 fi
+
+# create (mock) design matrices
+module load python
+python ${mk_descon} -n ${n_subj} --fpath_noext ${design_fpath_type}
+
 # FSL calls
 module load fsl
 export DISPLAY=:1
 
-if ! [ -f "${melodic_out}/melodic_IC.nii.gz" ]
+# verify that FSL is loaded properly
+module list
+
+if ! compgen -G "${melodic_out}/melodic_IC.nii.gz" >> /dev/null
 then
+	echo ""
+	echo "(re?-)computing melodic data for ${groupname}..."
+	echo "Start: $(date)"
 	melodic -i ${data_flist} -o ${melodic_out} --tr=0.72 --nobet -a concat -m ${mask_fpath} --report --Oall -d ${dim}
+	echo "Finish: $(date)"
+	echo ""
 fi
 
 /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/FSL_slurm/mask_only_slurm "${melodic_out}/melodic_IC.nii.gz" ${dim} "${design_fpath_type}.mat" "${design_fpath_type}.con" 0 "${DR_out}/groupICA${dim}.dr" $(cat ${data_flist})
+
+chmod -R 771 ${DR_out}
 

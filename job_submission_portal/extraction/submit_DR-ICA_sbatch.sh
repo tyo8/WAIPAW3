@@ -7,6 +7,7 @@ base_dir="/scratch/tyoeasley/WAPIAW3"
 ICA_dir="${base_dir}/brainrep_data/ICA_data"
 script_dir="${base_dir}/job_submission_portal/extraction/brainrep_xtr_scripts"
 maxtime_str="24:55:00"
+partition="tier2_cpu"
 
 # run & data option parameters
 dim_list_fpath="${ICA_dir}/ICA_dimlist.txt"
@@ -18,7 +19,7 @@ DR_process_script="up_to_stage1_DR_slurm"
 	# up_to_stage1_DR_slurm
 
 
-while getopts ":b:I:t:f:D:s:p:" opt; do
+while getopts ":b:I:t:f:D:s:p:P:" opt; do
   case $opt in
     b) base_dir=${OPTARG}
     ;;
@@ -31,6 +32,8 @@ while getopts ":b:I:t:f:D:s:p:" opt; do
     s) subj_group_flist=${OPTARG}
     ;;
     p) DR_process_script=${OPTARG}
+    ;;
+    P) partition=${OPTARG}
     ;;
     \?) echo "Invalid option -$OPTARG" >&2
     exit 1
@@ -72,14 +75,17 @@ do
 		fi
 		echo "\
 \
-#!/bin/sh
+#!/bin/sh -l
 
+#SBATCH --exclude=node03
 #SBATCH --job-name=\"${job_name}\"
+#SBATCH --account=janine_bijsterbosch
 #SBATCH --output=\"${log_fpath}.out%j\"
 #SBATCH --error=\"${log_fpath}.err%j\"
 #SBATCH --time=${maxtime_str}
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
+#SBATCH --partition=${partition}
 #SBATCH --mem=50gb
 
 # constants
@@ -127,7 +133,7 @@ fi
 module load python
 python \${mk_descon} -n \${n_subj} --fpath_noext \${design_fpath_type}
 
-# FSL calls
+# load FSL module
 module load fsl
 export DISPLAY=:1
 
@@ -144,7 +150,6 @@ fi
 /scratch/tyoeasley/WAPIAW3/brainrep_data/ICA_data/FSL_slurm/${DR_process_script} \"\${melodic_out}/melodic_IC.nii.gz\" \${dim} \"\${design_fpath_type}.mat\" \"\${design_fpath_type}.con\" 0 \"\${DR_out}/groupICA\${dim}.dr\" \$(cat \${data_flist})
 
 chmod -R 771 \${DR_out}
-rm \${data_flist}
 \
 " > "${sbatch_fpath}"  # Overwrite submission script
 

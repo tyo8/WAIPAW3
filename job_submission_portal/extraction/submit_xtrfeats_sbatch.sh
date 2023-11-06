@@ -69,6 +69,7 @@ do
 #!/bin/sh
 
 #SBATCH --job-name=${job_name}
+#SBATCH --account=janine_bijsterbosch
 #SBATCH --output=${xtr_dir}/logs/${job_name}_${dim}_${groupname}.out
 #SBATCH --error=${xtr_dir}/logs/${job_name}_${dim}_${groupname}.err
 #SBATCH --time=${maxtime_str}

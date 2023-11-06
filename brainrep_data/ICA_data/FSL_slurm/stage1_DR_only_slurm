@@ -188,6 +188,6 @@ for i in $INPUTS ; do
   if ! test -f ${OUTPUT}/dr_stage1_${eid}.txt
   then
 	  echo "${FSLDIR}/bin/fsl_glm -i ${i} -d ${ICA_MAPS} -o ${OUTPUT}/dr_stage1_${eid}.txt --demean -m ${OUTPUT}/mask" > "${LOGDIR}/drC_${eid}"
-  	  $FSLurmDIR/fsl_sub_slurm.sh -T 30 -N dual_regression -l $LOGDIR -f "${LOGDIR}/drC_${eid}"
+  	  $FSLurmDIR/fsl_sub_slurm.sh -T 10 -N dual_regression -l $LOGDIR -f "${LOGDIR}/drC_${eid}"
   fi
 done

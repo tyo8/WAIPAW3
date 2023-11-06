@@ -36,20 +36,18 @@ done
 n_substs=$(grep "%s" -o <<< ${pattern} | wc -l)
 
 # remove existing ${output_fpath} (if it exists) to avoid re-appending to it
-if compgen -G "${output_fpath}" >> /dev/null
+if ! compgen -G "${output_fpath}" >> /dev/null
 then
-	rm ${output_fpath}
+	# append a data filepath to ${output_fpath} for every eid in ${input_eids}
+	for eid in $(cat ${input_eids});
+	do
+		# creates eid-string substitution input to correctly fill out the given filepath pattern
+		inp_str=$( printf "%0.s ${eid}" $(seq 1 ${n_substs}) )
+
+		# saves newline-appended filepath to the output list
+		printf "${pattern}\n" ${inp_str} >> ${output_fpath}
+	done
+
+	cat ${output_fpath} | sort | uniq > "tmp_${output_fpath}"
+	mv "tmp_${output_fpath}" ${output_fpath}
 fi
-
-# append a data filepath to ${output_fpath} for every eid in ${input_eids}
-for eid in $(cat ${input_eids});
-do
-	# creates eid-string substitution input to correctly fill out the given filepath pattern
-	inp_str=$( printf "%0.s ${eid}" $(seq 1 ${n_substs}) )
-
-	# saves newline-appended filepath to the output list
-	printf "${pattern}\n" ${inp_str} >> ${output_fpath}
-done
-
-cat ${output_fpath} | sort | uniq > "tmp_${output_fpath}"
-mv "tmp_${output_fpath}" ${output_fpath}

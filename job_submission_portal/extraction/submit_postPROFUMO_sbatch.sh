@@ -72,6 +72,7 @@ do
 #!/bin/sh
 
 #SBATCH --job-name=${job_name}
+#SBATCH --account=janine_bijsterbosch
 #SBATCH --output=${log_fpath}.out
 #SBATCH --error=${log_fpath}.err
 #SBATCH --time=${maxtime_str}

@@ -16,10 +16,11 @@ n_splits=100
 # submission parameters
 n_jobs=10
 mem_gb=$(( 100/${n_jobs} + 5 ))
-maxtime_str="23:55:00"
+maxtime_str="167:55:00"
 ctype="RFC"
+partition="tier2_cpu"
 
-while getopts ":i:o:b:p:s:C:n:N:t:m:" opt; do
+while getopts ":i:o:b:p:s:C:n:N:t:m:P:" opt; do
   case $opt in
     i) spec_list_fpath=${OPTARG}
     ;;
@@ -40,6 +41,8 @@ while getopts ":i:o:b:p:s:C:n:N:t:m:" opt; do
     t) maxtime_str=${OPTARG}
     ;;
     m) mem_gb=${OPTARG}
+    ;;
+    P) partition=${OPTARG}
     ;;
     \?) echo "Invalid option -$OPTARG" >&2
     exit 1
@@ -90,8 +93,11 @@ do
 		echo "datapath ${datapath_type}"
 		echo "\
 \
-#!/bin/sh
+#!/bin/sh -l
+#SBATCH --partition=${partition}
+#SBATCH --account=janine_bijsterbosch
 #SBATCH --job-name=${job_name}
+#SBATCH --account=janine_bijsterbosch
 #SBATCH --output=${log_fpath}.out%j
 #SBATCH --error=${log_fpath}.err%j
 #SBATCH --time=${maxtime_str}
@@ -122,8 +128,8 @@ loss_criterion=\"gini\"   # minimized objective function
 module load python
 
 python \${classifier} -l \${subj_list} -f \${datapath_type} -o \${outpath} -p \${patient_eid_dir} \
-        -n \${n_jobs} -R \${rng_seed} \
-        -k \${folds} -s \${n_splits} -e \${n_estimators} -L \${loss_criterion} -C \${classifier_type} -v
+-n \${n_jobs} -R \${rng_seed} \
+-k \${folds} -s \${n_splits} -e \${n_estimators} -L \${loss_criterion} -C \${classifier_type} -v
 \
 " > "${sbatch_fpath}"  
 
