@@ -12,6 +12,9 @@ __pycache__/
 [._]ss[a-gi-z]
 [._]sw[a-p]
 
+# publication files
+Publication_files/*
+
 # program files
 __pycache__
 pull_*.sh
