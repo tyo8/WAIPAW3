@@ -48,7 +48,7 @@ Central hub for infrastructural bash scripts to assign, distribute, and organize
 General-purpose bash code to perform basic bookkeeping functions while navigating large collections of UK BioBank data on the compute cluster.
 
 ### Statistical Testing and Visualization Pipeline
-Both the `figure` (results visualization) and `stat_testing` (post-hoc statistical analysis of results) directories contain code referencing directories not present in this repository (i.e., `prediction_outputs` and `cross-prediction outs`), whose outputs would need to be created to test the replicability of our findings.
+Both the `figure` (results visualization) and `stat_testing` (post-hoc statistical analysis of results) directories contain code referencing directories not present in this repository (i.e., `prediction_outputs` and `cross-prediction_outputs`), whose outputs would need to be created to test the replicability of our findings.
 
 #### figures
 Visualization code producing summary swarm plots of prediction outputs under varying experimental conditions.
