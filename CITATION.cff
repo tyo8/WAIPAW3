@@ -1,13 +1,16 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
-- family-names: "Easley"
-  given-names: "Ty"
-  orcid: "https://orcid.org/0000-0002-8215-2598"
-- family-names: "Luo"
-  given-names: "Xiaoke"
-  orcid: "https://orcid.org/0009-0006-8028-3822"
-title: "Opaque Ontology: Neuroimaging Classification of ICD-10 Diagnostic Groups in the UK Biobank (WAPIAW 3)"
+  - family-names: "Easley"
+    given-names: "Ty"
+    orcid: "https://orcid.org/0000-0002-8215-2598"
+  - family-names: "Luo"
+    given-names: "Xiaoke"
+    orcid: "https://orcid.org/0009-0006-8028-3822"
+title: "Code for WAPIAW 3 (Opaque Ontology: Neuroimaging Classification of ICD-10 Diagnostic Groups in the UK Biobank)"
 version: v1.0
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.10393475
 date-released: 2024-11-16
 url: "https://github.com/tyo8/WAPIAW3/tree/main"
