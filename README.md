@@ -24,7 +24,7 @@ Note that no subject data of any kind is included in this public repository! Ins
 - <ins>PROFUMO_data</ins>: sub-repository for the computation of the [PROFUMO](https://git.fmrib.ox.ac.uk/samh/profumo) parcellation for each diagnostic group, and additional code for extracting secondary features (FC network matrices, spatial correlation matrices, and amplitudes)
 - <ins>Schaefer_data</ins>: code for extracting parcellation-level timeseries from data and computing FC network matrices, partial FC matrices, and amplitude features from [Schaefer-parcellated](https://academic.oup.com/cercor/article/28/9/3095/3978804) data
 - <ins>T1_data</ins>: storage location for [Freesurfer](https://surfer.nmr.mgh.harvard.edu/)-extracted structural volume and cortical surface features from T1-weighted structural MRI scans
-- <ins>sociodemographic</ins>: cotains data cleaning and feature extraction code to pull sociodemographic features from the UKB biobank for all subjects.
+- <ins>sociodemographic</ins>: contains data cleaning and feature extraction code to pull sociodemographic features from the UKB biobank for all subjects.
 
 #### subject_lists
 Repository containing lists of electronic ID numbers (eIDs) of patients in each diagnostic group, code for selecting corresponding matched healthy controls, and matched patient/control lists. Also contains some code and eID lists used to troubleshoot problems encountered in the UKB with incomplete or corrupted imaging, diagnostic, or sociodemographic data.
