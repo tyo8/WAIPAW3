@@ -8,6 +8,6 @@ authors:
   given-names: "Xiaoke"
   orcid: "https://orcid.org/0009-0006-8028-3822"
 title: "Opaque Ontology: Neuroimaging Classification of ICD-10 Diagnostic Groups in the UK Biobank (WAPIAW 3)"
-version: 1.0
+version: v1.0
 date-released: 2024-11-16
 url: "https://github.com/tyo8/WAPIAW3/tree/main"
